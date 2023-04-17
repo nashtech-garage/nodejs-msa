@@ -23,11 +23,14 @@
   },
   "dependencies": {
     "@nestjs/common": "^9.4.0",
+    "@nestjs/config": "^2.3.1",
     "@nestjs/core": "^9.4.0",
     "@nestjs/platform-express": "^9.4.0",
+    "nest-winston": "^1.9.1",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^5.0.0",
-    "rxjs": "^7.8.0"
+    "rxjs": "^7.8.0",
+    "winston": "^3.8.2"
   },
   "devDependencies": {
     "@nestjs/cli": "^9.4.0",
