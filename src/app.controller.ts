@@ -13,7 +13,11 @@ export class AppController {
 
   @Get()
   getHello(): string {
-    this.logger.info('Hello', { controller: AppController.name, action: this.getHello.name })
+    this.logger.info('Hello', {
+      context: AppController.name,
+      controller: AppController.name,
+      action: this.getHello.name,
+    })
 
     return this.appService.getHello()
   }
