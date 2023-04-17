@@ -1,4 +1,4 @@
-name: Auto-merge dependabot passed CI
+name: Auto-merge dependabot PR
 
 on:
   pull_request:
