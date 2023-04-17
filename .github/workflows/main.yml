@@ -1,8 +1,14 @@
 name: CI
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
-    branches: [main, develop, dev]
+    branches:
+      - main
+      - develop
+      - dev
 
 jobs:
   lint-build-test:
