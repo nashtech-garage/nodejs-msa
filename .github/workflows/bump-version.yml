@@ -1,0 +1,36 @@
+name: Bump version
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  lint-build-test:
+    name: Lint - Build - Test
+    runs-on: ubuntu-latest
+    if: ${{ github.actor != 'dependabot[bot]' }}
+    container: node:18
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Lint - Build - Test
+        id: lint-build-test
+        uses: ./.github/actions/lint-build-test
+
+  bump-version:
+    name: Bump version
+    runs-on: ubuntu-latest
+    needs: [lint-build-test]
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: '0'
+
+      - name: Bump version and push tag
+        uses: mathieudutour/github-tag-action@v6.1
+        with:
+          github_token: ${{ secrets.BUMP_TOKEN }}
+          release_branches: main
+          default_prerelease_bump: false
+          default_bump: minor
