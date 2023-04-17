@@ -1,0 +1,19 @@
+name: Auto-merge dependabot PR
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  auto-merge:
+    name: Auto merge dependabot's PR
+    runs-on: ubuntu-latest
+    if: ${{ github.actor == 'dependabot[bot]' }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ahmadnassri/action-dependabot-auto-merge@v2
+        with:
+          target: minor
+          github-token: ${{ secrets.AUTOMERGE_TOKEN }}
+          command: squash and merge
