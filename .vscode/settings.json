@@ -1,0 +1,9 @@
+{
+  "search.exclude": {
+    "**/.git": true,
+    "**/.yarn/cache": true,
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/*.code-search": true
+  }
+}

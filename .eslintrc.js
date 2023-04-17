@@ -5,12 +5,13 @@ module.exports = {
     project: ['./tsconfig.json'],
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint/eslint-plugin'],
+  plugins: ['@typescript-eslint/eslint-plugin', 'sonarjs'],
   extends: [
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
     'plugin:import/recommended',
     'plugin:import/typescript',
+    'plugin:sonarjs/recommended',
   ],
   root: true,
   env: {
@@ -47,16 +48,7 @@ module.exports = {
         alphabetize: {
           order: 'asc',
         },
-        groups: [
-          'builtin',
-          'external',
-          'internal',
-          'parent',
-          'sibling',
-          'index',
-          'object',
-          'type',
-        ],
+        groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object', 'type'],
         'newlines-between': 'always',
       },
     ],
@@ -76,6 +68,14 @@ module.exports = {
     quotes: ['error', 'single'],
     semi: ['error', 'never'],
   },
+  overrides: [
+    {
+      files: ['test/**/*.ts', '**/*.spec.ts'],
+      rules: {
+        'sonarjs/no-duplicate-string': 'off',
+      },
+    },
+  ],
   settings: {
     'import/resolver': {
       typescript: true,
@@ -83,4 +83,4 @@ module.exports = {
     },
     'import/ignore': ['node_modules'],
   },
-};
+}
