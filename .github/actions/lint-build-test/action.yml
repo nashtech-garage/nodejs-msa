@@ -1,0 +1,29 @@
+name: Lint - Build - Test
+description: Runs a composite step action
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Install packages dependencies
+      run: yarn --immutable
+      shell: bash
+
+    - name: Lint
+      run: yarn lint
+      shell: bash
+
+    - name: Build
+      run: yarn build
+      shell: bash
+
+    - name: Test coverage
+      run: yarn test:cov
+      shell: bash
+
+    - name: Test E2E
+      run: yarn test:e2e
+      shell: bash
