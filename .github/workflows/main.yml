@@ -1,0 +1,18 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main, develop, dev]
+
+jobs:
+  lint-build-test:
+    name: Lint - Build - Test
+    runs-on: ubuntu-latest
+    container: node:18-slim
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Lint - Build - Test
+        id: lint-build-test
+        uses: ./.github/actions/lint-build-test
