@@ -13,7 +13,7 @@ import { AppService } from './app.service'
       cache: true,
       isGlobal: true,
       expandVariables: true,
-      envFilePath: ['.env.local', '.env.production', '.env'],
+      envFilePath: ['.env.local', '.env.prod', '.env'],
       load: Object.values(configurations),
     }),
     SharedModule,
