@@ -18,9 +18,7 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@config": ["./src/config"],
       "@config/*": ["./src/config/*"],
-      "@shared": ["./src/shared"],
       "@shared/*": ["./src/shared/*"]
     }
   }
