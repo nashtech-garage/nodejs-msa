@@ -19,6 +19,7 @@ SHOW_PERSON_PORTRAIT()
 
 AddBoundaryTag(systemTag, $borderColor="", $type="System context")
 AddBoundaryTag(feSitesTag, $borderColor="DarkBlue", $bgColor="LightBlue", $type="Frontend sites")
+AddBoundaryTag(coreTag, $borderColor="DarkRed", $bgColor="LightPink", $type="Cores")
 AddBoundaryTag(dataStoreTag, $borderColor="", $bgColor="LightYellow", $type="Data store")
 
 Person(anonymous, "Anonymous", "Access to public pages")
@@ -34,9 +35,9 @@ System_Boundary(systemB, "System context", $tags="systemTag") {
     Container(feDashboard, "Dashboard", "NextJS 13", $sprite="nextjs")
   }
 
-  System_Boundary(cores, "Cores") {
-    Container(coreNestJs, "NestJS", $sprite="nestjs")
-    Container(coreStrApi, "StrApi", $descr="Content management system [CMS]", $sprite="strapi")
+  System_Boundary(cores, "Cores", $tags="coreTag") {
+    Container(coreNestJs, "NestJS", $descr="For building efficient, reliable and scalable server-side applications", $sprite="nestjs")
+    Container(coreStrApi, "StrApi", $descr="Content management system", $sprite="strapi")
   }
   
   Container(keycloak, "Identity", "Keycloak", $descr="Identity and access management solution", $sprite="keycloak", $link="https://www.keycloak.org/")
@@ -73,6 +74,7 @@ Rel(admin, minIoConsole, "Manage", "Web browsers")
 Rel(minIoConsole, minIoServer, "Manage", "HTTPS")
 Rel(coreStrApi, minIoServer, "Manage", "HTTPS")
 
+Rel(feSystemB, minIoB, "CDN", "HTTPS")
 Rel(feSystemB, cores, "Sync", "JSON/HTTPS")
 
 Rel(feSystemB, keycloak, "Authenticate/Authorise")
@@ -83,8 +85,8 @@ Rel(cores, databases, "Query", "TCP/IP")
 Rel(cores, messageQueues, "Produce", "TCP/IP")
 Rel(messageQueues, cores, "Consume", "TCP/IP")
 
-Rel(cores, observers, "Stream", "TCP/IP")
-Rel(feSystemB, observers, "Stream", "TCP/IP")
+Rel(cores, observers, "Stream log", "TCP/IP")
+Rel(feSystemB, observers, "Stream log", "TCP/IP")
 
 Rel(fePublic, elasticsearch, "Search full text", "JSON/HTTPS")
 
