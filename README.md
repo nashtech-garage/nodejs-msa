@@ -9,41 +9,20 @@ Best practices NodeJS in MSA
 - NodeJS 18
 - NestJS 9
 
-## Installation
+## System context
 
-```zsh
-yarn install
-```
+![System context](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/nashtech-garage/nodejs-msa/main/docs/diagrams/overview.puml)
 
-## Running the app
+## Quality
 
-```zsh
-# development
-$ yarn start
-
-# watch mode
-$ yarn start:dev
-
-# production mode
-$ yarn start:prod
-```
-
-## Test
-
-```zsh
-# unit tests
-$ yarn test
-
-# test coverage
-$ yarn test:cov
-
-# e2e tests
-$ yarn test:e2e
-```
-
-## Lint
+### Coding convention
 
 - Typescript eslint recommended rules
 - Prettier integrate
 - Import order
 - Sonar integrate
+
+### Testing
+
+- Unit testing
+- E2E testing
