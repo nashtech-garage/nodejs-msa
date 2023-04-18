@@ -1,0 +1,85 @@
+@startuml Overview
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+!include <logos/nestjs.puml>
+!include <logos/strapi.puml>
+!include <logos/nextjs.puml>
+!include <logos/new-relic.puml>
+!include <logos/postgresql.puml>
+!include <logos/mysql.puml>
+!include <logos/kafka.puml>
+!include <cloudinsight/keycloak.puml>
+
+title Overview
+
+LAYOUT_LANDSCAPE()
+SHOW_PERSON_PORTRAIT()
+
+AddBoundaryTag(systemTag, $borderColor="", $type="System context")
+AddBoundaryTag(feSitesTag, $borderColor="DarkBlue", $bgColor="LightBlue", $type="Frontend sites")
+AddBoundaryTag(dataStoreTag, $borderColor="", $bgColor="LightYellow", $type="Data store")
+
+Person(anonymous, "Anonymous", "Access to public pages")
+Person(user, "User", "Access to protected pages")
+Person(ops, "Operator", "Manage content")
+Person(admin, "Administrator", "Manage system")
+
+System_Boundary(systemB, "System context", $tags="systemTag") {
+  System_Boundary(feSystemB, "Frontend", $tags="feSitesTag") {
+    Container(fePublic, "Public routes", "NextJS 13", $sprite="nextjs")
+    Container(feProtected, "Protected routes", "NextJS 13", $sprite="nextjs")
+
+    Container(feDashboard, "Dashboard", "NextJS 13", $sprite="nextjs")
+  }
+
+  System_Boundary(cores, "Cores") {
+    Container(coreNestJs, "NestJS", $sprite="nestjs")
+    Container(coreStrApi, "StrApi", $descr="Content management system [CMS]", $sprite="strapi")
+  }
+  
+  Container(keycloak, "Identity", "Keycloak 21", $sprite="keycloak", $link="https://www.keycloak.org/")
+
+  System_Boundary(databases, "Databases") {
+    ContainerDb(postgres, "Postgres", $sprite="postgresql")
+    ContainerDb(MySQL, "MySQL", $sprite="mysql")
+  }
+
+  System_Boundary(messageQueues, "Message queues") {
+    ContainerQueue(kafka, "Kafka", $sprite="kafka")
+  }
+
+  Container(newRelic, "Observer", "NewRelic 2", $sprite="new-relic", $link="https://newrelic.com/")
+
+  System_Boundary(minIoB, "Min IO"){
+    Container(minIoClient, "MinIO client")
+    ContainerDb(minIoServer, "MinIO server", $descr="High Performance, Kubernetes Native Object Storage")
+  }
+}
+
+Rel(anonymous, fePublic, "View", "Web browsers")
+Rel(user, feProtected, "Use", "Web browsers")
+Rel(ops, feDashboard, "Manage", "Web browsers")
+Rel(admin, feDashboard, "Manage", "Web browsers")
+
+Rel(ops, minIoClient, "Manage", "Web browsers")
+Rel(admin, minIoClient, "Manage", "Web browsers")
+
+Rel(minIoClient, minIoServer, "Manage", "HTTPS")
+Rel(coreStrApi, minIoServer, "Manage", "HTTPS")
+
+Rel(feSystemB, cores, "Sync", "JSON/HTTPS")
+
+Rel(feSystemB, keycloak, "Authenticate/Authorise")
+Rel(cores, keycloak, "Authenticate/Authorise")
+
+Rel(cores, databases, "Query", "TCP/IP")
+
+Rel(cores, messageQueues, "Produce", "TCP/IP")
+Rel(messageQueues, cores, "Consume", "TCP/IP")
+
+Rel(cores, newRelic, "Stream", "TCP/IP")
+Rel(feSystemB, newRelic, "Stream", "TCP/IP")
+
+SHOW_LEGEND()
+
+@enduml
