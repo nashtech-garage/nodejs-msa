@@ -10,11 +10,12 @@
 !include <logos/kafka.puml>
 !include <logos/rabbitmq.puml>
 !include <logos/elasticsearch.puml>
+!include <logos/kibana.puml>
 !include <cloudinsight/keycloak.puml>
 
 title Overview
 
-LAYOUT_LANDSCAPE()
+' LAYOUT_LANDSCAPE()
 SHOW_PERSON_PORTRAIT()
 
 AddBoundaryTag(systemTag, $borderColor="", $type="System context")
@@ -54,6 +55,8 @@ System_Boundary(systemB, "System context", $tags="systemTag") {
 
   System_Boundary(observers, "Observers"){
     Container(newRelic, "New Relic", $sprite="new-relic", $link="https://newrelic.com/")
+    
+    Container(kibana, "Kibana", $descr="Visualizing, analyzing, and exploring the data with Elastic", $sprite="kibana")
     Container(elasticsearch, "Elastic search", $sprite="elasticsearch", $link="https://www.elastic.co/elasticsearch/")
   }
 
@@ -79,6 +82,7 @@ Rel(feSystemB, cores, "Sync", "JSON/HTTPS")
 
 Rel(feSystemB, keycloak, "Authenticate/Authorise")
 Rel(cores, keycloak, "Authenticate/Authorise")
+Rel(keycloak, databases, "Query", "TCP/IP")
 
 Rel(cores, databases, "Query", "TCP/IP")
 
@@ -89,6 +93,9 @@ Rel(cores, observers, "Stream log", "TCP/IP")
 Rel(feSystemB, observers, "Stream log", "TCP/IP")
 
 Rel(fePublic, elasticsearch, "Search full text", "JSON/HTTPS")
+
+Rel(admin, kibana, "Monitor", "Web browsers")
+Rel(kibana, elasticsearch, "Use", "JSON/HTTPS")
 
 SHOW_LEGEND()
 
