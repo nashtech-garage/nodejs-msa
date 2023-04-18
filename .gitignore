@@ -33,8 +33,9 @@ lerna-debug.log*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+!.vscode/C4.code-snippets
 
-# yarn 3 non zero-installs
+# yarn 3 install with cache & node linker
 .yarn/*
 !.yarn/cache
 !.yarn/patches
