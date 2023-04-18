@@ -8,6 +8,8 @@
 !include <logos/postgresql.puml>
 !include <logos/mysql.puml>
 !include <logos/kafka.puml>
+!include <logos/rabbitmq.puml>
+!include <logos/elasticsearch.puml>
 !include <cloudinsight/keycloak.puml>
 
 title Overview
@@ -37,7 +39,7 @@ System_Boundary(systemB, "System context", $tags="systemTag") {
     Container(coreStrApi, "StrApi", $descr="Content management system [CMS]", $sprite="strapi")
   }
   
-  Container(keycloak, "Identity", "Keycloak 21", $sprite="keycloak", $link="https://www.keycloak.org/")
+  Container(keycloak, "Identity", "Keycloak", $descr="Identity and access management solution", $sprite="keycloak", $link="https://www.keycloak.org/")
 
   System_Boundary(databases, "Databases") {
     ContainerDb(postgres, "Postgres", $sprite="postgresql")
@@ -46,13 +48,17 @@ System_Boundary(systemB, "System context", $tags="systemTag") {
 
   System_Boundary(messageQueues, "Message queues") {
     ContainerQueue(kafka, "Kafka", $sprite="kafka")
+    ContainerQueue(rabitMQ, "Rabit MQ", $sprite="rabbitmq")
   }
 
-  Container(newRelic, "Observer", "NewRelic 2", $sprite="new-relic", $link="https://newrelic.com/")
+  System_Boundary(observers, "Observers"){
+    Container(newRelic, "New Relic", $sprite="new-relic", $link="https://newrelic.com/")
+    Container(elasticsearch, "Elastic search", $sprite="elasticsearch", $link="https://www.elastic.co/elasticsearch/")
+  }
 
   System_Boundary(minIoB, "Min IO"){
-    Container(minIoClient, "MinIO client")
-    ContainerDb(minIoServer, "MinIO server", $descr="High Performance, Kubernetes Native Object Storage")
+    Container(minIoConsole, "MinIO console", $descr="Simple UI for MinIO Object Storage 🧮", $link="https://github.com/minio/console")
+    ContainerDb(minIoServer, "MinIO server", $descr="High Performance Object Storage for AI", $link="https://github.com/minio/minio")
   }
 }
 
@@ -61,10 +67,10 @@ Rel(user, feProtected, "Use", "Web browsers")
 Rel(ops, feDashboard, "Manage", "Web browsers")
 Rel(admin, feDashboard, "Manage", "Web browsers")
 
-Rel(ops, minIoClient, "Manage", "Web browsers")
-Rel(admin, minIoClient, "Manage", "Web browsers")
+Rel(ops, minIoConsole, "Manage", "Web browsers")
+Rel(admin, minIoConsole, "Manage", "Web browsers")
 
-Rel(minIoClient, minIoServer, "Manage", "HTTPS")
+Rel(minIoConsole, minIoServer, "Manage", "HTTPS")
 Rel(coreStrApi, minIoServer, "Manage", "HTTPS")
 
 Rel(feSystemB, cores, "Sync", "JSON/HTTPS")
@@ -77,8 +83,10 @@ Rel(cores, databases, "Query", "TCP/IP")
 Rel(cores, messageQueues, "Produce", "TCP/IP")
 Rel(messageQueues, cores, "Consume", "TCP/IP")
 
-Rel(cores, newRelic, "Stream", "TCP/IP")
-Rel(feSystemB, newRelic, "Stream", "TCP/IP")
+Rel(cores, observers, "Stream", "TCP/IP")
+Rel(feSystemB, observers, "Stream", "TCP/IP")
+
+Rel(fePublic, elasticsearch, "Search full text", "JSON/HTTPS")
 
 SHOW_LEGEND()
 
