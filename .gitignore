@@ -46,3 +46,6 @@ lerna-debug.log*
 
 # Generated diagrams
 docs/out
+
+# Lint
+.eslintcache

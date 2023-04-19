@@ -1,5 +1,5 @@
-@startuml Overview
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+@startuml Container context
+!include <C4/C4_Container>
 
 !include <logos/nestjs.puml>
 !include <logos/strapi.puml>
@@ -7,28 +7,27 @@
 !include <logos/new-relic.puml>
 !include <logos/postgresql.puml>
 !include <logos/mysql.puml>
+!include <logos/redis.puml>
 !include <logos/kafka.puml>
 !include <logos/rabbitmq.puml>
 !include <logos/elasticsearch.puml>
 !include <logos/kibana.puml>
+!include <logos/prometheus.puml>
+!include <logos/grafana.puml>
 !include <cloudinsight/keycloak.puml>
 
-title Overview
+title Container context
 
-' LAYOUT_LANDSCAPE()
-SHOW_PERSON_PORTRAIT()
+LAYOUT_AS_SKETCH()
+LAYOUT_LANDSCAPE()
+LAYOUT_WITH_LEGEND()
 
-AddBoundaryTag(systemTag, $borderColor="", $type="System context")
+AddBoundaryTag(systemTag, $borderColor="DarkRed", $type="System context")
 AddBoundaryTag(feSitesTag, $borderColor="DarkBlue", $bgColor="LightBlue", $type="Frontend sites")
 AddBoundaryTag(coreTag, $borderColor="DarkRed", $bgColor="LightPink", $type="Cores")
 AddBoundaryTag(dataStoreTag, $borderColor="", $bgColor="LightYellow", $type="Data store")
 
-Person(anonymous, "Anonymous", "Access to public pages")
-Person(user, "User", "Access to protected pages")
-Person(ops, "Operator", "Manage content")
-Person(admin, "Administrator", "Manage system")
-
-System_Boundary(systemB, "System context", $tags="systemTag") {
+System_Boundary(systemBoundary, "MSA eco-system", $tags="systemTag") {
   System_Boundary(feSystemB, "Frontend", $tags="feSitesTag") {
     Container(fePublic, "Public routes", "NextJS 13", $sprite="nextjs")
     Container(feProtected, "Protected routes", "NextJS 13", $sprite="nextjs")
@@ -48,31 +47,32 @@ System_Boundary(systemB, "System context", $tags="systemTag") {
     ContainerDb(MySQL, "MySQL", $sprite="mysql")
   }
 
+  System_Boundary(caches, "Caches") {
+    ContainerDb(redis, "Redis", $sprite="redis")
+  }
+
   System_Boundary(messageQueues, "Message queues") {
     ContainerQueue(kafka, "Kafka", $sprite="kafka")
     ContainerQueue(rabitMQ, "Rabit MQ", $sprite="rabbitmq")
   }
 
-  System_Boundary(observers, "Observers"){
-    Container(newRelic, "New Relic", $sprite="new-relic", $link="https://newrelic.com/")
-    
-    Container(kibana, "Kibana", $descr="Visualizing, analyzing, and exploring the data with Elastic", $sprite="kibana")
+  System_Boundary(searchFullTexts, "Full text searches") {
     Container(elasticsearch, "Elastic search", $sprite="elasticsearch", $link="https://www.elastic.co/elasticsearch/")
   }
 
+  System_Boundary(observers, "Observers"){
+    Container(newRelic, "New Relic", $sprite="new-relic", $link="https://newrelic.com/")
+
+    Container(prometheus, "Prometheus", $sprite="prometheus")
+    Container(grafana, "Grafana", $sprite="grafana")
+    Container(grafanaLoki, "Grafana loki", $descr="Log aggregation system designed to store and query logs from all your applications and infrastructure", $sprite="img:https://grafana.com/static/img/logos/logo-loki.svg")
+  }
+
   System_Boundary(minIoB, "Min IO"){
-    Container(minIoConsole, "MinIO console", $descr="Simple UI for MinIO Object Storage 🧮", $link="https://github.com/minio/console")
-    ContainerDb(minIoServer, "MinIO server", $descr="High Performance Object Storage for AI", $link="https://github.com/minio/minio")
+    Container(minIoConsole, "MinIO console", $descr="Simple UI for MinIO Object Storage 🧮", $sprite="img:https://min.io/resources/img/logo.svg", $link="https://github.com/minio/console")
+    ContainerDb(minIoServer, "MinIO server", $descr="High Performance Object Storage for AI", $sprite="img:https://min.io/resources/img/logo.svg", $link="https://github.com/minio/minio")
   }
 }
-
-Rel(anonymous, fePublic, "View", "Web browsers")
-Rel(user, feProtected, "Use", "Web browsers")
-Rel(ops, feDashboard, "Manage", "Web browsers")
-Rel(admin, feDashboard, "Manage", "Web browsers")
-
-Rel(ops, minIoConsole, "Manage", "Web browsers")
-Rel(admin, minIoConsole, "Manage", "Web browsers")
 
 Rel(minIoConsole, minIoServer, "Manage", "HTTPS")
 Rel(coreStrApi, minIoServer, "Manage", "HTTPS")
@@ -82,9 +82,12 @@ Rel(feSystemB, cores, "Sync", "JSON/HTTPS")
 
 Rel(feSystemB, keycloak, "Authenticate/Authorise")
 Rel(cores, keycloak, "Authenticate/Authorise")
+Rel(minIoB, keycloak, "Authenticate/Authorise")
 Rel(keycloak, databases, "Query", "TCP/IP")
 
 Rel(cores, databases, "Query", "TCP/IP")
+
+Rel(cores, caches, "Use", "TCP/IP")
 
 Rel(cores, messageQueues, "Produce", "TCP/IP")
 Rel(messageQueues, cores, "Consume", "TCP/IP")
@@ -94,9 +97,10 @@ Rel(feSystemB, observers, "Stream log", "TCP/IP")
 
 Rel(fePublic, elasticsearch, "Search full text", "JSON/HTTPS")
 
-Rel(admin, kibana, "Monitor", "Web browsers")
-Rel(kibana, elasticsearch, "Use", "JSON/HTTPS")
-
 SHOW_LEGEND()
+
+skinparam linetype ortho
+' skinparam linetype polyline
+' !pragma layout elk
 
 @enduml
