@@ -1,9 +1,11 @@
 {
+  "plantuml.exportOutDir": "docs/out",
+  "plantuml.jarArgs": ["-DRELATIVE_INCLUDE=../docs/plantuml"],
   "search.exclude": {
     "**/.git": true,
     "**/.yarn/cache": true,
-    "**/node_modules": true,
+    "**/*.code-search": true,
     "**/bower_components": true,
-    "**/*.code-search": true
+    "**/node_modules": true
   }
 }

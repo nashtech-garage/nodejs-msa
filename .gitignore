@@ -43,3 +43,9 @@ lerna-debug.log*
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+# Generated diagrams
+docs/out
+
+# Lint
+.eslintcache

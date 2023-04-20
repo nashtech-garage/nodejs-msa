@@ -13,7 +13,7 @@
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
+    "lint": "eslint --cache --color \"{src,apps,libs,test}/**/*.ts\"",
     "lint:fix": "yarn lint --fix",
     "test": "jest --config ./jest.config.ts --runInBand --detectOpenHandles",
     "test:watch": "jest --watch",

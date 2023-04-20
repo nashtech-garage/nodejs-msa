@@ -1,0 +1,33 @@
+@startuml System context
+!include <C4/C4_Container>
+
+!include <logos/nodejs.puml>
+
+title System context
+
+LAYOUT_AS_SKETCH()
+LAYOUT_LANDSCAPE()
+SHOW_PERSON_PORTRAIT()
+
+AddBoundaryTag(systemTag, $bgColor="LightGoldenRodYellow", $borderColor="DarkRed", $type="System context")
+
+Person(anonymous, "Anonymous", "Access to public pages")
+Person(user, "User", "Access to protected pages")
+Person(ops, "Operator", "Manage content")
+Person(admin, "Administrator", "Manage system")
+
+System_Boundary(systemBoundary, "MSA eco-system", $tags="systemTag") {
+  Container(fe, "Frontend", $descr="GUI for users/operators", $sprite="nodejs")
+  Container(be, "Backend", $descr="Process all main logic", $sprite="nodejs")
+}
+
+Rel(anonymous, fe, "View", "Web browsers")
+Rel(user, fe, "Use", "Web browsers")
+Rel(ops, fe, "Manage", "Web browsers")
+Rel(admin, fe, "Manage", "Web browsers")
+
+Rel(fe, be, "Use", "JSON/HTTPS")
+
+SHOW_LEGEND()
+
+@enduml
