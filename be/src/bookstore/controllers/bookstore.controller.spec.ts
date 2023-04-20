@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing'
+import { WINSTON_MODULE_PROVIDER } from 'nest-winston'
 
 import { BookstoreController } from '@/bookstore/controllers'
 import { BookstoreService } from '@/bookstore/providers'
@@ -9,7 +10,16 @@ describe('BookstoreController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [BookstoreController],
-      providers: [BookstoreService],
+      providers: [
+        {
+          provide: WINSTON_MODULE_PROVIDER,
+          useFactory: () => ({
+            info: jest.fn(),
+            warn: jest.fn(),
+          }),
+        },
+        BookstoreService,
+      ],
     }).compile()
 
     controller = module.get<BookstoreController>(BookstoreController)
