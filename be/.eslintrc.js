@@ -2,17 +2,9 @@ const { compilerOptions } = require('./tsconfig.json')
 
 const pathGroups = []
 
-const patchInternalPaths = ['@casl/ability']
-for (const path of patchInternalPaths) {
-  pathGroups.push({
-    pattern: path,
-    group: 'internal',
-  })
-}
-
 for (const path in compilerOptions.paths) {
   pathGroups.push({
-    pattern: `${path}*`,
+    pattern: `${path}`,
     group: 'object',
   })
 }
@@ -26,6 +18,7 @@ module.exports = {
   },
   plugins: ['@typescript-eslint/eslint-plugin', 'sonarjs'],
   extends: [
+    'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
     'plugin:import/recommended',

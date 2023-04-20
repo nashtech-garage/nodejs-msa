@@ -1,3 +1,3 @@
-import logConfig from '@config/log.config'
+import logConfig from '@/config/log.config'
 
 export { logConfig }

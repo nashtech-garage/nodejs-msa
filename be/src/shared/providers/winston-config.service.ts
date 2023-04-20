@@ -3,8 +3,8 @@ import { ConfigType } from '@nestjs/config'
 import { utilities, WinstonModuleOptions, WinstonModuleOptionsFactory } from 'nest-winston'
 import { format as _format, transports as _transports } from 'winston'
 
-import logConfig from '@config/log.config'
-import { LogLevel } from '@shared/constants'
+import logConfig from '@/config/log.config'
+import { LogLevel } from '@/shared/constants'
 
 @Injectable()
 export class WinstonConfigService implements WinstonModuleOptionsFactory {

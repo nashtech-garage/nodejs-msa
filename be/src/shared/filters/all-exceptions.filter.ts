@@ -1,7 +1,7 @@
 import { ArgumentsHost, Catch, ExceptionFilter, HttpStatus, Logger } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 
-import { moment, parseErrorStack } from '@shared/utils'
+import { moment, parseErrorStack } from '@/shared/utils'
 
 import type { Request, Response } from 'express'
 

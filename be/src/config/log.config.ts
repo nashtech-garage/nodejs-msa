@@ -1,6 +1,6 @@
 import { registerAs } from '@nestjs/config'
 
-import { LogLevel } from '@shared/constants'
+import { LogLevel } from '@/shared/constants'
 
 export default registerAs('log', () => ({
   name: process.env.APP_NAME || 'NBTMSA',

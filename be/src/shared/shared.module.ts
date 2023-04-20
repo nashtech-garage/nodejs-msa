@@ -2,7 +2,7 @@ import { Global, Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 import { WinstonModule } from 'nest-winston'
 
-import * as providers from '@shared/providers'
+import * as providers from '@/shared/providers'
 
 @Global()
 @Module({

@@ -1,1 +1,1 @@
-export * from '@shared/filters/all-exceptions.filter'
+export * from '@/shared/filters/all-exceptions.filter'
