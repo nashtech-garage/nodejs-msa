@@ -5896,9 +5896,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nodejs-msa@workspace:.":
+"nodejs-msa-be@workspace:be":
   version: 0.0.0-use.local
-  resolution: "nodejs-msa@workspace:."
+  resolution: "nodejs-msa-be@workspace:be"
   dependencies:
     "@nestjs/cli": ^9.4.0
     "@nestjs/common": ^9.4.0
@@ -6655,6 +6655,12 @@ __metadata:
   checksum: 60c5a7f152014d4f6bbf23f48e6badd145960a9be1115b719a07ba688c760b1bb8270abd6650bbd184ae2011843d8e9c775409652c89ff97550418aa5d581b27
   languageName: node
   linkType: hard
+
+"root-workspace-0b6124@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "root-workspace-0b6124@workspace:."
+  languageName: unknown
+  linkType: soft
 
 "run-async@npm:^2.4.0":
   version: 2.4.1
