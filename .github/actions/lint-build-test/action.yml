@@ -13,17 +13,13 @@ runs:
       shell: bash
 
     - name: Lint
-      run: yarn lint
+      run: yarn workspaces foreach run lint
       shell: bash
 
     - name: Build
-      run: yarn build
+      run: yarn workspaces foreach run build
       shell: bash
 
-    - name: Test coverage
-      run: yarn test:cov
-      shell: bash
-
-    - name: Test E2E
-      run: yarn test:e2e
+    - name: Test
+      run: yarn workspaces foreach run test
       shell: bash
