@@ -11,6 +11,7 @@
     "be"
   ],
   "dependencies": {
+    "@faker-js/faker": "^7.6.0",
     "eslint": "^8.38.0",
     "prettier": "^2.8.7",
     "typescript": "^5.0.4"

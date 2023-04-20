@@ -6,9 +6,7 @@ import { SharedModule } from '@/shared/shared.module'
 
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
-
-import * as configurations from '@config/index'
-import { SharedModule } from '@shared/shared.module'
+import { BookstoreModule } from './bookstore/bookstore.module'
 
 @Module({
   imports: [
@@ -20,6 +18,7 @@ import { SharedModule } from '@shared/shared.module'
       load: Object.values(configurations),
     }),
     SharedModule,
+    BookstoreModule,
   ],
   providers: [AppService],
   controllers: [AppController],
