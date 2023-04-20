@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 
-import * as configurations from '@config/index'
-import { SharedModule } from '@shared/shared.module'
+import * as configurations from '@/config/index'
+import { SharedModule } from '@/shared/shared.module'
 
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
+import { BookstoreModule } from './bookstore/bookstore.module'
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { AppService } from './app.service'
       load: Object.values(configurations),
     }),
     SharedModule,
+    BookstoreModule,
   ],
   providers: [AppService],
   controllers: [AppController],

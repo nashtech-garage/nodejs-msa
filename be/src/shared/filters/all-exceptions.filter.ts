@@ -1,9 +1,15 @@
 import { ArgumentsHost, Catch, ExceptionFilter, HttpStatus, Logger } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 
-import { moment, parseErrorStack } from '@shared/utils'
+import { moment, parseErrorStack } from '@/shared/utils'
 
 import type { Request, Response } from 'express'
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type UnknownException = any
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type UnknownDetail = any
 
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
@@ -14,8 +20,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
     this.configService = configService
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  catch(exception: any, host: ArgumentsHost) {
+  catch(exception: UnknownException, host: ArgumentsHost) {
     const ctx = host.switchToHttp()
     const request = ctx.getRequest<Request>()
     const response = ctx.getResponse<Response>()
@@ -23,15 +28,14 @@ export class AllExceptionsFilter implements ExceptionFilter {
     const status = this.generateStatus(exception)
     const msgErr = this.generateMsgErr(exception)
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let detail: any = {
+    let detail: UnknownDetail = {
       path: request.url,
       timestamp: moment().format('YYYY-MM-DD HH:mm:ss'),
       statusCode: status,
       ...this.generateExceptionExtra(exception),
     }
 
-    detail = this.generateExceptionDetail(exception)
+    detail = this.generateExceptionDetail(detail, exception)
 
     if (status >= 500) {
       const stack = parseErrorStack(exception && exception.stack ? exception.stack : undefined)
@@ -42,32 +46,25 @@ export class AllExceptionsFilter implements ExceptionFilter {
     }
 
     response.status(status).json({
-      isSuccess: false,
       message: msgErr,
       detail,
     })
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private generateStatus(exception: any) {
+  private generateStatus(exception: UnknownException) {
     return exception?.getStatus ? exception.getStatus() : HttpStatus.INTERNAL_SERVER_ERROR
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private generateMsgErr(exception: any) {
+  private generateMsgErr(exception: UnknownException) {
     return exception?.message ? exception.message : 'Internal server error'
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private generateExceptionExtra(exception: any) {
+  private generateExceptionExtra(exception: UnknownException) {
     this.logger.warn('Implementing', { context: AllExceptionsFilter.name, exception })
     return {}
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private generateExceptionDetail(exception: any) {
-    let detail
-
+  private generateExceptionDetail(detail: UnknownDetail, exception: UnknownException) {
     if (exception && exception.getResponse) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { message, statusCode, ...args } = exception.getResponse()

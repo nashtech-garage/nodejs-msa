@@ -1,3 +1,14 @@
+const { compilerOptions } = require('./tsconfig.json')
+
+const pathGroups = []
+
+for (const path in compilerOptions.paths) {
+  pathGroups.push({
+    pattern: `${path}`,
+    group: 'object',
+  })
+}
+
 module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -7,6 +18,7 @@ module.exports = {
   },
   plugins: ['@typescript-eslint/eslint-plugin', 'sonarjs'],
   extends: [
+    'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
     'plugin:import/recommended',
@@ -50,6 +62,7 @@ module.exports = {
         },
         groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object', 'type'],
         'newlines-between': 'always',
+        pathGroups,
       },
     ],
     indent: 'off',
@@ -81,6 +94,6 @@ module.exports = {
       typescript: true,
       node: true,
     },
-    'import/ignore': ['node_modules'],
+    'import/ignore': ['coverage', 'dist', 'logs', 'node_modules'],
   },
 }

@@ -1,1 +1,1 @@
-export * from '@shared/providers/winston-config.service'
+export * from '@/shared/providers/winston-config.service'

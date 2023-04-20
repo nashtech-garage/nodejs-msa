@@ -49,3 +49,6 @@ docs/out
 
 # Lint
 .eslintcache
+
+# ENV
+.env
