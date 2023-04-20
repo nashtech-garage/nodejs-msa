@@ -13,13 +13,13 @@ runs:
       shell: bash
 
     - name: Lint
-      run: yarn workspaces foreach run lint
+      run: yarn workspaces foreach -v run lint
       shell: bash
 
     - name: Build
-      run: yarn workspaces foreach run build
+      run: yarn workspaces foreach -vptR run build
       shell: bash
 
     - name: Test
-      run: yarn workspaces foreach run test
+      run: yarn workspaces foreach -v run test
       shell: bash
