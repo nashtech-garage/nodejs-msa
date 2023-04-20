@@ -1,5 +1,12 @@
 {
+  "version": "0.0.1",
+  "description": "NodeJS best practices in MSA",
+  "author": {
+    "name": "Son Bui",
+    "email": "son.buithanh1@nashtechglobal.com"
+  },
   "private": true,
+  "license": "UNLICENSED",
   "workspaces": [
     "be"
   ]
