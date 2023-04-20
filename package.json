@@ -9,5 +9,14 @@
   "license": "UNLICENSED",
   "workspaces": [
     "be"
-  ]
+  ],
+  "dependencies": {
+    "eslint": "^8.38.0",
+    "prettier": "^2.8.7",
+    "typescript": "^5.0.4"
+  },
+  "devDependencies": {
+    "@types/eslint": "^8",
+    "@types/prettier": "^2"
+  }
 }

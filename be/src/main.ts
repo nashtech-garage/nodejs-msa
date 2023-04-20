@@ -2,11 +2,11 @@ import { HttpStatus, ValidationPipe } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { NestFactory } from '@nestjs/core'
 
+import { AppModule } from './app.module'
+
 import { Environment } from '@shared/constants'
 import { AllExceptionsFilter } from '@shared/filters'
 import { AuthInterceptor, LoggingInterceptor } from '@shared/interceptors'
-
-import { AppModule } from './app.module'
 
 import type { NestExpressApplication } from '@nestjs/platform-express'
 

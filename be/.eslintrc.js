@@ -1,3 +1,22 @@
+const { compilerOptions } = require('./tsconfig.json')
+
+const pathGroups = []
+
+const patchInternalPaths = ['@casl/ability']
+for (const path of patchInternalPaths) {
+  pathGroups.push({
+    pattern: path,
+    group: 'internal',
+  })
+}
+
+for (const path in compilerOptions.paths) {
+  pathGroups.push({
+    pattern: `${path}*`,
+    group: 'object',
+  })
+}
+
 module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -50,6 +69,7 @@ module.exports = {
         },
         groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object', 'type'],
         'newlines-between': 'always',
+        pathGroups,
       },
     ],
     indent: 'off',
@@ -81,6 +101,6 @@ module.exports = {
       typescript: true,
       node: true,
     },
-    'import/ignore': ['node_modules'],
+    'import/ignore': ['coverage', 'dist', 'logs', 'node_modules'],
   },
 }

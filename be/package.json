@@ -11,7 +11,7 @@
   "scripts": {
     "clean": "rimraf coverage dist logs .eslintcache",
     "prebuild": "rimraf dist",
-    "build": "nest build",
+    "build": "yarn prebuild && nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
@@ -31,6 +31,8 @@
     "@nestjs/config": "^2.3.1",
     "@nestjs/core": "^9.4.0",
     "@nestjs/platform-express": "^9.4.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.0",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.43",
     "nest-winston": "^1.9.1",
