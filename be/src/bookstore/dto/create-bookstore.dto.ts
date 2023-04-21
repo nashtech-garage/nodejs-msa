@@ -1,13 +1,9 @@
+import { faker } from '@faker-js/faker'
 import { ApiProperty } from '@nestjs/swagger'
-import { IsString, IsUUID, Length } from 'class-validator'
+import { IsString, Length } from 'class-validator'
 
 export class CreateBookstoreDto {
-  @ApiProperty({ required: true })
-  @IsString()
-  @IsUUID()
-  id: string
-
-  @ApiProperty({ required: true })
+  @ApiProperty({ required: true, example: faker.commerce.productName() })
   @IsString()
   @Length(10, 100)
   name: string

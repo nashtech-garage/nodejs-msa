@@ -1,6 +1,7 @@
 import { faker } from '@faker-js/faker'
 import { Inject, Injectable, NotFoundException } from '@nestjs/common'
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston'
+import { v4 as uuidV4 } from 'uuid'
 import { Logger } from 'winston'
 
 import { CreateBookstoreDto, UpdateBookstoreDto } from '@/bookstore/dto'
@@ -25,10 +26,10 @@ for (let index = 0; index < 10; index++) {
 export class BookstoreService {
   constructor(@Inject(WINSTON_MODULE_PROVIDER) private readonly logger: Logger) {}
 
-  async create({ id, name }: CreateBookstoreDto) {
+  async create({ name }: CreateBookstoreDto) {
     this.logger.info('Create bookstore', { context: BookstoreService.name })
     const bookstore = new Bookstore()
-    bookstore.id = id
+    bookstore.id = uuidV4()
     bookstore.name = name
 
     bookstores.push(bookstore)

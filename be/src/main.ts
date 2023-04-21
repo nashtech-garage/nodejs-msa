@@ -1,8 +1,9 @@
 import { HttpStatus, ValidationPipe } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { NestFactory } from '@nestjs/core'
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
 
-import { Environment } from '@/shared/constants'
+import { ApiTag, Environment } from '@/shared/constants'
 import { AllExceptionsFilter } from '@/shared/filters'
 import { AuthInterceptor, LoggingInterceptor } from '@/shared/interceptors'
 
@@ -34,6 +35,17 @@ async function bootstrap() {
       whitelist: true,
     }),
   )
+
+  const config = new DocumentBuilder()
+    .setTitle('NBTMSA')
+    .setDescription('NodeJS best practices in MSA')
+    .setVersion('1.0')
+    .addServer('/')
+    .addTag(ApiTag.App, 'Application')
+    .addTag(ApiTag.Bookstore, 'Bookstore domain')
+    .build()
+  const document = SwaggerModule.createDocument(app, config)
+  SwaggerModule.setup(`${configService.get('SITE_SECRET')}/api-docs`, app, document)
 
   await app.listen(configService.get('PORT'))
   console.log(`✅ Application is 🏃‍♂️ on: ${await app.getUrl()} - ${configService.get('NODE_ENV')}`)
