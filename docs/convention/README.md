@@ -316,6 +316,33 @@ const friend = 'Bob'
 const friends = ['Bob', 'Tony', 'Tanya']
 ```
 
+### File naming
+
+In this part, we will see the naming conventions that we can use in order to have better maintainability and readability. For each decorator, you should use the name with a hyphen for a composed name, followed by a dot and the name of the decorator or object to which it corresponds.
+
+```js
+// user.controller.ts
+@Controller()
+export class UserController { /* ... */ }
+
+// user.service.ts
+@Injectable()
+export class UserService { /* ... */ }
+
+// user-role.service.ts
+@Injectable()
+export class UserRoleService { /* ... */ }
+
+// user.module.ts
+@Module()
+export class UserModule { /* ... */ }
+
+// authentication.middleware.ts
+@Injectable()
+export class AuthenticationMiddleware { /* ... */ }
+
+```
+
 ## Linting & formatting
 
 Uses Typescript Eslint, and Prettier to catch errors and avoid bike-shedding by enforcing a common code style. 
