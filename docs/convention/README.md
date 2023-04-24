@@ -2,13 +2,6 @@
 
 Define documents/CI rules for convention (best practices) in NodeJS
 
-## CI
-
-- Eslint recommended rules
-- Typescript eslint recommended rules
-- Prettier formatter rules
-- SonarJS recommended rules
-
 ## Naming cheatsheet
 
 Naming things is hard. This sheet attempts to make it easier.
@@ -322,6 +315,49 @@ const friend = ['Bob', 'Tony', 'Tanya']
 const friend = 'Bob'
 const friends = ['Bob', 'Tony', 'Tanya']
 ```
+
+## Linting & formatting
+
+Uses Typescript Eslint, and Prettier to catch errors and avoid bike-shedding by enforcing a common code style. 
+Uses SonarJS to prevent code smell
+
+- Eslint recommended rules
+- Typescript eslint recommended rules
+- Prettier formatter rules
+- SonarJS recommended rules
+
+### Languages
+
+- Typescript/JavaScript is linted by Typescript Eslint and formatted by Prettier
+- JSON is formatted by Prettier
+
+### Scripts
+
+#### Terminal
+
+```zsh
+# Lint all files without auto-fixing
+$ yarn lint
+
+# Lint all files, fixing many violations automatically
+$ yarn lint:fix
+```
+
+> See `package.json` to update
+
+#### Pre-commit
+
+Staged files are automatically linted and tested before each commit.
+
+> [Husky](https://www.npmjs.com/package/husky) improves your commits and more 🐶 woof!
+
+#### Editor
+
+In supported editors, all files will be linted and show under the linter errors section.
+
+### Configuration
+
+See `.eslintrc.js` for more information and defined rules
 
 ## Application architecture
 
