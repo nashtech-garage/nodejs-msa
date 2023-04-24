@@ -343,6 +343,38 @@ export class AuthenticationMiddleware { /* ... */ }
 
 ```
 
+#### Class naming convention
+
+```js
+export class PascalCaseSuffix {} //= pascal-case.suffix.ts
+
+// Except for suffix, PascalCase to hyphen-case
+class FooBarNaming {} //= foo-bar.naming.ts
+class FooController {} //= foo.controller.ts
+class BarQueryDto {} //= bar-query.dto.ts
+```
+
+#### Interface naming convention
+
+```js
+// https://stackoverflow.com/questions/541912
+// https://stackoverflow.com/questions/2814805
+interface User {}
+interface CustomeUser extends User {}
+interface ThirdCustomeUser extends CustomeUser {}
+```
+
+#### Add index exporting
+
+```js
+// It is recommended to place index.ts in each folder and export.
+// Unless it's a special case, it is import from a folder instead of directly from a file.
+- import { FooController } from './controllers/foo.controller';
+- import { BarController } from './controllers/bar.controller';
+
++ import { FooController, BarController } from './controllers';
+```
+
 ## Linting & formatting
 
 Uses Typescript Eslint, and Prettier to catch errors and avoid bike-shedding by enforcing a common code style. 
