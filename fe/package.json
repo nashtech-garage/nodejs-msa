@@ -15,7 +15,7 @@
     "lint-ts": "eslint  --cache --color --ext .ts,.tsx .",
     "lint:fix": "yarn lint-ts:fix",
     "lint": "yarn lint-ts",
-    "test": "No test for FE"
+    "test": "echo \"No test for FE\""
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
