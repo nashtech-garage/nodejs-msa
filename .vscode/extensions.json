@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "jebbs.plantuml",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "sonarsource.sonarlint-vscode"
+  ]
+}
