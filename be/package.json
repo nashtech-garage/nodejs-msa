@@ -20,9 +20,9 @@
     "lint": "eslint --cache --color \"{src,apps,libs,test}/**/*.ts\"",
     "lint:fix": "yarn lint --fix",
     "test": "yarn test:cov && yarn test:e2e",
-    "test:base": "jest --config ./jest.config.ts --runInBand --detectOpenHandles",
-    "test:watch": "yarn test:base --watch",
-    "test:cov": "yarn test:base --coverage",
+    "test:unit": "jest --config ./jest.config.ts --runInBand --detectOpenHandles",
+    "test:watch": "yarn test:unit --watch",
+    "test:cov": "yarn test:unit --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./jest.config.e2e.ts --runInBand --detectOpenHandles",
     "test:e2e:watch": "yarn test:e2e --watch"
@@ -42,6 +42,7 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^5.0.0",
     "rxjs": "^7.8.0",
+    "uuid": "^9.0.0",
     "winston": "^3.8.2"
   },
   "devDependencies": {
@@ -52,6 +53,7 @@
     "@types/jest": "^29.5.0",
     "@types/node": "^18.15.11",
     "@types/supertest": "^2.0.11",
+    "@types/uuid": "^9",
     "@typescript-eslint/eslint-plugin": "^5.58.0",
     "@typescript-eslint/parser": "^5.58.0",
     "eslint": "^8.38.0",
@@ -67,7 +69,8 @@
     "ts-loader": "^9.4.2",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "webpack": "^5.80.0"
   },
   "engines": {
     "node": "18",

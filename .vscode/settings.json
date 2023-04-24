@@ -1,6 +1,8 @@
 {
   "plantuml.exportOutDir": "docs/out",
   "plantuml.jarArgs": ["-DRELATIVE_INCLUDE=../docs/plantuml"],
+  "plantuml.render": "PlantUMLServer",
+  "plantuml.server": "https://www.plantuml.com/plantuml",
   "search.exclude": {
     "**/.git": true,
     "**/.yarn/cache": true,
