@@ -8,7 +8,6 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
-      - internal
       - external
 
   whoami:
@@ -27,6 +26,18 @@ services:
         WORKSPACE_PATH: be
     labels:
       - "traefik.http.routers.be.rule=Host(`be.docker.localhost`)"
+    networks:
+      - internal
+
+  fe:
+    build:
+      context: .
+      dockerfile: docker/fe.Dockerfile
+      args:
+        WORKSPACE: nodejs-msa-fe
+        WORKSPACE_PATH: fe
+    labels:
+      - "traefik.http.routers.fe.rule=Host(`fe.docker.localhost`)"
     networks:
       - internal
       - external

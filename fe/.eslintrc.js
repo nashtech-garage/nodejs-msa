@@ -30,7 +30,7 @@ module.exports = {
     },
   },
   plugins: ['react', 'react-hooks'],
-  ignorePatterns: ['.eslintrc.js'],
+  ignorePatterns: ['.eslintrc.js', 'next.config.js'],
   rules: {
     'import/order': [
       'error',
