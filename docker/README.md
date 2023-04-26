@@ -25,10 +25,9 @@ flowchart LR
 
   fe -- JSON/HTTPS --> bff
   bff -- JSON/HTTPS --> be
-  fe -- JSON/HTTPS --> be
 
   be -- TCP --> db
   be -- TCP --> cache
 
-  style nodeJsMas fill:whitesmoke
+  style nodeJsMas fill:whitesmoke,stroke:darkred,stroke-width:2px,stroke-dasharray: 5 5
 ```
