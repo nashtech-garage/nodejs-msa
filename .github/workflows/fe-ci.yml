@@ -1,0 +1,26 @@
+name: FE service CI
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - fe/**
+
+jobs:
+  build-image:
+    name: Build image
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build image
+        id: build-image
+        uses: ./.github/actions/build-image
+        with:
+          repository: ${{ secrets.DOCKER_HUB_REPOSITORY }}
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+          willPush: false
+          dockerfile: docker/fe.Dockerfile
