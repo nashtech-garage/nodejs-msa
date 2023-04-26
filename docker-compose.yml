@@ -1,0 +1,88 @@
+services:
+  proxy:
+    image: traefik:v2.10
+    command: --api.insecure=true --providers.docker
+    ports:
+      - 80:80
+      - 8080:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - external
+
+  whoami:
+    image: traefik/whoami
+    labels:
+      - traefik.http.routers.whoami.rule=Host(`whoami.docker.localhost`)
+    networks:
+      - external
+
+  be:
+    build:
+      context: .
+      dockerfile: docker/be.Dockerfile
+      args:
+        WORKSPACE: nodejs-msa-be
+        WORKSPACE_PATH: be
+    labels:
+      - traefik.http.routers.be.rule=Host(`be.docker.localhost`)
+    networks:
+      - internal
+
+  be-dev:
+    build:
+      context: .
+      dockerfile: docker/be.Dockerfile
+      target: deps
+      args:
+        WORKSPACE: nodejs-msa-be
+        WORKSPACE_PATH: be
+    command: yarn workspace nodejs-msa-be start:dev
+    labels:
+      - traefik.http.routers.be-dev.rule=Host(`be-dev.docker.localhost`)
+      - traefik.http.services.be-dev.loadbalancer.server.port=8080
+    volumes:
+      - ./be:/app/be
+    expose:
+      - 8080
+    networks:
+      - internal
+      - external
+
+  fe:
+    build:
+      context: .
+      dockerfile: docker/fe.Dockerfile
+      args:
+        WORKSPACE: nodejs-msa-fe
+        WORKSPACE_PATH: fe
+    environment:
+      BE_URL: http://be:3000
+    labels:
+      - traefik.http.routers.fe.rule=Host(`fe.docker.localhost`)
+    networks:
+      - internal
+      - external
+
+  fe-dev:
+    build:
+      context: .
+      dockerfile: docker/fe.Dockerfile
+      target: deps
+      args:
+        WORKSPACE: nodejs-msa-fe
+        WORKSPACE_PATH: fe
+    command: yarn workspace nodejs-msa-fe dev
+    environment:
+      BE_URL: http://be:3000
+    labels:
+      - traefik.http.routers.fe-dev.rule=Host(`fe-fev.docker.localhost`)
+    volumes:
+      - ./fe:/app/fe
+    networks:
+      - internal
+      - external
+
+networks:
+  internal:
+  external:

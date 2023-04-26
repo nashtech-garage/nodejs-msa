@@ -1,0 +1,104 @@
+name: Build docker image
+description: Runs a composite step action
+
+inputs:
+  repository:
+    required: true
+    description: Repository name
+  username:
+    required: true
+    description: Username
+  password:
+    required: true
+    description: Password
+  willPush:
+    required: true
+    description: Should push image to registry/hub after building image
+  dockerfile:
+    required: true
+    description: Path to Dockerfile
+  workspace:
+    required: true
+    description: yarn workspace
+  workspacePath:
+    required: true
+    description: Path to yarn workspace
+
+runs:
+  using: composite
+  steps:
+    - name: Set up Docker Buildx
+      id: buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Inspect builder
+      id: builderInspector
+      shell: bash
+      run: |
+        echo "Name:      ${{ steps.buildx.outputs.name }}"
+        echo "Endpoint:  ${{ steps.buildx.outputs.endpoint }}"
+        echo "Status:    ${{ steps.buildx.outputs.status }}"
+        echo "Flags:     ${{ steps.buildx.outputs.flags }}"
+        echo "Platforms: ${{ steps.buildx.outputs.platforms }}"
+
+        osArch=$(echo ${{ steps.buildx.outputs.platforms }} | cut -d, -f1)
+        os=$(echo $osArch | cut -d/ -f1)
+        arch=$(echo $osArch | cut -d/ -f2)
+
+        echo "OS arch: $osArch"
+        echo "os=$os" >> $GITHUB_OUTPUT
+        echo "arch=$arch" >> $GITHUB_OUTPUT
+
+    - name: Docker meta
+      id: meta
+      uses: docker/metadata-action@v4
+      with:
+        images: |
+          ${{ inputs.repository }}
+        tags: |
+          type=ref,event=branch
+          type=ref,event=pr
+          type=semver,pattern={{version}}
+          type=semver,pattern={{major}}
+
+    # - name: Login to DockerHub
+    #   uses: docker/login-action@v2
+    #   with:
+    #     username: ${{ inputs.username }}
+    #     password: ${{ inputs.password }}
+
+    - name: Cache Docker layers
+      uses: actions/cache@v3
+      with:
+        path: /tmp/.buildx-cache
+        key: ${{ runner.os }}-${{ steps.builderInspector.outputs.arch }}-buildx-${{ github.sha }}
+        restore-keys: |
+          ${{ runner.os }}-${{ steps.builderInspector.outputs.arch }}-buildx-
+
+    - name: Build and push
+      id: docker_build
+      uses: docker/build-push-action@v3
+      with:
+        context: .
+        file: ${{ inputs.dockerfile }}
+        push: ${{ inputs.willPush }}
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
+        build-args: |
+          BUILD_TIME=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.created'] }}
+          VERSION=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.version'] }}
+          REVISION=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.revision'] }}
+          WORKSPACE=${{ inputs.workspace }}
+          WORKSPACE_PATH=${{ inputs.workspacePath }}
+        cache-from: type=local,src=/tmp/.buildx-cache
+        cache-to: type=local,dest=/tmp/.buildx-cache-new
+
+    - name: Move cache
+      run: |
+        rm -rf /tmp/.buildx-cache
+        mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+      shell: bash
+
+    - name: Image digest
+      run: echo ${{ steps.docker_build.outputs.digest }}
+      shell: bash
