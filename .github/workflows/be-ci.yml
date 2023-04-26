@@ -6,7 +6,6 @@ on:
       - main
     paths:
       - be/**
-      - fe/**
 
 jobs:
   build-image:
