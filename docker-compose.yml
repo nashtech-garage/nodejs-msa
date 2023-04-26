@@ -7,13 +7,14 @@ services:
       - 8080:8080
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - internal
+      - external
 
   whoami:
     image: traefik/whoami
     labels:
       - "traefik.http.routers.whoami.rule=Host(`whoami.docker.localhost`)"
-    deploy:
-      replicas: 2
     networks:
       - external
 
@@ -24,8 +25,8 @@ services:
       args:
         WORKSPACE: nodejs-msa-be
         WORKSPACE_PATH: be
-    ports:
-      - 8080:3000
+    labels:
+      - "traefik.http.routers.be.rule=Host(`be.docker.localhost`)"
     networks:
       - internal
       - external
