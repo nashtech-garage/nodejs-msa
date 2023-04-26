@@ -1,0 +1,35 @@
+services:
+  proxy:
+    image: traefik:v2.10
+    command: --api.insecure=true --providers.docker
+    ports:
+      - 80:80
+      - 8080:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  whoami:
+    image: traefik/whoami
+    labels:
+      - "traefik.http.routers.whoami.rule=Host(`whoami.docker.localhost`)"
+    deploy:
+      replicas: 2
+    networks:
+      - external
+
+  be:
+    build:
+      context: .
+      dockerfile: docker/be.Dockerfile
+      args:
+        WORKSPACE: nodejs-msa-be
+        WORKSPACE_PATH: be
+    ports:
+      - 8080:3000
+    networks:
+      - internal
+      - external
+
+networks:
+  internal:
+  external:
