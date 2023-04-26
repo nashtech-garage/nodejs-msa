@@ -46,8 +46,8 @@ runs:
         arch=$(echo $osArch | cut -d/ -f2)
 
         echo "OS arch: $osArch"
-        echo "::set-output name=os::$os"
-        echo "::set-output name=arch::$arch"
+        echo "os=$os" >> $GITHUB_OUTPUT
+        echo "arch=$arch" >> $GITHUB_OUTPUT
 
     - name: Docker meta
       id: meta
