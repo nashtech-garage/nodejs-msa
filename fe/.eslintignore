@@ -1,0 +1,16 @@
+.git
+.github
+.next
+.vscode
+.yarn
+dist
+node_modules
+
+.eslint*
+next.config.js
+yarn.lock
+
+*pnp*
+**/*.js
+**/*.log
+**/*.map
