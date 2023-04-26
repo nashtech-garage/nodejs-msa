@@ -24,3 +24,5 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
           willPush: false
           dockerfile: docker/be.Dockerfile
+          workspace: nodejs-msa-be
+          workspacePath: be

@@ -17,6 +17,13 @@ inputs:
   dockerfile:
     required: true
     description: Path to Dockerfile
+  workspace:
+    required: true
+    description: yarn workspace
+  workspacePath:
+    required: true
+    description: Path to yarn workspace
+
 runs:
   using: composite
   steps:
@@ -81,6 +88,8 @@ runs:
           BUILD_TIME=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.created'] }}
           VERSION=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.version'] }}
           REVISION=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.revision'] }}
+          WORKSPACE=${{ inputs.workspace }}
+          WORKSPACE_PATH=${{ inputs.workspacePath }}
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache-new
 
