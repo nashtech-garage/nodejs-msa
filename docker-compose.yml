@@ -36,8 +36,31 @@ services:
       args:
         WORKSPACE: nodejs-msa-fe
         WORKSPACE_PATH: fe
+    environment:
+      BE_URL: http://be:3000
     labels:
       - "traefik.http.routers.fe.rule=Host(`fe.docker.localhost`)"
+    networks:
+      - internal
+      - external
+
+  fe-dev:
+    build:
+      context: .
+      dockerfile: docker/fe.Dockerfile
+      target: deps
+      args:
+        WORKSPACE: nodejs-msa-fe
+        WORKSPACE_PATH: fe
+    command: yarn workspace nodejs-msa-fe dev
+    environment:
+      BE_URL: http://be:3000
+    labels:
+      - "traefik.http.routers.fe-dev.rule=Host(`fe-fev.docker.localhost`)"
+    volumes:
+      - ./fe:/app/fe
+    ports:
+      - 3000:3000
     networks:
       - internal
       - external
