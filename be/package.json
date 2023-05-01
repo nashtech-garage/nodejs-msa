@@ -41,7 +41,7 @@
     "nest-winston": "^1.9.1",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^5.0.0",
-    "rxjs": "^7.8.0",
+    "rxjs": "^7.8.1",
     "uuid": "^9.0.0",
     "winston": "^3.8.2"
   },
