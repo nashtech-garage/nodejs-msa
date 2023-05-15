@@ -6633,15 +6633,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nest-winston@npm:^1.9.1":
-  version: 1.9.1
-  resolution: "nest-winston@npm:1.9.1"
+"nest-winston@npm:^1.9.2":
+  version: 1.9.2
+  resolution: "nest-winston@npm:1.9.2"
   dependencies:
     fast-safe-stringify: ^2.1.1
   peerDependencies:
     "@nestjs/common": ^5.0.0 || ^6.6.0 || ^7.0.0 || ^8.0.0 || ^9.0.0
     winston: ^3.0.0
-  checksum: 811afd4a750971e67b2000d30aa87fb4f91b91e9d90fcf89925a58b01911cf8d301cdbe0de3f8ca8a91f5c01db3e0504393ea705134c549711ce2063404e03d8
+  checksum: a29858cc401a69260a2bc7d9f815569c9c588e55d645d21a34d9d4788680df649b3de01d0017552ca12e5632aec11505c8d5095acc38743411a5f1211f08a388
   languageName: node
   linkType: hard
 
@@ -6801,7 +6801,7 @@ __metadata:
     jest: ^29.5.0
     moment: ^2.29.4
     moment-timezone: ^0.5.43
-    nest-winston: ^1.9.1
+    nest-winston: ^1.9.2
     prettier: ^2.8.8
     reflect-metadata: ^0.1.13
     rimraf: ^5.0.0
