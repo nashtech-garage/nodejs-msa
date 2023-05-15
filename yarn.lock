@@ -1593,10 +1593,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^18.16.3":
-  version: 18.16.3
-  resolution: "@types/node@npm:18.16.3"
-  checksum: 816b39d45b05ebdc6f362b630970df3f6d82f71d418a2555353522f4eeeb078fa201de5299f02c09a09faa975e43b2745fe19c263d44069f87ddf37d6c37b717
+"@types/node@npm:^20.1.4":
+  version: 20.1.4
+  resolution: "@types/node@npm:20.1.4"
+  checksum: bffa6a6e92831cc805b13658c55be8e04abe3202d5e57ddd7fee4cfbe269656a1f475909a9f9514e1aff50310d0d90c516ac2c649cb6f1c77d4b1079c2fd1e88
   languageName: node
   linkType: hard
 
@@ -6830,7 +6830,7 @@ __metadata:
     "@nestjs/testing": ^9.4.0
     "@types/express": ^4.17.13
     "@types/jest": ^29.5.0
-    "@types/node": ^18.16.3
+    "@types/node": ^20.1.4
     "@types/supertest": ^2.0.11
     "@types/uuid": ^9
     "@typescript-eslint/eslint-plugin": ^5.59.5
@@ -6871,7 +6871,7 @@ __metadata:
     "@fortawesome/free-solid-svg-icons": ^6.4.0
     "@fortawesome/react-fontawesome": ^0.2.0
     "@types/eslint": ^8
-    "@types/node": ^18.16.3
+    "@types/node": ^20.1.4
     "@types/prettier": ^2
     "@types/react": ^18.2.0
     "@types/react-dom": ^18.2.1
