@@ -1054,9 +1054,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nestjs/core@npm:^9.4.0":
-  version: 9.4.0
-  resolution: "@nestjs/core@npm:9.4.0"
+"@nestjs/core@npm:^9.4.1":
+  version: 9.4.1
+  resolution: "@nestjs/core@npm:9.4.1"
   dependencies:
     "@nuxtjs/opencollective": 0.3.2
     fast-safe-stringify: 2.1.1
@@ -1078,7 +1078,7 @@ __metadata:
       optional: true
     "@nestjs/websockets":
       optional: true
-  checksum: a0d5ca077a25cdd21a720aead6121ff27070cc608dd323a4459c10c21d36dc59ab471d1198f8b3e20f1eeeec35d0fde4e589601ccc82236d8a99c8fcb3ea9b15
+  checksum: 8c46d38c5f878a6a6ddbb3a07e28348243fa2ae4a56010ed97f17991135b3e0bdae0c9ccd01ded7bdfc7de5bb896687d4a8de351454edd3120185ceff0d5408b
   languageName: node
   linkType: hard
 
@@ -6787,7 +6787,7 @@ __metadata:
     "@nestjs/cli": ^9.4.2
     "@nestjs/common": ^9.4.0
     "@nestjs/config": ^2.3.1
-    "@nestjs/core": ^9.4.0
+    "@nestjs/core": ^9.4.1
     "@nestjs/mapped-types": 1.2.2
     "@nestjs/platform-express": ^9.4.0
     "@nestjs/schematics": ^9.1.0
