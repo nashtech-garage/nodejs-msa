@@ -6,8 +6,10 @@ Best practices NodeJS in MSA
 
 * NestJS v9 / Typescript
 * NextJS v13 / Typescript
+* Flutter
 * goauthentik
 * Kafka
+* PostgreSQL
 * Docker
 
 ## Architecture
