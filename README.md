@@ -24,7 +24,7 @@ Best practices NodeJS in MSA
 | 6  | listing-service     | Typescript  | Lists rooms, views room detail, price...                                                                     |
 | 7  | reservation-service | Typescript  | Manage room reservation                                                                                      |
 | 8  | payment-service     | Typescript  | Processes payment                                                                                            |
-| 9  | message-broker      | C/C++       | A Kafka instance                                                                                             |
+| 9  | message-broker      |             | A Kafka instance                                                                                             |
 
 ## Development
 
