@@ -21,13 +21,19 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Export drawio files to asciidoctor and png files
-        uses: rlespinasse/drawio-export-action@v2
-        with:
-          path: docs/diagrams
-          format: png
-          transparent: true
-          output: docs/imgs
+      # - name: Export drawio files to asciidoctor and png files
+      #   uses: rlespinasse/drawio-export-action@v2
+      #   with:
+      #     path: docs/diagrams
+      #     format: png
+      #     transparent: true
+      #     output: docs/imgs
+      - name: Render .drawio files
+        uses: docker://ghcr.io/racklet/render-drawio-action:v1
+        with: # Showcasing the default values here
+          formats: 'png'
+          files: 'docs/imgs/system-design.png:docs/diagrams/system-design.drawio'
+          log-level: 'info'
 
       - name: Get author and committer info from HEAD commit
         uses: rlespinasse/git-commit-data-action@v1
