@@ -5,7 +5,7 @@ Best practices NodeJS in MSA
 ## Technical stack
 
 * [TypeScript](https://www.typescriptlang.org) language
-- [NodeJs](https://nodejs.org) / [NestJS v9](https://github.com/nestjs/nest)
+* [NodeJs](https://nodejs.org) / [NestJS v9](https://github.com/nestjs/nest)
 * [NextJS v13](https://nextjs.org)
 * [Flutter v3.3](https://flutter.dev)
 * [goauthentik](https://goauthentik.io)
