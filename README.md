@@ -30,3 +30,6 @@ Best practices NodeJS in MSA
 
 See the [Development guide](docs/development-guide.md) to learn how to run and develop this app locally.
 
+## Sponsors
+
+![NashTech Vietnam](docs/imgs/nashTech-logo-red.svg)
