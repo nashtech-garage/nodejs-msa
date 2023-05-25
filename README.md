@@ -4,4 +4,4 @@ Best practices NodeJS in MSA
 
 ## Overview
 
-![System Design](docs/diagrams/system-design1.svg)
+![System Design](docs/imgs/system-design.png)
