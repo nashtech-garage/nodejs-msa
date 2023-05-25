@@ -33,6 +33,7 @@ jobs:
         uses: docker://ghcr.io/racklet/render-drawio-action:v1
         with: # Showcasing the default values here
           formats: 'png'
+          sub-dirs: 'docs/diagrams'
           files: 'docs/imgs/system-design.png:docs/diagrams/system-design.drawio'
           log-level: 'info'
 
