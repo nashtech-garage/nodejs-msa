@@ -4,11 +4,14 @@ Best practices NodeJS in MSA
 
 ## Technical stack
 
-* NestJS v9 / Typescript
-* NextJS v13 / Typescript
-* goauthentik
-* Kafka
-* Docker
+* [TypeScript](https://www.typescriptlang.org) language
+* [NodeJs](https://nodejs.org) / [NestJS v9](https://github.com/nestjs/nest)
+* [NextJS v13](https://nextjs.org)
+* [Flutter v3.3](https://flutter.dev)
+* [goauthentik](https://goauthentik.io)
+* [Kafka](https://kafka.apache.org)
+* [PostgreSQL](https://www.postgresql.org)
+* [Docker](https://www.docker.com)
 
 ## Architecture
 
