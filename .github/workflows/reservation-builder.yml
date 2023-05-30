@@ -41,3 +41,12 @@ jobs:
           push: true
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/reservation:build
+      - name: Build and push reservation release
+        uses: docker/build-push-action@v3.1.1
+        with:
+          context: ./reservation-service
+          file: ./reservation-service/Dockerfile-release
+          # platforms: linux/arm/v7,linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/reservation:release
