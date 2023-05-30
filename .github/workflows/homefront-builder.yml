@@ -21,7 +21,7 @@ concurrency:
 
 jobs:
   build_and_push_service_dev:
-    if: ${{ always() && github.ref == 'dev' }}
+    if: ${{ github.ref == 'dev' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -48,7 +48,7 @@ jobs:
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/homefront:dev
 
   build_and_push_service_latest:
-    if: ${{ always() && github.ref == 'main' }}
+    if: ${{ github.ref == 'main' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
