@@ -33,7 +33,7 @@ jobs:
     - uses: dorny/paths-filter@v2
       id: filter
       with:
-        base: HEAD
+        base: ${{ github.ref }}
         filters: |
           builder:
             - 'reservation-service/package.json'
