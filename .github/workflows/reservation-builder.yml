@@ -14,7 +14,7 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  build_and_push_backend:
+  build_and_push_builder:
     # needs: changes
     # if: ${{ needs.changes.outputs.backend == 'true' }}
     runs-on: ubuntu-latest
@@ -36,7 +36,7 @@ jobs:
         uses: docker/build-push-action@v3.1.1
         with:
           context: ./reservation-service
-          file: ./reservation/Dockerfile-build
+          file: ./reservation-service/Dockerfile-build
           # platforms: linux/arm/v7,linux/amd64,linux/arm64
           push: true
           tags: |
