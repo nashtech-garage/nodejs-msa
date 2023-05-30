@@ -1,4 +1,4 @@
-name: Build reservation service
+name: Build payment service
 
 on:
   push:
@@ -6,8 +6,8 @@ on:
       - dev
       - main
     paths:
-      - "reservation-service/**"
-      - ".github/workflows/reservation-builder.yml"
+      - "payment-service/**"
+      - ".github/workflows/payment-builder.yml"
 
 env:
   # Use docker.io for Docker Hub if empty
@@ -37,13 +37,13 @@ jobs:
         base: ${{ github.ref }}
         filters: |
           builder:
-            - 'reservation-service/package.json'
-            - 'reservation-service/Dockerfile-build'
-            - 'reservation-service/Dockerfile-release'
-            - '.github/workflows/reservation-builder.yml'
+            - 'payment-service/package.json'
+            - 'payment-service/Dockerfile-build'
+            - 'payment-service/Dockerfile-release'
+            - '.github/workflows/payment-builder.yml'
           service:
-            - 'reservation-service/**'
-            - '.github/workflows/reservation-builder.yml'
+            - 'payment-service/**'
+            - '.github/workflows/payment-builder.yml'
 
   build_and_push_builder:
     needs: changes
@@ -63,24 +63,24 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Build and push reservation builer
+      - name: Build and push payment builer
         uses: docker/build-push-action@v3
         with:
-          context: ./reservation-service
-          file: ./reservation-service/Dockerfile-build
+          context: ./payment-service
+          file: ./payment-service/Dockerfile-build
           # platforms: linux/arm/v7,linux/amd64,linux/arm64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/reservation:build
-      - name: Build and push reservation release
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/payment:build
+      - name: Build and push payment release
         uses: docker/build-push-action@v3
         with:
-          context: ./reservation-service
-          file: ./reservation-service/Dockerfile-release
+          context: ./payment-service
+          file: ./payment-service/Dockerfile-release
           # platforms: linux/arm/v7,linux/amd64,linux/arm64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/reservation:release
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/payment:release
 
   build_and_push_service_dev:
     needs: [changes, build_and_push_builder]
@@ -100,15 +100,15 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Build and push reservation service
+      - name: Build and push payment service
         uses: docker/build-push-action@v3
         with:
-          context: ./reservation-service
-          file: ./reservation-service/Dockerfile
+          context: ./payment-service
+          file: ./payment-service/Dockerfile
           # platforms: linux/arm/v7,linux/amd64,linux/arm64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/reservation:dev
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/payment:dev
 
   build_and_push_service_latest:
     needs: [changes, build_and_push_builder]
@@ -128,12 +128,12 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Build and push reservation service
+      - name: Build and push payment service
         uses: docker/build-push-action@v3
         with:
-          context: ./reservation-service
-          file: ./reservation-service/Dockerfile
+          context: ./payment-service
+          file: ./payment-service/Dockerfile
           # platforms: linux/arm/v7,linux/amd64,linux/arm64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/reservation:latest
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/payment:latest
