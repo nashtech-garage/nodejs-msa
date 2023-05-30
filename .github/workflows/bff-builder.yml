@@ -1,4 +1,4 @@
-name: Build payment service
+name: Build bff service
 
 on:
   push:
@@ -6,8 +6,8 @@ on:
       - dev
       - main
     paths:
-      - "payment-service/**"
-      - ".github/workflows/payment-builder.yml"
+      - "bff-service/**"
+      - ".github/workflows/bff-builder.yml"
 
 env:
   # Use docker.io for Docker Hub if empty
@@ -37,13 +37,13 @@ jobs:
         base: ${{ github.ref }}
         filters: |
           builder:
-            - 'payment-service/package.json'
-            - 'payment-service/Dockerfile-build'
-            - 'payment-service/Dockerfile-release'
-            - '.github/workflows/payment-builder.yml'
+            - 'bff-service/package.json'
+            - 'bff-service/Dockerfile-build'
+            - 'bff-service/Dockerfile-release'
+            - '.github/workflows/bff-builder.yml'
           service:
-            - 'payment-service/**'
-            - '.github/workflows/payment-builder.yml'
+            - 'bff-service/**'
+            - '.github/workflows/bff-builder.yml'
 
   build_and_push_builder:
     needs: changes
@@ -63,24 +63,24 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Build and push payment builer
+      - name: Build and push bff builer
         uses: docker/build-push-action@v3
         with:
-          context: ./payment-service
-          file: ./payment-service/Dockerfile-build
+          context: ./bff-service
+          file: ./bff-service/Dockerfile-build
           # platforms: linux/arm/v7,linux/amd64,linux/arm64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/payment:build
-      - name: Build and push payment release
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/bff:build
+      - name: Build and push bff release
         uses: docker/build-push-action@v3
         with:
-          context: ./payment-service
-          file: ./payment-service/Dockerfile-release
+          context: ./bff-service
+          file: ./bff-service/Dockerfile-release
           # platforms: linux/arm/v7,linux/amd64,linux/arm64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/payment:release
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/bff:release
 
   build_and_push_service_dev:
     needs: [changes, build_and_push_builder]
@@ -100,15 +100,15 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Build and push payment service
+      - name: Build and push bff service
         uses: docker/build-push-action@v3
         with:
-          context: ./payment-service
-          file: ./payment-service/Dockerfile
+          context: ./bff-service
+          file: ./bff-service/Dockerfile
           # platforms: linux/arm/v7,linux/amd64,linux/arm64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/payment:dev
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/bff:dev
 
   build_and_push_service_latest:
     needs: [changes, build_and_push_builder]
@@ -128,12 +128,12 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Build and push payment service
+      - name: Build and push bff service
         uses: docker/build-push-action@v3
         with:
-          context: ./payment-service
-          file: ./payment-service/Dockerfile
+          context: ./bff-service
+          file: ./bff-service/Dockerfile
           # platforms: linux/arm/v7,linux/amd64,linux/arm64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/payment:latest
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/bff:latest

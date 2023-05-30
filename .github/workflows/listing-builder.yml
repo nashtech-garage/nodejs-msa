@@ -84,7 +84,7 @@ jobs:
 
   build_and_push_service_dev:
     needs: [changes, build_and_push_builder]
-    if: ${{ always() && needs.changes.outputs.service == 'true' && github.ref == 'dev' }}
+    if: ${{ always() && needs.changes.outputs.service == 'true' && github.ref == 'refs/heads/dev' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -112,7 +112,7 @@ jobs:
 
   build_and_push_service_latest:
     needs: [changes, build_and_push_builder]
-    if: ${{ always() && needs.changes.outputs.service == 'true' && github.ref == 'main' }}
+    if: ${{ always() && needs.changes.outputs.service == 'true' && github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
