@@ -98,7 +98,7 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Build and push reservation builer
+      - name: Build and push reservation service
         uses: docker/build-push-action@v3
         with:
           context: ./reservation-service
