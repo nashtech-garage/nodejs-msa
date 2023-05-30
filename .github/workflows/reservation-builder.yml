@@ -19,9 +19,33 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  changes:
+    runs-on: ubuntu-latest
+    # Set job outputs to values from filter step
+    outputs:
+      builder: ${{ steps.filter.outputs.builder }}
+      service: ${{ steps.filter.outputs.service }}
+    steps:
+    # For pull requests it's not necessary to checkout the code
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - uses: dorny/paths-filter@v2
+      id: filter
+      with:
+        filters: |
+          builder:
+            - 'reservation-service/package.json'
+            - 'reservation-service/Dockerfile-build'
+            - 'reservation-service/Dockerfile-release'
+            - '.github/workflows/reservation-builder.yml'
+          service:
+            - 'reservation-service/**'
+            - '.github/workflows/reservation-builder.yml'
+
   build_and_push_builder:
-    # needs: changes
-    # if: ${{ needs.changes.outputs.backend == 'true' }}
+    needs: changes
+    if: ${{ needs.changes.outputs.builder == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -57,6 +81,8 @@ jobs:
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/reservation:release
 
   build_and_push_service:
+    needs: [changes, build_and_push_builder]
+    if: ${{ always() && needs.changes.outputs.service == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
