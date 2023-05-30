@@ -20,7 +20,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build_and_push_service_dev:
+  build_and_push_homefront_dev:
     if: ${{ github.ref == 'dev' }}
     runs-on: ubuntu-latest
     steps:
@@ -47,7 +47,7 @@ jobs:
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/homefront:dev
 
-  build_and_push_service_latest:
+  build_and_push_homefront_latest:
     if: ${{ github.ref == 'main' }}
     runs-on: ubuntu-latest
     steps:
