@@ -36,3 +36,9 @@ See the [Development guide](docs/development-guide.md) to learn how to run and d
 ## Sponsors
 
 ![NashTech Vietnam](docs/imgs/nashTech-logo-red.svg)
+
+
+## migration 
+npx prisma migrate dev 
+## seeding
+npx prisma db seed
