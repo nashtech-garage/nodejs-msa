@@ -32,3 +32,29 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+
+## Set Up Unit Test with Playwright and how to use
+Install module package into project
+
+```
+npm install --save-dev @playwright/test playwright-test-coverage babel-plugin-istanbul nyc start-server-and-test
+
+```
+
+Add script run test into package.json
+
+```
+"scripts": {
+  "start": "npx nyc next dev",
+  "test:only": "npx nyc playwright test --reporter=html",
+  "pretest": "rm -rf .next/ coverage/ .nyc_output/",
+  "test": "start-server-and-test 3000 test:only",
+}
+```
+
+Show result report
+```
+npx playwright show-report
+```

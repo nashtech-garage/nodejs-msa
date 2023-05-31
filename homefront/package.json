@@ -3,9 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "npx nyc next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "npx nyc next dev",
+    "test:only": "npx nyc playwright test --reporter=html",
+    "pretest": "rm -rf .next/ coverage/ .nyc_output/",
+    "test": "start-server-and-test 3000 test:only",
     "lint": "next lint"
   },
   "dependencies": {
@@ -21,5 +24,12 @@
     "react-dom": "18.2.0",
     "tailwindcss": "3.3.2",
     "typescript": "5.0.4"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.34.3",
+    "babel-plugin-istanbul": "^6.1.1",
+    "nyc": "^15.1.0",
+    "playwright-test-coverage": "^1.2.12",
+    "start-server-and-test": "^2.0.0"
   }
 }
