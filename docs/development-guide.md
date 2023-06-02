@@ -28,6 +28,8 @@
     <a href="javascript: void(0)"><strong>2. Database schema</strong></a>
   </summary>
 
+The below database schema is designed by [dbdesigner](https://erd.dbdesigner.net/)
+
 ![Database schema](/docs/imgs/db-schema.png)
 </details>
 
