@@ -27,5 +27,7 @@
   <summary>
     <a href="javascript: void(0)"><strong>2. Database schema</strong></a>
   </summary>
+
+![Database schema](/docs/imgs/db-schema.png)
 </details>
 
