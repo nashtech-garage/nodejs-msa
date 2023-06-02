@@ -1,0 +1,14 @@
+// https://erd.dbdesigner.net/
+
+listing {
+	id integer pk def(as)
+	name varchar
+	description text
+	firstpic varchar
+	category varchar
+	createdat date
+	createdby integer
+	updatedat date
+	updatedby integer
+}
+
