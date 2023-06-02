@@ -1,6 +1,12 @@
 # NodeJS MSA
 
-Best practices NodeJS in MSA
+We try to build a simple room booking to make the best practices NodeJS in MSA. 
+
+[![Build bff service](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/bff-builder.yml/badge.svg)](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/bff-builder.yml)
+[![Build homefront service](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/homefront-builder.yml/badge.svg)](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/homefront-builder.yml)
+[![Build listing service](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/listing-builder.yml/badge.svg)](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/listing-builder.yml)
+[![Build payment service](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/payment-builder.yml/badge.svg)](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/payment-builder.yml)
+[![Build reservation service](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/reservation-builder.yml/badge.svg)](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/reservation-builder.yml)
 
 ## Technical stack
 
@@ -13,7 +19,7 @@ Best practices NodeJS in MSA
 * [PostgreSQL](https://www.postgresql.org)
 * [Docker](https://www.docker.com)
 
-## Architecture
+## Software Architecture
 
 ![System Design](docs/imgs/system-design.png)
 
