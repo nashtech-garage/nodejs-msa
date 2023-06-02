@@ -28,7 +28,7 @@
     <a href="javascript: void(0)"><strong>2. Database schema</strong></a>
   </summary>
 
-The below database schema is designed by [dbdesigner](https://erd.dbdesigner.net/)
+The below database schema is designed by using [dbdesigner](https://erd.dbdesigner.net/). You can import this file [room-booking.dbml](/docs/db-schema/room-booking.dbml) into **dbdesigner** to visualize the db schema like the below image.
 
 ![Database schema](/docs/imgs/db-schema.png)
 </details>
