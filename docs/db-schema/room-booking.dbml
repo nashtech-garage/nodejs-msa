@@ -4,11 +4,23 @@ listing {
 	id integer pk def(as)
 	name varchar
 	description text
-	firstpic varchar
-	category varchar
-	createdat date
-	createdby integer
-	updatedat date
-	updatedby integer
+	firstPic varchar
+	categoryId integer *> category.id
+	capacity json
+	createdAt date
+	createdBy integer
+	updatedAt date
+	updatedBy integer
+}
+
+category {
+	id integer pk increments
+	name varchar
+	description text
+	firstPic varchar
+	createdAt date
+	createdBy integer
+	updatedAt date
+	updatedBy integer
 }
 
