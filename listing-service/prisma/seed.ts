@@ -14,8 +14,8 @@ async function main() {
       name: 'category1',
       description: 'We are excited to share that category1',
       firstPic: 'firstPic',
-      category: '',
       createdBy: 0,
+      updatedBy: 0,
     },
   });
 
@@ -26,8 +26,8 @@ async function main() {
       name: 'category2',
       description: 'We are excited to share that category2',
       firstPic: 'firstPic',
-      category: '',
-      createdBy: 0,
+      createdBy: 1,
+      updatedBy: 1,
     },
   });
 
@@ -39,8 +39,14 @@ async function main() {
       name: 'listing1',
       description: 'We are excited to share that listing1',
       firstPic: 'firstPic',
-      idCategory: 1,
-      createdBy: 0,
+      categoryId: 1,
+      capacity: {
+        guest: 2,
+        room: 1,
+        bed: 1
+      },
+      createdBy: 1,
+      updatedBy: 1,
     },
   });
 
@@ -51,56 +57,17 @@ async function main() {
       name: 'listing2',
       description: 'We are excited to share that listing2',
       firstPic: 'firstPic',
-      idCategory: 1,
+      categoryId: 1,
+      capacity: {
+        guest: 2,
+        room: 1,
+        bed: 1
+      },
       createdBy: 0,
+      updatedBy: 1,
     },
   });
 
-  const listing3 = await prisma.listing.upsert({
-    where: { id: -1 },
-    update: {},
-    create: {
-      name: 'listing3',
-      description: 'We are excited to share that listing3',
-      firstPic: 'firstPic',
-      idCategory: 1,
-      createdBy: 0,
-    },
-  });
-
-  // create dummy listingPrice
-  const listingPrice1 = await prisma.listingPrice.upsert({
-    where: { id: -1 },
-    update: {},
-    create: {
-      name: 'price',
-      price: 100000,
-      listingId: 1,
-      createdBy: 0,
-    },
-  });
-
-  const listingPrice2 = await prisma.listingPrice.upsert({
-    where: { id: -1 },
-    update: {},
-    create: {
-      name: 'price',
-      price: 150000,
-      listingId: 2,
-      createdBy: 0,
-    },
-  });
-
-  const listingPrice3 = await prisma.listingPrice.upsert({
-    where: { id: -1 },
-    update: {},
-    create: {
-      name: 'price',
-      price: 200000,
-      listingId: 3,
-      createdBy: 0,
-    },
-  });
 
 }
 

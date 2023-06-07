@@ -1,23 +1,30 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { CreateListingDto } from './dto/create-listing.dto';
-import { ListingEntity } from './entities/listing.entity';
-import { UpdateListingDto } from './dto/update-listing.dto';
-import { GetListingDto } from './dto/get-listing.dto';
-
+import { UpdateListingDto } from '../dto/update-listing.dto';
+import { GetListingDto } from '../dto/get-listing.dto';
+import { CreateListingDto } from 'src/dto/create-listing.dto';
+import { Listing, Prisma } from "@prisma/client";
 @Injectable()
 export class ListingService {
   constructor(private prisma: PrismaService) {}
 
   create(createListingDto: CreateListingDto) {
-    return this.prisma.listing.create({ data: new ListingEntity({...createListingDto}) });
+    const {idCategory, ...createListingData} = createListingDto
+    return this.prisma.listing.create({ data:  {
+      ...createListingData,
+      category:{
+        connect: {
+          id: idCategory,
+        },  
+      }
+    }});
   }
 
-  findAll(getListingDto: GetListingDto) {
-    const {maxPeople} = getListingDto
+  findAll() {
     return this.prisma.listing.findMany({
     include: {
-        listingPrice: true
+        listingPrice: true,
+        category: true
     },
     where: {
         
@@ -32,7 +39,7 @@ export class ListingService {
   update(id: number, updateListingDto: UpdateListingDto) {
     return this.prisma.listing.update({
       where: { id },
-      data: new ListingEntity({...updateListingDto}),
+      data: updateListingDto,
     });
   }
 

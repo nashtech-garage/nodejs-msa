@@ -6,39 +6,39 @@ import {
   IsString,
   MaxLength,
   MinLength,
+  ValidateNested,
 } from 'class-validator';
+import { CreateCapacityDto } from './capacity.dto';
+import { Type } from 'class-transformer';
+import { Prisma } from '@prisma/client';
 
 export class CreateListingDto {
   @IsString()
   @IsNotEmpty()
   @MinLength(5)
-//   @ApiProperty()
   name: string;
 
   @IsString()
   @IsOptional()
   @MaxLength(300)
-//   @ApiProperty({ required: false })
   description?: string;
 
   @IsString()
   @IsNotEmpty()
-//   @ApiProperty()
   firstPic: string;
 
-  @IsNumber()
   @IsNotEmpty()
-//   @ApiProperty({ required: false, default: 2 })
-  maxPeople: number;
+  capacity: Prisma.JsonValue;
 
   @IsNumber()
   @IsNotEmpty()
-//   @ApiProperty({ required: true})
   idCategory: number;
 
   @IsNumber()
   @IsNotEmpty()
-  @IsOptional()
-//   @ApiProperty({ required: false, default: 1 })
   createdBy: number;
+
+  @IsNumber()
+  @IsNotEmpty()
+  updatedBy: number;
 }
