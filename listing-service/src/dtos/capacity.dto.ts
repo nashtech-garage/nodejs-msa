@@ -6,7 +6,7 @@ import {
 export class CreateCapacityDto {
   @IsNumber()
   @IsNotEmpty()
-  gest: number;
+  guest: number;
 
   @IsNumber()
   @IsNotEmpty()
