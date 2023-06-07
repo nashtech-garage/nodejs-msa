@@ -10,17 +10,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model Category {
   id Int    @id @default(autoincrement())
   name String
   description String?
   firstPic String
-  category String
   createdAt DateTime @default(now())
   createdBy Int
-  updatedAt DateTime?
-  updatedBy Int?
+  updatedAt DateTime @updatedAt
+  updatedBy Int
   listing Listing[]
 }
 
@@ -32,23 +30,50 @@ model Listing {
   firstPic String
   createdAt DateTime @default(now())
   createdBy Int
-  maxPeople Int @default(2)
-  updatedAt DateTime?
-  updatedBy Int?
-  category Category @relation(fields: [idCategory], references: [id])
-  idCategory Int
+  updatedAt DateTime @updatedAt
+  updatedBy Int
+  capacity Json
+  category Category? @relation(fields: [categoryId], references: [id])
+  categoryId Int?
   listingPrice ListingPrice[]
+  listingAmenity ListingAmenity[]
+  listingAddress ListingAddress[]
 }
 
 model ListingPrice {
   id    Int    @id @default(autoincrement())
   name String
   price Int
-  isActive   Boolean  @default(true)
+  isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
   createdBy Int
-  updatedAt DateTime?
-  updatedBy Int?
-  listing Listing @relation(fields: [listingId], references: [id])
-  listingId Int
+  updatedAt DateTime @updatedAt
+  updatedBy Int
+  listing Listing? @relation(fields: [listingId], references: [id])
+  listingId Int?
+}
+
+model ListingAmenity {
+  id    Int    @id @default(autoincrement())
+  name String
+  description String?
+  createdAt DateTime @default(now())
+  createdBy Int
+  updatedAt DateTime @updatedAt
+  updatedBy Int
+  listing Listing? @relation(fields: [listingId], references: [id])
+  listingId Int?
+}
+
+model ListingAddress {
+  id    Int    @id @default(autoincrement())
+  address String
+  city String
+  golocation Json
+  createdAt DateTime @default(now())
+  createdBy Int
+  updatedAt DateTime @updatedAt
+  updatedBy Int
+  listing Listing? @relation(fields: [listingId], references: [id])
+  listingId Int?
 }

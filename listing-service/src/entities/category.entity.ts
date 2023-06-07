@@ -6,14 +6,13 @@ export class CategoryEntity implements Category {
 			Object.assign(this, partial)
 		}
 	}
-    
     id: number;
     name: string;
-    description: string | null;
+    description: string;
     firstPic: string;
-    category: string;
     createdAt: Date;
     createdBy: number;
     updatedAt: Date;
     updatedBy: number;
+    
 }
