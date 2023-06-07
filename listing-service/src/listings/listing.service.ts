@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
-import { UpdateListingDto } from '../dto/update-listing.dto';
-import { GetListingDto } from '../dto/get-listing.dto';
-import { CreateListingDto } from 'src/dto/create-listing.dto';
-import { Listing, Prisma } from "@prisma/client";
+import { PrismaService } from 'src/prismas/prisma.service';
+import { UpdateListingDto } from '../dtos/update-listing.dto';
+import { CreateListingDto } from 'src/dtos/create-listing.dto';
+
 @Injectable()
 export class ListingService {
   constructor(private prisma: PrismaService) {}

@@ -28,6 +28,8 @@ export class CreateListingDto {
   firstPic: string;
 
   @IsNotEmpty()
+  @ValidateNested()
+  @Type(() => CreateCapacityDto)
   capacity: Prisma.JsonValue;
 
   @IsNumber()

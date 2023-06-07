@@ -23,10 +23,6 @@ export class CreateCategoryDto {
   @IsNotEmpty()
   firstPic: string;
 
-  @IsString()
-  @IsNotEmpty()
-  category: string;
-
   @IsNumber()
   @IsNotEmpty()
   createdBy: number;

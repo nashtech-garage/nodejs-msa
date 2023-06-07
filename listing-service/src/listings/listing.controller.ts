@@ -7,12 +7,10 @@ import {
     Param,
     Delete,
     ParseIntPipe,
-    Query,
 } from '@nestjs/common';
-import { CreateListingDto } from '../dto/create-listing.dto';
+import { CreateListingDto } from '../dtos/create-listing.dto';
 import { ListingService } from './listing.service';
-import { UpdateListingDto } from '../dto/update-listing.dto';
-import { GetListingDto } from '../dto/get-listing.dto';
+import { UpdateListingDto } from '../dtos/update-listing.dto';
 import { ListingEntity } from 'src/entities/listing.entity';
 
 
