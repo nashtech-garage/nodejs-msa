@@ -1,25 +1,16 @@
 # NodeJS MSA
 
-We try to build a simple room booking to make the best practices NodeJS in MSA. 
-
-[![Build bff service](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/bff-builder.yml/badge.svg)](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/bff-builder.yml)
-[![Build homefront service](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/homefront-builder.yml/badge.svg)](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/homefront-builder.yml)
-[![Build listing service](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/listing-builder.yml/badge.svg)](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/listing-builder.yml)
-[![Build payment service](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/payment-builder.yml/badge.svg)](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/payment-builder.yml)
-[![Build reservation service](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/reservation-builder.yml/badge.svg)](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/reservation-builder.yml)
+Best practices NodeJS in MSA
 
 ## Technical stack
 
-* [TypeScript](https://www.typescriptlang.org) language
-* [NodeJs](https://nodejs.org) / [NestJS v9](https://github.com/nestjs/nest)
-* [NextJS v13](https://nextjs.org)
-* [Flutter v3.3](https://flutter.dev)
-* [goauthentik](https://goauthentik.io)
-* [Kafka](https://kafka.apache.org)
-* [PostgreSQL](https://www.postgresql.org)
-* [Docker](https://www.docker.com)
+* NestJS v9 / Typescript
+* NextJS v13 / Typescript
+* goauthentik
+* Kafka
+* Docker
 
-## Software Architecture
+## Architecture
 
 ![System Design](docs/imgs/system-design.png)
 
@@ -33,7 +24,7 @@ We try to build a simple room booking to make the best practices NodeJS in MSA.
 | 6  | listing-service     | Typescript  | Lists rooms, views room detail, price...                                                                     |
 | 7  | reservation-service | Typescript  | Manage room reservation                                                                                      |
 | 8  | payment-service     | Typescript  | Processes payment                                                                                            |
-| 9  | message-broker      |             | A Kafka instance                                                                                             |
+| 9  | message-broker      | C/C++       | A Kafka instance                                                                                             |
 
 ## Development
 
