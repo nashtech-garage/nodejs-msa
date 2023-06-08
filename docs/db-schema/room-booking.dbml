@@ -1,0 +1,60 @@
+// https://erd.dbdesigner.net/
+
+listing {
+	id integer pk def(as)
+	name varchar
+	description text
+	firstPic varchar
+	categoryId integer *> category.id
+	capacity json
+	createdAt date
+	createdBy integer
+	updatedAt date
+	updatedBy integer
+}
+
+category {
+	id integer pk increments
+	name varchar
+	description text
+	firstPic varchar
+	createdAt date
+	createdBy integer
+	updatedAt date
+	updatedBy integer
+}
+
+listing_amenity {
+	id integer pk increments
+	listingId integer *> listing.id
+	name varchar
+	description text
+	createdAt date
+	createdBy integer
+	updatedAt date
+	updatedBy integer
+}
+
+listing_price {
+	id integer pk increments
+	listingId integer *> listing.id
+	price double
+	isActive boolean
+	createdAt date
+	createdBy integer
+	updatedAt date
+	updatedBy integer
+}
+
+listing_address {
+	id integer pk increments
+	listingId integer *> listing.id
+	geolocation point
+	address varchar(255)
+	city varchar(255)
+	createdAt date
+	createdBy integer
+	updatedAt date
+	updatedBy integer
+}
+
