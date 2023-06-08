@@ -10,11 +10,14 @@ We try to build a simple room booking to make the best practices NodeJS in MSA.
 
 ## Technical stack
 
-* NestJS v9 / Typescript
-* NextJS v13 / Typescript
-* goauthentik
-* Kafka
-* Docker
+* [TypeScript](https://www.typescriptlang.org) language
+* [NodeJs](https://nodejs.org) / [NestJS v9](https://github.com/nestjs/nest)
+* [NextJS v13](https://nextjs.org)
+* [Flutter v3.3](https://flutter.dev)
+* [goauthentik](https://goauthentik.io)
+* [Kafka](https://kafka.apache.org)
+* [PostgreSQL](https://www.postgresql.org)
+* [Docker](https://www.docker.com)
 
 ## Software Architecture
 
@@ -30,7 +33,7 @@ We try to build a simple room booking to make the best practices NodeJS in MSA.
 | 6  | listing-service     | Typescript  | Lists rooms, views room detail, price...                                                                     |
 | 7  | reservation-service | Typescript  | Manage room reservation                                                                                      |
 | 8  | payment-service     | Typescript  | Processes payment                                                                                            |
-| 9  | message-broker      | C/C++       | A Kafka instance                                                                                             |
+| 9  | message-broker      |             | A Kafka instance                                                                                             |
 
 ## Development
 
