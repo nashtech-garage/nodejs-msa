@@ -7,10 +7,10 @@ import { CreateListingDto } from 'src/dtos/create-listing.dto';
 export class ListingService {
   constructor(private prisma: PrismaService) {}
 
-  create(createListingDto: CreateListingDto) {
+  create(data: CreateListingDto) {
     const {idCategory, ...createListingData} = createListingDto
     return this.prisma.listing.create({ data:  {
-      ...createListingData,
+      ...data,
       category:{
         connect: {
           id: idCategory,
@@ -35,10 +35,10 @@ export class ListingService {
     return this.prisma.listing.findUnique({ where: { id } });
   }
 
-  update(id: number, updateListingDto: UpdateListingDto) {
+  update(id: number, data: UpdateListingDto) {
     return this.prisma.listing.update({
       where: { id },
-      data: updateListingDto,
+      data: data,
     });
   }
 
