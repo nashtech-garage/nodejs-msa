@@ -20,7 +20,8 @@ We try to build a simple room booking to make the best practices NodeJS in MSA.
 * [Docker](https://www.docker.com)
 * [Terraform](https://www.terraform.io)
 * [FluxCD](https://fluxcd.io)
-* [kubernetes](https://kubernetes.io)
+* [Kustomize](https://kustomize.io)
+* [Kubernetes](https://kubernetes.io)
 
 ## Software Architecture
 
