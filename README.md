@@ -42,9 +42,9 @@ We try to build a simple room booking to make the best practices NodeJS in MSA.
 
 See the [Development guide](docs/development-guide.md) to learn how to run and develop this app locally.
 
-## Terraform Infrastructure
+## Infrastructure
 
-![Terraform Infrastructure](docs/imgs/infrastructure.png)
+![Infrastructure](docs/imgs/infrastructure.png)
 
 
 ![Availability Domain 1 (AD1)](docs/imgs/infrastructure-ad1.png)
