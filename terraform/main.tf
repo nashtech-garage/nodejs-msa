@@ -16,6 +16,6 @@ module "compute" {
   compartment_id      = var.oci_compartment_id
   availability_domain = data.oci_identity_availability_domains.ads.availability_domains[0].name
   subnet_id           = module.network.public_subnet_id
-  public_key          = file(var.oci_public_key_filepath)
+  public_key          = file(var.oci_public_key_path)
   freeform_tags       = locals.freeform_tags
 }
