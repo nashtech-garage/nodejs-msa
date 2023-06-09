@@ -69,7 +69,7 @@ model ListingAddress {
   id    Int    @id @default(autoincrement())
   address String
   city String
-  golocation Json
+  geolocation Json
   createdAt DateTime @default(now())
   createdBy Int
   updatedAt DateTime @updatedAt

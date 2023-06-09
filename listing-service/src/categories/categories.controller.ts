@@ -9,8 +9,8 @@ import {
     ParseIntPipe,
 } from '@nestjs/common';
 import { CategoriesService } from './categories.service';
-import { CreateCategoryDto } from '../dtos/create-categories.dto';
-import { UpdateCategoryDto } from '../dtos/update-categories.dto';
+import { CreateCategoryDto } from '../dtos/create-category.dto';
+import { UpdateCategoryDto } from '../dtos/update-category.dto';
 
 
 @Controller('categories')
@@ -35,9 +35,9 @@ export class CategoryController {
   @Patch(':id')
   update(
     @Param('id', ParseIntPipe) id: number,
-    @Body() updateCategoryDto: UpdateCategoryDto,
+    @Body() payload: UpdateCategoryDto,
   ) {
-    return this.CategoriesService.update(id, updateCategoryDto);
+    return this.CategoriesService.update(id, payload);
   }
 
   @Delete(':id')

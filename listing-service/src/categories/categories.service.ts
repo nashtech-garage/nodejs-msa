@@ -8,8 +8,8 @@ import { UpdateCategoryDto } from '../dtos/update-categories.dto';
 export class CategoriesService {
   constructor(private prisma: PrismaService) {}
 
-  create(createCategoryDto: CreateCategoryDto) {
-    return this.prisma.category.create({ data: createCategoryDto });
+  create(data: CreateCategoryDto) {
+    return this.prisma.category.create({ data });
   }
 
   findAll() {
@@ -20,10 +20,10 @@ export class CategoriesService {
     return this.prisma.category.findUnique({ where: { id } });
   }
 
-  update(id: number, updateCategoryDto: UpdateCategoryDto) {
+  update(id: number, data: UpdateCategoryDto) {
     return this.prisma.category.update({
       where: { id },
-      data: new CategoryEntity({...updateCategoryDto}),
+      data: new CategoryEntity({...data}),
     });
   }
 
