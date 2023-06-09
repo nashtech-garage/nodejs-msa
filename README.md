@@ -46,6 +46,9 @@ See the [Development guide](docs/development-guide.md) to learn how to run and d
 
 ![Terraform Infrastructure](docs/imgs/infrastructure.png)
 
+
+![Availability Domain 1 (AD1)](docs/imgs/infrastructure-ad1.png)
+
 ## Sponsors
 
 ![NashTech Vietnam](docs/imgs/nashTech-logo-red.svg)
