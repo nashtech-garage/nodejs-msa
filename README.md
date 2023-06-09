@@ -42,6 +42,10 @@ We try to build a simple room booking to make the best practices NodeJS in MSA.
 
 See the [Development guide](docs/development-guide.md) to learn how to run and develop this app locally.
 
+## Terraform Infrastructure
+
+![Terraform Infrastructure](docs/imgs/infrastructure.png)
+
 ## Sponsors
 
 ![NashTech Vietnam](docs/imgs/nashTech-logo-red.svg)
