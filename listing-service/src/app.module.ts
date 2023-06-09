@@ -5,7 +5,7 @@ import { CategoryModule } from './categories/categories.module';
 
 @Module({
   imports: [PrismaModule, ListingModule, CategoryModule],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
