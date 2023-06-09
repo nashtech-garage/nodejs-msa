@@ -18,6 +18,9 @@ We try to build a simple room booking to make the best practices NodeJS in MSA.
 * [Kafka](https://kafka.apache.org)
 * [PostgreSQL](https://www.postgresql.org)
 * [Docker](https://www.docker.com)
+* [Terraform] (https://www.terraform.io)
+* [FluxCD] (https://fluxcd.io)
+* [kubernetes] (https://kubernetes.io)
 
 ## Software Architecture
 
@@ -38,6 +41,10 @@ We try to build a simple room booking to make the best practices NodeJS in MSA.
 ## Development
 
 See the [Development guide](docs/development-guide.md) to learn how to run and develop this app locally.
+
+## Terraform Infrastructure
+
+![Terraform Infrastructure](docs/imgs/infrastructure.png)
 
 ## Sponsors
 

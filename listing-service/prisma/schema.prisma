@@ -1,0 +1,79 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id Int    @id @default(autoincrement())
+  name String
+  description String?
+  firstPic String
+  createdAt DateTime @default(now())
+  createdBy Int
+  updatedAt DateTime @updatedAt
+  updatedBy Int
+  listing Listing[]
+}
+
+
+model Listing {
+  id    Int    @id @default(autoincrement())
+  name String
+  description String?
+  firstPic String
+  createdAt DateTime @default(now())
+  createdBy Int
+  updatedAt DateTime @updatedAt
+  updatedBy Int
+  capacity Json
+  category Category? @relation(fields: [categoryId], references: [id])
+  categoryId Int?
+  listingPrice ListingPrice[]
+  listingAmenity ListingAmenity[]
+  listingAddress ListingAddress[]
+}
+
+model ListingPrice {
+  id    Int    @id @default(autoincrement())
+  name String
+  price Int
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  createdBy Int
+  updatedAt DateTime @updatedAt
+  updatedBy Int
+  listing Listing? @relation(fields: [listingId], references: [id])
+  listingId Int?
+}
+
+model ListingAmenity {
+  id    Int    @id @default(autoincrement())
+  name String
+  description String?
+  createdAt DateTime @default(now())
+  createdBy Int
+  updatedAt DateTime @updatedAt
+  updatedBy Int
+  listing Listing? @relation(fields: [listingId], references: [id])
+  listingId Int?
+}
+
+model ListingAddress {
+  id    Int    @id @default(autoincrement())
+  address String
+  city String
+  geolocation Json
+  createdAt DateTime @default(now())
+  createdBy Int
+  updatedAt DateTime @updatedAt
+  updatedBy Int
+  listing Listing? @relation(fields: [listingId], references: [id])
+  listingId Int?
+}
