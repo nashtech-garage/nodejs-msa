@@ -1,0 +1,24 @@
+# Source from https://registry.terraform.io/providers/oracle/oci/latest/docs/resources/core_subnet
+
+resource "oci_core_subnet" "vcn_prvsubn" {
+
+  # Required
+  compartment_id = var.oci_compartment_id
+  vcn_id = module.vcn.vcn_id
+  cidr_block = "10.0.1.0/24"
+
+  # Optional
+  display_name = "prvsubn"
+  dns_label = "prvsubn"
+  route_table_id = module.vcn.nat_route_id
+  security_list_ids = [oci_core_security_list.private_security_list.id]
+
+  #availability_domain = var.subnet_availability_domain
+  #defined_tags = {"Operations.CostCenter"= "42"}
+  #dhcp_options_id = oci_core_dhcp_options.test_dhcp_options.id
+  #freeform_tags = {"Department"= "Finance"}
+  #ipv6cidr_block = var.subnet_ipv6cidr_block
+  #ipv6cidr_blocks = var.subnet_ipv6cidr_blocks
+  #prohibit_internet_ingress = var.subnet_prohibit_internet_ingress
+  #prohibit_public_ip_on_vnic = var.subnet_prohibit_public_ip_on_vnic
+}

@@ -1,0 +1,149 @@
+resource "oci_core_instance_configuration" "free1GB_ins_conf" {
+  # Required
+  compartment_id = var.oci_compartment_id
+
+  # Optional
+  display_name = "Free 1GB/1CPU AMD"
+
+  instance_details {
+    instance_type = "compute"
+
+    launch_details {
+      availability_domain = data.oci_identity_availability_domains.ads.availability_domains[0].name
+      compartment_id      = var.oci_compartment_id
+
+      shape = "VM.Standard.E2.1.Micro"
+      shape_config {
+        memory_in_gbs = "1"
+        ocpus         = "1"
+      }
+      # https://docs.oracle.com/en-us/iaas/images
+      source_details {
+        image_id    = "ocid1.image.oc1.phx.aaaaaaaa5jocsabngwr5cgtkl6eiukcbpdip3g4kft3wouempfjlvcxis7fq"
+        source_type = "image"
+      }
+
+      create_vnic_details {
+        assign_public_ip = true
+        subnet_id        = oci_core_subnet.vcn_pubsubn.id
+      }
+
+      metadata = {
+        ssh_authorized_keys = file(var.oci_public_key_filepath)
+      }
+    }
+
+    block_volumes {
+      attach_details {
+        type = "iscsi"
+      }
+
+      create_details {
+        compartment_id = var.oci_compartment_id
+        size_in_gbs = 50
+        display_name = "50 GB Free"
+      }
+    }
+  }
+
+  freeform_tags = local.tags
+}
+
+resource "oci_core_instance_configuration" "free12GB_ins_conf" {
+  # Required
+  compartment_id = var.oci_compartment_id
+
+  # Optional
+  display_name = "Free 2GB/12CPU ARM"
+
+  instance_details {
+    instance_type = "compute"
+
+    launch_details {
+      availability_domain = data.oci_identity_availability_domains.ads.availability_domains[0].name
+      compartment_id      = var.oci_compartment_id
+
+      shape = "VM.Standard.A1.Flex"
+      shape_config {
+        memory_in_gbs = "12"
+        ocpus         = "2"
+      }
+      # https://docs.oracle.com/en-us/iaas/images
+      source_details {
+        image_id    = "ocid1.image.oc1.phx.aaaaaaaa2jp234mldtfxv7hlpy5tpvvqjzyeb4tu2kvku5pm6dy6f77zao4q"
+        source_type = "image"
+      }
+
+      create_vnic_details {
+        assign_public_ip = true
+        subnet_id        = oci_core_subnet.vcn_pubsubn.id
+      }
+
+      metadata = {
+        ssh_authorized_keys = file(var.oci_public_key_filepath)
+      }
+    }
+
+    block_volumes {
+      attach_details {
+        type = "iscsi"
+      }
+
+      create_details {
+        compartment_id = var.oci_compartment_id
+        size_in_gbs = 50
+        display_name = "50 GB Free"
+      }
+    }
+  }
+
+  freeform_tags = local.tags
+}
+
+resource "oci_core_instance_pool" "free1GB_ins_pool" {
+
+  # Required
+  compartment_id            = var.oci_compartment_id
+  instance_configuration_id = oci_core_instance_configuration.free1GB_ins_conf.id
+
+  placement_configurations {
+    # Required
+    availability_domain = data.oci_identity_availability_domains.ads.availability_domains[0].name
+    primary_subnet_id   = oci_core_subnet.vcn_pubsubn.id
+  }
+
+  size = 2
+
+  # Optional
+  display_name  = "Free 1GB/1CPU AMD"
+  freeform_tags = local.tags
+
+  lifecycle {
+    create_before_destroy = true
+    ignore_changes        = [load_balancers, freeform_tags]
+  }
+}
+
+resource "oci_core_instance_pool" "free12GB_ins_pool" {
+
+  # Required
+  compartment_id            = var.oci_compartment_id
+  instance_configuration_id = oci_core_instance_configuration.free12GB_ins_conf.id
+
+  placement_configurations {
+    # Required
+    availability_domain = data.oci_identity_availability_domains.ads.availability_domains[0].name
+    primary_subnet_id   = oci_core_subnet.vcn_pubsubn.id
+  }
+
+  size = 2
+
+  # Optional
+  display_name  = "Free 12GB/2CPU ARM"
+  freeform_tags = local.tags
+
+  lifecycle {
+    create_before_destroy = true
+    ignore_changes        = [load_balancers, freeform_tags]
+  }
+}
