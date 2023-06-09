@@ -8,14 +8,16 @@ data "oci_identity_availability_domains" "ads" {
 }
 
 module "network" {
+  source = "./modules/network"
   compartment_id = var.oci_compartment_id
-  freeform_tags  = locals.freeform_tags
+  freeform_tags  = local.freeform_tags
 }
 
 module "compute" {
+  source = "./modules/compute"
   compartment_id      = var.oci_compartment_id
   availability_domain = data.oci_identity_availability_domains.ads.availability_domains[0].name
   subnet_id           = module.network.public_subnet_id
   public_key          = file(var.oci_public_key_path)
-  freeform_tags       = locals.freeform_tags
+  freeform_tags       = local.freeform_tags
 }
