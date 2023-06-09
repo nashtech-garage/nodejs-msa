@@ -1,0 +1,19 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: kubernetes-dashboard
+  namespace: kubernetes-dashboard
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`pnt-k8s.petadev.work`)
+      kind: Rule
+      services:
+        - kind: Service
+          name: kubernetes-dashboard
+          namespace: kubernetes-dashboard
+          port: 9090
+      #middlewares:
+      #  - name: longhorn-add-trailing-slash
+      #  - name: longhorn-stripprefix
