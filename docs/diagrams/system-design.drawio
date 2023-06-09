@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-06-09T09:13:56.900Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.41" etag="kHFyNR3pXyXn9f0nPxK8" version="21.3.3" type="device" pages="3">
+<mxfile host="app.diagrams.net" modified="2023-06-09T09:18:14.899Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.41" etag="eHd1kkOl98cVxbZUiWGJ" version="21.3.3" type="device" pages="3">
   <diagram name="Software Architecture" id="y5Jj0muLnSd2WHnL5ocM">
     <mxGraphModel dx="794" dy="1496" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -222,10 +222,10 @@
           <mxGeometry x="70" y="100" width="330" height="450" as="geometry" />
         </mxCell>
         <mxCell id="nhd4F8vvcdglLJRTMwFk-14" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeWidth=2;arcSize=3;strokeColor=#CC6600;dashed=1;dashPattern=8 8;" vertex="1" parent="1">
-          <mxGeometry x="-10" y="159.5" width="670" height="330.5" as="geometry" />
+          <mxGeometry x="-10" y="159.5" width="670" height="350.5" as="geometry" />
         </mxCell>
         <mxCell id="nhd4F8vvcdglLJRTMwFk-12" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeWidth=2;arcSize=4;strokeColor=#CC6600;dashed=1;" vertex="1" parent="1">
-          <mxGeometry x="58" y="190" width="542" height="270" as="geometry" />
+          <mxGeometry x="58" y="190" width="542" height="290" as="geometry" />
         </mxCell>
         <mxCell id="UY6l-0SQwOVGesC4bHzt-5" value="Oracle Cloud Infrastructure - OCI (Region)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontFamily=PT Sans;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DPT%2BSans;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="-110" y="50" width="260" height="30" as="geometry" />
@@ -252,10 +252,10 @@
           <mxGeometry x="520" y="110" width="50" height="30" as="geometry" />
         </mxCell>
         <mxCell id="nhd4F8vvcdglLJRTMwFk-15" value="10.0.0.0/24&lt;br style=&quot;font-size: 14px;&quot;&gt;&lt;b style=&quot;font-size: 14px;&quot;&gt;Public subnet&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;horizontal=0;fontSize=14;fontFamily=PT Sans;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DPT%2BSans;fontColor=#CC6600;" vertex="1" parent="1">
-          <mxGeometry x="600" y="365" width="40" height="95" as="geometry" />
+          <mxGeometry x="600" y="385" width="40" height="95" as="geometry" />
         </mxCell>
         <mxCell id="nhd4F8vvcdglLJRTMwFk-16" value="10.0.0.0/16&lt;br style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;Virtual Cloud Network - VCN&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;horizontal=0;fontSize=14;fontFamily=PT Sans;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DPT%2BSans;fontColor=#CC6600;" vertex="1" parent="1">
-          <mxGeometry x="660" y="299.5" width="40" height="190.5" as="geometry" />
+          <mxGeometry x="660" y="317.25" width="40" height="190.5" as="geometry" />
         </mxCell>
         <mxCell id="nhd4F8vvcdglLJRTMwFk-17" value="Internet&#xa;gateway" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;strokeColor=#333333;fillColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=14;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.internet_gateway;fontFamily=PT Sans;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DPT%2BSans;" vertex="1" parent="1">
           <mxGeometry x="-41" y="251" width="60" height="60" as="geometry" />
