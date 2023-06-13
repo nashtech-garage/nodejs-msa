@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:merchant_app/src/screens/home.dart';
+import 'package:merchant_app/src/screens/sign_in.dart';
 
 class SignUpPage extends StatelessWidget {
   @override
@@ -92,9 +93,8 @@ class SignUpPage extends StatelessWidget {
                 SizedBox(
                   child: ElevatedButton(
                     child: Text("Sign up"),
-                    onPressed: () async {
-                      print('form submited');
-                    },
+                    onPressed: () => Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => HomePage())),
                   ),
                 ),
                 Row(
@@ -102,8 +102,10 @@ class SignUpPage extends StatelessWidget {
                   children: [
                     Text('Already have an account?'),
                     TextButton(
-                      child: Text('Sign in'),
-                      onPressed: () => print('Sign in called'),
+                      child: const Text('Sign in'),
+                      onPressed: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) => SignInPage())),
                     ),
                   ],
                 )
