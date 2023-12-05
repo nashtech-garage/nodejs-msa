@@ -1,21 +1,20 @@
 import {
-    Controller,
-    Get,
-    Post,
-    Body,
-    Patch,
-    Param,
-    Delete,
-    ParseIntPipe,
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { CategoriesService } from './categories.service';
 import { CreateCategoryDto } from '../dtos/create-category.dto';
 import { UpdateCategoryDto } from '../dtos/update-category.dto';
 
-
 @Controller('categories')
 export class CategoryController {
-    constructor(private readonly CategoriesService: CategoriesService) {}
+  constructor(private readonly CategoriesService: CategoriesService) {}
 
   @Post()
   create(@Body() createCategoryDto: CreateCategoryDto) {
