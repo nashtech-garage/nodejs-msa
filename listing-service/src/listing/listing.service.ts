@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prismas/prisma.service';
+import { PrismaService } from '../shared/prisma/prisma.service';
 import { UpdateListingDto } from '../dtos/update-listing.dto';
 import { CreateListingDto } from 'src/dtos/create-listing.dto';
 
@@ -8,26 +8,26 @@ export class ListingService {
   constructor(private prisma: PrismaService) {}
 
   create(data: CreateListingDto) {
-    const {idCategory, ...createListingData} = createListingDto
-    return this.prisma.listing.create({ data:  {
-      ...data,
-      category:{
-        connect: {
-          id: idCategory,
-        },  
-      }
-    }});
+    const { idCategory } = data;
+    return this.prisma.listing.create({
+      data: {
+        ...data,
+        category: {
+          connect: {
+            id: idCategory,
+          },
+        },
+      },
+    });
   }
 
   findAll() {
     return this.prisma.listing.findMany({
-    include: {
+      include: {
         listingPrice: true,
-        category: true
-    },
-    where: {
-        
-    }
+        category: true,
+      },
+      where: {},
     });
   }
 
