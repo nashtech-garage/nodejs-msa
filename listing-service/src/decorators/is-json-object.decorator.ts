@@ -1,5 +1,5 @@
 import { registerDecorator, ValidationArguments } from 'class-validator';
- 
+
 function IsJsonObject() {
   return function (object: object, propertyName: string) {
     registerDecorator({
@@ -19,5 +19,5 @@ function IsJsonObject() {
     });
   };
 }
- 
+
 export default IsJsonObject;

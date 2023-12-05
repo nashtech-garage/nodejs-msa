@@ -32,6 +32,35 @@
 $ npm install
 ```
 
+## Run prisma to generate
+
+```bash
+$ npx prisma generate
+```
+
+## Run docker-compose to init postgres
+
+```bash
+$ docker-compose up -d
+```
+
+## Run migrate to create db
+
+```bash
+$ npx prisma migrate dev
+```
+
+## Generate from seed
+```bash
+$ npm run seed
+```
+
+## Start prisma studio to review db
+
+```bash
+prx prisma studio
+```
+
 ## Running the app
 
 ```bash
