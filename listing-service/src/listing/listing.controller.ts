@@ -1,22 +1,21 @@
 import {
-    Controller,
-    Get,
-    Post,
-    Body,
-    Patch,
-    Param,
-    Delete,
-    ParseIntPipe,
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { CreateListingDto } from '../dtos/create-listing.dto';
 import { ListingService } from './listing.service';
 import { UpdateListingDto } from '../dtos/update-listing.dto';
-import { ListingEntity } from 'src/entities/listing.entity';
-
+import { ListingEntity } from '../entities/listing.entity';
 
 @Controller('listing')
 export class ListingController {
-    constructor(private readonly listingService: ListingService) {}
+  constructor(private readonly listingService: ListingService) {}
 
   @Post()
   async create(@Body() createListingDto: CreateListingDto) {
