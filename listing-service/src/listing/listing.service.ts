@@ -8,26 +8,26 @@ export class ListingService {
   constructor(private prisma: PrismaService) {}
 
   create(data: CreateListingDto) {
-    const { idCategory } = data
-    return this.prisma.listing.create({ data:  {
-      ...data,
-      category:{
-        connect: {
-          id: idCategory,
-        },  
-      }
-    }});
+    const { idCategory } = data;
+    return this.prisma.listing.create({
+      data: {
+        ...data,
+        category: {
+          connect: {
+            id: idCategory,
+          },
+        },
+      },
+    });
   }
 
   findAll() {
     return this.prisma.listing.findMany({
-    include: {
+      include: {
         listingPrice: true,
-        category: true
-    },
-    where: {
-        
-    }
+        category: true,
+      },
+      where: {},
     });
   }
 
