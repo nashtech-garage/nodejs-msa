@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,70 +7,106 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Category {
-  id Int    @id @default(autoincrement())
-  name String
-  description String?
-  firstPic String
-  createdAt DateTime @default(now())
-  createdBy Int
-  updatedAt DateTime @updatedAt
-  updatedBy Int
-  listing Listing[]
+model Amenity {
+  id          Int           @id(map: "Amenity_pk") @default(autoincrement())
+  name        String        @db.VarChar
+  description String
+  createdAt   DateTime      @default(now()) @db.Date
+  createdBy   Int
+  updatedAt   DateTime      @db.Date  @updatedAt
+  updatedBy   Int
+  RoomAmenity RoomAmenity[]
 }
 
-
-model Listing {
-  id    Int    @id @default(autoincrement())
-  name String
-  description String?
-  firstPic String
-  createdAt DateTime @default(now())
-  createdBy Int
-  updatedAt DateTime @updatedAt
-  updatedBy Int
-  capacity Json
-  category Category? @relation(fields: [categoryId], references: [id])
-  categoryId Int?
-  listingPrice ListingPrice[]
-  listingAmenity ListingAmenity[]
-  listingAddress ListingAddress[]
+model Hotel {
+  id          Int      @id(map: "Hotel_pk") @default(autoincrement())
+  hotelName   String   @db.VarChar
+  description String
+  geolocation String   @db.VarChar
+  mainPic     String   @db.VarChar
+  address     String   @db.VarChar
+  city        String   @db.VarChar
+  locationId  Int
+  createdAt   DateTime @default(now()) @db.Date
+  createdBy   Int
+  updatedAt   DateTime @db.Date @updatedAt
+  updatedBy   Int
+  Location    Location @relation(fields: [locationId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "Hotel_fk0")
+  Room        Room[]
 }
 
-model ListingPrice {
-  id    Int    @id @default(autoincrement())
-  name String
-  price Int
-  isActive  Boolean  @default(true)
-  createdAt DateTime @default(now())
-  createdBy Int
-  updatedAt DateTime @updatedAt
-  updatedBy Int
-  listing Listing? @relation(fields: [listingId], references: [id])
-  listingId Int?
+model Location {
+  id          Int      @id(map: "Location_pk") @default(autoincrement())
+  name        String   @db.VarChar
+  description String
+  firstPic    String   @db.VarChar
+  createdAt   DateTime @default(now()) @db.Date
+  createdBy   Int
+  updatedAt   DateTime @db.Date @updatedAt
+  updatedBy   Int
+  Hotel       Hotel[]
 }
 
-model ListingAmenity {
-  id    Int    @id @default(autoincrement())
-  name String
-  description String?
-  createdAt DateTime @default(now())
-  createdBy Int
-  updatedAt DateTime @updatedAt
-  updatedBy Int
-  listing Listing? @relation(fields: [listingId], references: [id])
-  listingId Int?
+model PropertyImage {
+  id                Int                 @id(map: "PropertyImage_pk") @default(autoincrement())
+  imagePath         String              @db.VarChar
+  createdAt         DateTime            @default(now()) @db.Date
+  createdBy         Int
+  updatedAt         DateTime            @db.Date  @updatedAt
+  updatedBy         Int
+  RoomPropertyImage RoomPropertyImage[]
 }
 
-model ListingAddress {
-  id    Int    @id @default(autoincrement())
-  address String
-  city String
-  geolocation Json
-  createdAt DateTime @default(now())
+model Room {
+  id                Int                 @id(map: "Room_pk") @default(autoincrement())
+  name              String              @db.VarChar
+  description       String
+  mainPic           String              @db.VarChar
+  hotelId           Int
+  capacity          Json                @db.Json
+  createdAt         DateTime            @default(now()) @db.Date
+  createdBy         Int
+  updatedAt         DateTime            @db.Date  @updatedAt
+  updatedBy         Int
+  Hotel             Hotel               @relation(fields: [hotelId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "Room_fk0")
+  RoomAmenity       RoomAmenity[]
+  RoomBooking       RoomBooking[]
+  RoomPropertyImage RoomPropertyImage[]
+}
+
+model RoomAmenity {
+  id        Int      @id(map: "RoomAmenity_pk") @default(autoincrement())
+  roomId    Int
+  amenityId Int
+  createdAt DateTime @default(now()) @db.Date
   createdBy Int
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @db.Date @updatedAt
   updatedBy Int
-  listing Listing? @relation(fields: [listingId], references: [id])
-  listingId Int?
+  Room      Room     @relation(fields: [roomId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "RoomAmenity_fk0")
+  Amenity   Amenity  @relation(fields: [amenityId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "RoomAmenity_fk1")
+}
+
+model RoomBooking {
+  id          Int      @id(map: "RoomBooking_pk") @default(autoincrement())
+  firstName   String   @db.VarChar
+  lastName    String   @db.VarChar
+  email       String   @db.VarChar
+  paymentCard String
+  fromDate    DateTime @db.Date
+  toDate      DateTime @db.Date
+  price       Decimal  @db.Decimal
+  roomId      Int
+  Room        Room     @relation(fields: [roomId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "RoomBooking_fk0")
+}
+
+model RoomPropertyImage {
+  id              Int           @id(map: "RoomPropertyImage_pk") @default(autoincrement())
+  roomId          Int
+  propertyImageId Int
+  createdAt       DateTime      @default(now()) @db.Date
+  createdBy       Int
+  updatedAt       DateTime      @db.Date  @updatedAt
+  updatedBy       Int
+  Room            Room          @relation(fields: [roomId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "RoomPropertyImage_fk0")
+  PropertyImage   PropertyImage @relation(fields: [propertyImageId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "RoomPropertyImage_fk1")
 }
