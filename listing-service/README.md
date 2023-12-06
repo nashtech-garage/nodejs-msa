@@ -38,6 +38,31 @@ $ npm install
 $ npx prisma generate
 ```
 
+## If you want to update from db to your prisma file
+
+```bash
+$ npx prisma pull
+$ npx prisma generate
+```
+
+## If you want to generate dbml file, that can use at https://dbdiagram.io/
+
+- Update file: `prisma/schema.prisma`
+```
+generator client {
+  provider = "prisma-dbml-generator"
+}
+```
+
+- Run bash to generate
+
+```bash
+$ npx prisma generate
+```
+
+- That will generate file `prisma/dbml/schema.dbml`
+
+
 ## Run docker-compose to init postgres
 
 ```bash
