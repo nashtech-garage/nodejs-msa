@@ -1,60 +1,92 @@
 // https://erd.dbdesigner.net/
 
-listing {
-	id integer pk def(as)
+
+Location {
+	id integer pk increments
 	name varchar
 	description text
 	firstPic varchar
-	categoryId integer *> category.id
+	createdAt date def(CURRENT_TIMESTAMP)
+	createdBy integer
+	updatedAt date
+	updatedBy integer
+}
+
+Room {
+	id integer pk increments
+	name varchar
+	description text
+	mainPic varchar
+	hotelId integer *> Hotel.id
 	capacity json
-	createdAt date
+	createdAt date def(CURRENT_TIMESTAMP)
 	createdBy integer
 	updatedAt date
 	updatedBy integer
 }
 
-category {
+Amenity {
 	id integer pk increments
 	name varchar
 	description text
-	firstPic varchar
-	createdAt date
+	createdAt date def(CURRENT_TIMESTAMP)
 	createdBy integer
 	updatedAt date
 	updatedBy integer
 }
 
-listing_amenity {
+RoomAmenity {
 	id integer pk increments
-	listingId integer *> listing.id
-	name varchar
+	roomId integer *> Room.id
+	amenityId integer *> Amenity.id
+	createdAt date def(CURRENT_TIMESTAMP)
+	createdBy integer
+	updatedAt date
+	updatedBy integer
+}
+
+Hotel {
+	id integer pk increments
+	hotelName varchar
 	description text
-	createdAt date
-	createdBy integer
-	updatedAt date
-	updatedBy integer
-}
-
-listing_price {
-	id integer pk increments
-	listingId integer *> listing.id
-	price double
-	isActive boolean
-	createdAt date
-	createdBy integer
-	updatedAt date
-	updatedBy integer
-}
-
-listing_address {
-	id integer pk increments
-	listingId integer *> listing.id
 	geolocation point
-	address varchar(255)
-	city varchar(255)
-	createdAt date
+	mainPic varchar
+	address varchar
+	city varchar
+	locationId integer *> Location.id
+    createdAt date def(CURRENT_TIMESTAMP)
 	createdBy integer
 	updatedAt date
 	updatedBy integer
 }
 
+PropertyImage {
+	id integer pk increments
+	imagePath varchar
+	createdAt date def(CURRENT_TIMESTAMP)
+	createdBy integer
+	updatedAt date
+	updatedBy integer
+}
+
+RoomPropertyImage {
+	id integer pk increments
+	roomId integer *> Room.id
+	propertyImageId integer *> PropertyImage.id
+    createdAt date def(CURRENT_TIMESTAMP)
+	createdBy integer
+	updatedAt date
+	updatedBy integer
+}
+
+RoomBooking {
+	id integer pk increments
+	firstName varchar
+	lastName varchar
+	email varchar
+	paymentCard text
+	fromDate date
+	toDate date
+	price decimal
+	roomId integer *> Room.id
+}
