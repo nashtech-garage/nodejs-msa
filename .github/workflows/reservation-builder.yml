@@ -5,6 +5,7 @@ on:
     branches:
       - dev
       - main
+      - fix/nodejs-msa-76529977-listing-service-fix-github-action
     paths:
       - "reservation-service/**"
       - ".github/workflows/reservation-builder.yml"
