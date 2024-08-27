@@ -7,7 +7,7 @@ WORKDIR /app
 
 # Install app dependencies
 COPY package.json /app/
-RUN npm i --production
+RUN npm i --production --force
 
 FROM gcr.io/distroless/nodejs18-debian11
 
