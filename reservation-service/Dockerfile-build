@@ -7,6 +7,6 @@ RUN mkdir -p /app
 COPY package.json /app/
 
 RUN cd /app \
-  && npm i --force
+  && npm i
 
 WORKDIR /app
