@@ -1,0 +1,100 @@
+version: "3.8"
+
+services:
+  bff:
+    build:
+      context: ./bff-service
+      dockerfile: Dockerfile
+    container_name: bff
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/bff
+    depends_on:
+      - db
+    networks:
+      - nodejs_msa_network
+
+  payment:
+    build:
+      context: ./payment-service
+      dockerfile: Dockerfile
+    container_name: payment
+    ports:
+      - "8001:8001"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/payment
+    depends_on:
+      - db
+    networks:
+      - nodejs_msa_network
+
+  listing:
+    build:
+      context: ./listing-service
+      dockerfile: Dockerfile
+    container_name: listing
+    ports:
+      - "8002:8002"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/listing
+    depends_on:
+      - db
+    networks:
+      - nodejs_msa_network
+
+  reservation:
+    build:
+      context: ./reservation-service
+      dockerfile: Dockerfile
+    container_name: reservation
+    ports:
+      - "8003:8003"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/reservation
+    depends_on:
+      - db
+    networks:
+      - nodejs_msa_network
+
+  homefront:
+    build:
+      context: ./homefront-service
+      dockerfile: Dockerfile
+    container_name: homefront
+    ports:
+      - "8004:8004"
+    depends_on:
+      - bff
+    networks:
+      - nodejs_msa_network
+
+  db:
+    image: postgres
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - nodejs_msa_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    command: >
+      sh -c "psql -U postgres -c 'CREATE DATABASE payment;' &&
+             psql -U postgres -c 'CREATE DATABASE listing;' &&
+             psql -U postgres -c 'CREATE DATABASE reservation;' &&
+             postgres"
+
+volumes:
+  postgres_data:
+
+networks:
+  nodejs_msa_network:
+    driver: bridge
