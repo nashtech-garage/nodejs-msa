@@ -7,9 +7,9 @@ services:
       dockerfile: Dockerfile
     container_name: bff
     ports:
-      - "8000:8000"
+      - "${BFF_SERVICE_PORT}:${BFF_SERVICE_PORT}"
     environment:
-      - DATABASE_URL=postgresql://postgres:postgres@db:5432/bff
+      - BFF_SERVICE_PORT=${BFF_SERVICE_PORT}
     depends_on:
       - db
     networks:
@@ -21,9 +21,10 @@ services:
       dockerfile: Dockerfile
     container_name: payment
     ports:
-      - "8001:8001"
+      - "${PAYMENT_SERVICE_PORT}:${PAYMENT_SERVICE_PORT}"
     environment:
-      - DATABASE_URL=postgresql://postgres:postgres@db:5432/payment
+      - PAYMENT_SERVICE_PORT=${PAYMENT_SERVICE_PORT}
+      - DATABASE_URL=${PAYMENT_DB_URL}
     depends_on:
       - db
     networks:
@@ -35,9 +36,10 @@ services:
       dockerfile: Dockerfile
     container_name: listing
     ports:
-      - "8002:8002"
+      - "${LISTING_SERVICE_PORT}:${LISTING_SERVICE_PORT}"
     environment:
-      - DATABASE_URL=postgresql://postgres:postgres@db:5432/listing
+      - LISTING_SERVICE_PORT=${LISTING_SERVICE_PORT}
+      - DATABASE_URL=${LISTING_DB_URL}
     depends_on:
       - db
     networks:
@@ -49,9 +51,10 @@ services:
       dockerfile: Dockerfile
     container_name: reservation
     ports:
-      - "8003:8003"
+      - "${RESERVATION_SERVICE_PORT}:${RESERVATION_SERVICE_PORT}"
     environment:
-      - DATABASE_URL=postgresql://postgres:postgres@db:5432/reservation
+      - RESERVATION_SERVICE_PORT=${RESERVATION_SERVICE_PORT}
+      - DATABASE_URL=${RESERVATION_DB_URL}
     depends_on:
       - db
     networks:
@@ -63,7 +66,7 @@ services:
       dockerfile: Dockerfile
     container_name: homefront
     ports:
-      - "8004:8004"
+      - "${HOMEFRONT_PORT}:${HOMEFRONT_PORT}"
     depends_on:
       - bff
     networks:
@@ -73,10 +76,10 @@ services:
     image: postgres
     container_name: postgres
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
-      - "5432:5432"
+      - "${POSTGRES_PORT}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
