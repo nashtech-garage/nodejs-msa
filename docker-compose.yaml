@@ -1,0 +1,40 @@
+version: "3"
+services:
+
+  postgres:
+    container_name: msa-postgres
+    image: postgres:16.0
+    networks:
+      - msa-network
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+    volumes:
+      - ./postgres_init.sql:/docker-entrypoint-initdb.d/postgres_init.sql
+      - /postgres:/var/lib/postgresql/data
+
+  identity:
+    container_name: msa-identity
+    image: quay.io/keycloak/keycloak:latest
+    command: ['start-dev']
+    networks:
+      - msa-network
+    ports:
+      - 8080:8080
+    environment:
+      - KC_DB=postgres
+      - KC_DB_URL_HOST=postgres
+      - KC_DB_PORT=5432
+      - KC_DB_USERNAME=admin
+      - KC_DB_PASSWORD=admin
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    depends_on:
+      - postgres
+
+networks:
+  msa-network:
+    driver: bridge
+    name: msa-network
