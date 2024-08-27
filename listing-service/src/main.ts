@@ -2,20 +2,23 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
 
-  const config = new DocumentBuilder()
+  const configService = app.get(ConfigService)
+
+  const swaggerConfig = new DocumentBuilder()
     .setTitle('Listing Service')
     .setDescription('The API of booking room')
     .setVersion('1.0')
     .addTag('services')
     .build();
-  const document = SwaggerModule.createDocument(app, config);
+  const document = SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup('api', app, document);
 
-  await app.listen(3003);
+  await app.listen(configService.get<string>('LISTING_SERVICE_PORT'));
 }
 bootstrap();
