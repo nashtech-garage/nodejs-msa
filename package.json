@@ -2,6 +2,7 @@
   "name": "nodejs-msa",
   "workspaces": [
     "listing-service",
-    "reservation-service"
+    "reservation-service",
+    "payment-service"
   ]
 }
