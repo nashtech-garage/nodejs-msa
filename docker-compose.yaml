@@ -11,7 +11,7 @@ services:
     environment:
       - BFF_SERVICE_PORT=${BFF_SERVICE_PORT}
     depends_on:
-      - postgres
+      - db
     networks:
       - nodejs_msa_network
 
@@ -26,7 +26,7 @@ services:
       - PAYMENT_SERVICE_PORT=${PAYMENT_SERVICE_PORT}
       - DATABASE_URL=${PAYMENT_DB_URL}
     depends_on:
-      - postgres
+      - db
     networks:
       - nodejs_msa_network
 
@@ -41,7 +41,7 @@ services:
       - LISTING_SERVICE_PORT=${LISTING_SERVICE_PORT}
       - DATABASE_URL=${LISTING_DB_URL}
     depends_on:
-      - postgres
+      - db
     networks:
       - nodejs_msa_network
 
@@ -56,7 +56,7 @@ services:
       - RESERVATION_SERVICE_PORT=${RESERVATION_SERVICE_PORT}
       - DATABASE_URL=${RESERVATION_DB_URL}
     depends_on:
-      - postgres
+      - db
     networks:
       - nodejs_msa_network
 
@@ -72,7 +72,7 @@ services:
     networks:
       - nodejs_msa_network
 
-  postgres:
+  db:
     image: postgres
     container_name: postgres
     environment:
