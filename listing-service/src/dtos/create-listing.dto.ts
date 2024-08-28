@@ -10,7 +10,6 @@ import {
 } from 'class-validator';
 import { CreateCapacityDto } from './capacity.dto';
 import { Type } from 'class-transformer';
-import { Prisma } from '@prisma/client';
 
 export class CreateListingDto {
   @IsString()

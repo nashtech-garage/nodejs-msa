@@ -8,7 +8,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
 
-  const configService = app.get(ConfigService)
+  const configService = app.get(ConfigService);
 
   const swaggerConfig = new DocumentBuilder()
     .setTitle('Listing Service')
@@ -19,6 +19,8 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup('api', app, document);
 
-  await app.listen(configService.get<string>('LISTING_SERVICE_PORT'));
+  const PORT = configService.get<string>('LISTING_SERVICE_PORT');
+  await app.listen(PORT);
+  console.log('Listing service is listening on port: ', PORT);
 }
 bootstrap();

@@ -17,6 +17,8 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup('api', app, document);
 
-  await app.listen(configService.get<string>('RESERVATION_SERVICE_PORT'));
+  const PORT = configService.get<string>('RESERVATION_SERVICE_PORT');
+  await app.listen(PORT);
+  console.log('Reservation service listening on port ' + PORT);
 }
 bootstrap();
