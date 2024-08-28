@@ -4,7 +4,7 @@ services:
   bff:
     build:
       context: ./bff-service
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-local
     container_name: bff
     ports:
       - "${BFF_SERVICE_PORT}:${BFF_SERVICE_PORT}"
@@ -18,7 +18,7 @@ services:
   payment:
     build:
       context: ./payment-service
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-local
     container_name: payment
     ports:
       - "${PAYMENT_SERVICE_PORT}:${PAYMENT_SERVICE_PORT}"
@@ -48,7 +48,7 @@ services:
   reservation:
     build:
       context: ./reservation-service
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-local
     container_name: reservation
     ports:
       - "${RESERVATION_SERVICE_PORT}:${RESERVATION_SERVICE_PORT}"
@@ -62,7 +62,7 @@ services:
 
   homefront:
     build:
-      context: ./homefront-service
+      context: ./homefront
       dockerfile: Dockerfile
     container_name: homefront
     ports:
@@ -72,7 +72,7 @@ services:
     networks:
       - nodejs_msa_network
 
-  db:
+  postgres:
     image: postgres
     container_name: postgres
     environment:
