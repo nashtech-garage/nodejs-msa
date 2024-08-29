@@ -1,5 +1,5 @@
 # Build stage
-FROM ghcr.io/nashtech-garage/nodejs-msa/reservation:build as builder
+FROM ghcr.io/nashtech-garage/nodejs-msa/nodejs-msa-reservation:build as builder
 
 COPY . .
 
