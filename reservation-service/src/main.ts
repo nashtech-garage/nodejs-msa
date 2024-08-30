@@ -1,24 +1,25 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ConfigService } from '@nestjs/config';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  
+  const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
+    transport: Transport.KAFKA,
+    options: {
+      client: {
+        brokers: [process.env.KAFKA_BROKER],
+        connectionTimeout: 100000,
+        retry: {
+          retries: Number.MAX_SAFE_INTEGER,
+        }
+      },
+      consumer: {
+        groupId: process.env.KAFKA_CONSUMER_GROUP_ID,
+      },
+    }
+  })
 
-  const configService = app.get(ConfigService);
-
-  const swaggerConfig = new DocumentBuilder()
-    .setTitle('Reservation Service')
-    .setDescription('The API of booking room')
-    .setVersion('1.0')
-    .addTag('services')
-    .build();
-  const document = SwaggerModule.createDocument(app, swaggerConfig);
-  SwaggerModule.setup('api', app, document);
-
-  const PORT = configService.get<string>('RESERVATION_SERVICE_PORT');
-  await app.listen(PORT);
-  console.log('Reservation service listening on port ' + PORT);
+  await app.listen();
 }
 bootstrap();

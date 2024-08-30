@@ -5,9 +5,11 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 import { AppService } from './app.service';
 import { AppResolver } from './app.resolver';
+import { PaymentModule } from './payment/payment.module';
 
 @Module({
   imports: [
+    PaymentModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       playground: true,

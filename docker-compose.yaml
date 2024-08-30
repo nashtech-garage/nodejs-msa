@@ -10,8 +10,10 @@ services:
       - "${BFF_SERVICE_PORT}:${BFF_SERVICE_PORT}"
     environment:
       - BFF_SERVICE_PORT=${BFF_SERVICE_PORT}
+      - KAFKA_BROKER=${KAFKA_BROKER}
     depends_on:
       - db
+      - kafka
     networks:
       - nodejs_msa_network
 
@@ -25,8 +27,11 @@ services:
     environment:
       - PAYMENT_SERVICE_PORT=${PAYMENT_SERVICE_PORT}
       - DATABASE_URL=${PAYMENT_DB_URL}
+      - KAFKA_BROKER=${KAFKA_BROKER}
+      - KAFKA_CONSUMER_GROUP_ID=${PAYMENT_KAFKA_CONSUMER_GROUP_ID}
     depends_on:
       - db
+      - kafka
     networks:
       - nodejs_msa_network
 
@@ -40,6 +45,8 @@ services:
     environment:
       - LISTING_SERVICE_PORT=${LISTING_SERVICE_PORT}
       - DATABASE_URL=${LISTING_DB_URL}
+      - KAFKA_BROKER=${KAFKA_BROKER}
+      - KAFKA_CONSUMER_GROUP_ID=${LISTING_KAFKA_CONSUMER_GROUP_ID}
     depends_on:
       - db
     networks:
@@ -55,8 +62,11 @@ services:
     environment:
       - RESERVATION_SERVICE_PORT=${RESERVATION_SERVICE_PORT}
       - DATABASE_URL=${RESERVATION_DB_URL}
+      - KAFKA_BROKER=${KAFKA_BROKER}
+      - KAFKA_CONSUMER_GROUP_ID=${RESERVATION_KAFKA_CONSUMER_GROUP_ID}
     depends_on:
       - db
+      - kafka
     networks:
       - nodejs_msa_network
 
@@ -105,7 +115,6 @@ services:
   kafka:
     container_name: kafka
     image: confluentinc/cp-kafka:latest
-    build: kafka
     networks:
       - nodejs_msa_network
     depends_on:
