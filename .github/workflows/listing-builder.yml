@@ -71,7 +71,7 @@ jobs:
           # platforms: linux/arm/v7,linux/amd64,linux/arm64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/listing:build
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/nodejs-msa-listing:build
       - name: Build and push listing release
         uses: docker/build-push-action@v3
         with:
@@ -80,7 +80,7 @@ jobs:
           # platforms: linux/arm/v7,linux/amd64,linux/arm64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/listing:release
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/nodejs-msa-listing:release
 
   build_and_push_service_dev:
     needs: [changes, build_and_push_builder]
@@ -108,7 +108,7 @@ jobs:
           # platforms: linux/arm/v7,linux/amd64,linux/arm64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/listing:dev
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/nodejs-msa-listing:dev
 
   build_and_push_service_latest:
     needs: [changes, build_and_push_builder]
@@ -136,4 +136,4 @@ jobs:
           # platforms: linux/arm/v7,linux/amd64,linux/arm64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/listing:latest
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/nodejs-msa-listing:latest
