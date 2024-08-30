@@ -71,7 +71,7 @@ jobs:
           # platforms: linux/arm/v7,linux/amd64,linux/arm64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/bff:build
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/nodejs-msa-bff:build
       - name: Build and push bff release
         uses: docker/build-push-action@v3
         with:
@@ -80,7 +80,7 @@ jobs:
           # platforms: linux/arm/v7,linux/amd64,linux/arm64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/bff:release
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/nodejs-msa-bff:release
 
   build_and_push_service_dev:
     needs: [changes, build_and_push_builder]
@@ -108,7 +108,7 @@ jobs:
           # platforms: linux/arm/v7,linux/amd64,linux/arm64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/bff:dev
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/nodejs-msa-bff:dev
 
   build_and_push_service_latest:
     needs: [changes, build_and_push_builder]
@@ -136,4 +136,4 @@ jobs:
           # platforms: linux/arm/v7,linux/amd64,linux/arm64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/bff:latest
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/nodejs-msa-bff:latest

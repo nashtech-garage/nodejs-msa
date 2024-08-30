@@ -71,7 +71,7 @@ jobs:
           # platforms: linux/arm/v7,linux/amd64,linux/arm64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/reservation:build
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/nodejs-msa-reservation:build
       - name: Build and push reservation release
         uses: docker/build-push-action@v3
         with:
@@ -80,7 +80,7 @@ jobs:
           # platforms: linux/arm/v7,linux/amd64,linux/arm64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/reservation:release
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/nodejs-msa-reservation:release
 
   build_and_push_service_dev:
     needs: [changes, build_and_push_builder]
@@ -108,7 +108,7 @@ jobs:
           # platforms: linux/arm/v7,linux/amd64,linux/arm64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/reservation:dev
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/nodejs-msa-reservation:dev
 
   build_and_push_service_latest:
     needs: [changes, build_and_push_builder]
@@ -136,4 +136,4 @@ jobs:
           # platforms: linux/arm/v7,linux/amd64,linux/arm64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/reservation:latest
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/nodejs-msa-reservation:latest
