@@ -10,7 +10,6 @@ import {
 } from 'class-validator';
 import { CreateCapacityDto } from './capacity.dto';
 import { Type } from 'class-transformer';
-import { Prisma } from '@prisma/client';
 
 export class CreateListingDto {
   @IsString()
@@ -30,7 +29,8 @@ export class CreateListingDto {
   @IsNotEmpty()
   @ValidateNested()
   @Type(() => CreateCapacityDto)
-  capacity: Prisma.JsonValue;
+  // capacity: Prisma.JsonValue;
+  capacity: string;
 
   @IsNumber()
   @IsNotEmpty()
