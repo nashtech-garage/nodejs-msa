@@ -71,7 +71,7 @@ jobs:
           # platforms: linux/arm/v7,linux/amd64,linux/arm64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/payment:build
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/nodejs-msa-payment:build
       - name: Build and push payment release
         uses: docker/build-push-action@v3
         with:
@@ -80,7 +80,7 @@ jobs:
           # platforms: linux/arm/v7,linux/amd64,linux/arm64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/payment:release
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/nodejs-msa-payment:release
 
   build_and_push_service_dev:
     needs: [changes, build_and_push_builder]
@@ -108,7 +108,7 @@ jobs:
           # platforms: linux/arm/v7,linux/amd64,linux/arm64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/payment:dev
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/nodejs-msa-payment:dev
 
   build_and_push_service_latest:
     needs: [changes, build_and_push_builder]
@@ -136,4 +136,4 @@ jobs:
           # platforms: linux/arm/v7,linux/amd64,linux/arm64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/payment:latest
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/nodejs-msa-payment:latest

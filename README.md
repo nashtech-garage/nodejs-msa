@@ -23,9 +23,37 @@ We try to build a simple room booking to make the best practices NodeJS in MSA.
 * [Kustomize](https://kustomize.io)
 * [Kubernetes](https://kubernetes.io)
 
-## Software Architecture
+## Local Development Architecture
+![Local Development](docs/imgs/docker-compose-architecture.png)
 
-![System Design](docs/imgs/system-design.png)
+## Getting started with Docker Compose
+1. Get the latest source code
+2. Add the following records to your host file:
+   ```sh
+   127.0.0.1 identity.local
+   127.0.0.1 node-msa.local/api-docs
+   127.0.0.1 node-msa.local
+   127.0.0.1 admin.node-msa.local 
+   ```
+To edit the hosts file on macOS or Unix-based systems:
+   ```sh
+   sudo nano /etc/hosts 
+   ```
+To edit the hosts file on Windows:
+
+1. Open Notepad or any text editor as Administrator.
+2. Open the file located at C:\Windows\System32\drivers\etc\hosts.
+3. Add the above records to the file and save it.
+4. Start the Docker Compose services:
+```sh
+docker-compose up -d
+```
+5. Ensure your services are properly labeled to be picked up by Traefik.
+Accessing the Traefik Dashboard:
+Traefik dashboard will be available at http://localhost:8080
+
+## Service Documentation
+This document provides an overview of the different services used in the project, including details on their implementation languages and functionalities
 
 | NO | Service             | Language    | Description                                                                                                  |
 | -- | ------------------- | ----------- | ------------------------------------------------------------------------------------------------------------ |
@@ -39,16 +67,15 @@ We try to build a simple room booking to make the best practices NodeJS in MSA.
 | 8  | payment-service     | Typescript  | Processes payment                                                                                            |
 | 9  | message-broker      |             | A Kafka instance                                                                                             |
 
-## Development
-
-See the [Development guide](docs/development-guide.md) to learn how to run and develop this app locally.
-
 ## Infrastructure
 
 ![Infrastructure](docs/imgs/infrastructure.png)
 
 
 ![Availability Domain 1 (AD1)](docs/imgs/infrastructure-ad1.png)
+
+## Documentation
+- [Development guide](docs/development-guide.md)
 
 ## Sponsors
 
