@@ -7,7 +7,7 @@ RUN npm run build
 
 
 # Prod stage
-FROM ghcr.io/nashtech-garage/nodejs-msa/reservation:release
+FROM ghcr.io/nashtech-garage/nodejs-msa/nodejs-msa-reservation:release
 
 COPY --from=builder /app/dist /app
 
