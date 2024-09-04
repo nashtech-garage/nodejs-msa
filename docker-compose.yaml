@@ -1,40 +1,103 @@
-version: "3"
+version: "3.8"
+
 services:
-
-  postgres:
-    container_name: msa-postgres
-    image: postgres:16.0
-    networks:
-      - msa-network
+  bff:
+    build:
+      context: ./bff-service
+      dockerfile: Dockerfile-local
+    container_name: bff
     ports:
-      - 5432:5432
+      - "${BFF_SERVICE_PORT}:${BFF_SERVICE_PORT}"
     environment:
-      - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=admin
-    volumes:
-      - ./postgres_init.sql:/docker-entrypoint-initdb.d/postgres_init.sql
-      - /postgres:/var/lib/postgresql/data
-
-  identity:
-    container_name: msa-identity
-    image: quay.io/keycloak/keycloak:latest
-    command: ['start-dev']
-    networks:
-      - msa-network
-    ports:
-      - 8080:8080
-    environment:
-      - KC_DB=postgres
-      - KC_DB_URL_HOST=postgres
-      - KC_DB_PORT=5432
-      - KC_DB_USERNAME=admin
-      - KC_DB_PASSWORD=admin
-      - KEYCLOAK_ADMIN=admin
-      - KEYCLOAK_ADMIN_PASSWORD=admin
+      - BFF_SERVICE_PORT=${BFF_SERVICE_PORT}
     depends_on:
-      - postgres
+      - db
+    networks:
+      - nodejs_msa_network
+
+  payment:
+    build:
+      context: ./payment-service
+      dockerfile: Dockerfile-local
+    container_name: payment
+    ports:
+      - "${PAYMENT_SERVICE_PORT}:${PAYMENT_SERVICE_PORT}"
+    environment:
+      - PAYMENT_SERVICE_PORT=${PAYMENT_SERVICE_PORT}
+      - DATABASE_URL=${PAYMENT_DB_URL}
+    depends_on:
+      - db
+    networks:
+      - nodejs_msa_network
+
+  listing:
+    build:
+      context: ./listing-service
+      dockerfile: Dockerfile-local
+    container_name: listing
+    ports:
+      - "${LISTING_SERVICE_PORT}:${LISTING_SERVICE_PORT}"
+    environment:
+      - LISTING_SERVICE_PORT=${LISTING_SERVICE_PORT}
+      - DATABASE_URL=${LISTING_DB_URL}
+    depends_on:
+      - db
+    networks:
+      - nodejs_msa_network
+
+  reservation:
+    build:
+      context: ./reservation-service
+      dockerfile: Dockerfile-local
+    container_name: reservation
+    ports:
+      - "${RESERVATION_SERVICE_PORT}:${RESERVATION_SERVICE_PORT}"
+    environment:
+      - RESERVATION_SERVICE_PORT=${RESERVATION_SERVICE_PORT}
+      - DATABASE_URL=${RESERVATION_DB_URL}
+    depends_on:
+      - db
+    networks:
+      - nodejs_msa_network
+
+  homefront:
+    build:
+      context: ./homefront
+      dockerfile: Dockerfile
+    container_name: homefront
+    ports:
+      - "${HOMEFRONT_PORT}:${HOMEFRONT_PORT}"
+    depends_on:
+      - bff
+    networks:
+      - nodejs_msa_network
+
+  db:
+    image: postgres
+    container_name: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - nodejs_msa_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    command: >
+      sh -c "psql -U postgres -c 'CREATE DATABASE payment;' &&
+             psql -U postgres -c 'CREATE DATABASE listing;' &&
+             psql -U postgres -c 'CREATE DATABASE reservation;' &&
+             postgres"
+
+volumes:
+  postgres_data:
 
 networks:
-  msa-network:
+  nodejs_msa_network:
     driver: bridge
-    name: msa-network

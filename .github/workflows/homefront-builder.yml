@@ -45,7 +45,7 @@ jobs:
           # platforms: linux/arm/v7,linux/amd64,linux/arm64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/homefront:dev
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/nodejs-msa-homefront:dev
 
   build_and_push_homefront_latest:
     if: ${{ github.ref == 'refs/heads/main' }}
@@ -72,4 +72,4 @@ jobs:
           # platforms: linux/arm/v7,linux/amd64,linux/arm64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/homefront:latest
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/nodejs-msa-homefront:latest
