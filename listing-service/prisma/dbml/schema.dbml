@@ -1,0 +1,120 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table Hotel {
+  id Int [pk, increment]
+  name String [not null]
+  description String [not null]
+  geolocation String [not null]
+  mainPic String [not null]
+  address String [not null]
+  locationId Int [not null]
+  createdAt DateTime [default: `now()`, not null]
+  createdBy Int [not null]
+  updatedAt DateTime [not null]
+  updatedBy Int [not null]
+  Location Location [not null]
+  Room Room [not null]
+}
+
+Table Amenity {
+  id Int [pk, increment]
+  name String [not null]
+  description String [not null]
+  createdAt DateTime [default: `now()`, not null]
+  createdBy Int [not null]
+  updatedAt DateTime [not null]
+  updatedBy Int [not null]
+  RoomAmenity RoomAmenity [not null]
+}
+
+Table Location {
+  id Int [pk, increment]
+  name String [not null]
+  description String [not null]
+  firstPic String [not null]
+  createdAt DateTime [default: `now()`, not null]
+  createdBy Int [not null]
+  updatedAt DateTime [not null]
+  updatedBy Int [not null]
+  Hotel Hotel [not null]
+}
+
+Table PropertyImage {
+  id Int [pk, increment]
+  imagePath String [not null]
+  createdAt DateTime [default: `now()`, not null]
+  createdBy Int [not null]
+  updatedAt DateTime [not null]
+  updatedBy Int [not null]
+  RoomPropertyImage RoomPropertyImage [not null]
+}
+
+Table Room {
+  id Int [pk, increment]
+  name String [not null]
+  description String [not null]
+  mainPic String [not null]
+  hotelId Int [not null]
+  capacity Json [not null]
+  createdAt DateTime [default: `now()`, not null]
+  createdBy Int [not null]
+  updatedAt DateTime [not null]
+  updatedBy Int [not null]
+  Hotel Hotel [not null]
+  RoomAmenity RoomAmenity [not null]
+  RoomBooking RoomBooking [not null]
+  RoomPropertyImage RoomPropertyImage [not null]
+}
+
+Table RoomAmenity {
+  id Int [pk, increment]
+  roomId Int [not null]
+  amenityId Int [not null]
+  createdAt DateTime [default: `now()`, not null]
+  createdBy Int [not null]
+  updatedAt DateTime [not null]
+  updatedBy Int [not null]
+  Room Room [not null]
+  Amenity Amenity [not null]
+}
+
+Table RoomBooking {
+  id Int [pk, increment]
+  firstName String [not null]
+  lastName String [not null]
+  email String [not null]
+  paymentCard String [not null]
+  fromDate DateTime [not null]
+  toDate DateTime [not null]
+  price Decimal [not null]
+  roomId Int [not null]
+  Room Room [not null]
+}
+
+Table RoomPropertyImage {
+  id Int [pk, increment]
+  roomId Int [not null]
+  propertyImageId Int [not null]
+  createdAt DateTime [default: `now()`, not null]
+  createdBy Int [not null]
+  updatedAt DateTime [not null]
+  updatedBy Int [not null]
+  Room Room [not null]
+  PropertyImage PropertyImage [not null]
+}
+
+Ref: Hotel.locationId > Location.id [delete: No Action]
+
+Ref: Room.hotelId > Hotel.id [delete: No Action]
+
+Ref: RoomAmenity.roomId > Room.id [delete: No Action]
+
+Ref: RoomAmenity.amenityId > Amenity.id [delete: No Action]
+
+Ref: RoomBooking.roomId > Room.id [delete: No Action]
+
+Ref: RoomPropertyImage.roomId > Room.id [delete: No Action]
+
+Ref: RoomPropertyImage.propertyImageId > PropertyImage.id [delete: No Action]

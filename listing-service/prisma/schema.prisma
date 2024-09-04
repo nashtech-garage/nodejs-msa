@@ -110,29 +110,3 @@ model RoomPropertyImage {
   Room            Room          @relation(fields: [roomId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "RoomPropertyImage_fk0")
   PropertyImage   PropertyImage @relation(fields: [propertyImageId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "RoomPropertyImage_fk1")
 }
-
-// model Category {
-//   id          Int       @id @default(autoincrement())
-//   name        String    @db.VarChar
-//   description String    @db.Text
-//   firstPic    String    @db.VarChar
-//   createdAt   DateTime  @default(now()) @db.Date
-//   createdBy   Int
-//   updatedAt   DateTime  @updatedAt @db.Date
-//   updatedBy   Int
-//   listings    Listing[]
-// }
-
-// model Listing {
-//   id          Int      @id @default(autoincrement())
-//   name        String   @db.VarChar
-//   description String   @db.Text
-//   firstPic    String   @db.VarChar
-//   categoryId  Int
-//   category    Category @relation(fields: [categoryId], references: [id])
-//   capacity    Json
-//   createdAt   DateTime @default(now()) @db.Date
-//   createdBy   Int
-//   updatedAt   DateTime @updatedAt @db.Date
-//   updatedBy   Int
-// }
