@@ -1,0 +1,78 @@
+{
+  "realm": "node-msa",
+  "enabled": true,
+  "roles": {
+    "realm": [
+      {
+        "name": "user",
+        "description": "User role with limited access",
+        "composite": false,
+        "clientRole": false,
+        "containerId": "node-msa"
+      },
+      {
+        "name": "admin",
+        "description": "Administrator role with full access",
+        "composite": true,
+        "clientRole": false,
+        "containerId": "node-msa",
+        "composites": {
+          "realm": [
+            "user"
+          ]
+        }
+      },
+      {
+        "name": "admin system",
+        "description": "Administrator System role with full access and control of system",
+        "composite": true,
+        "clientRole": false,
+        "containerId": "node-msa",
+        "composites": {
+          "realm": [
+            "admin"
+          ]
+        }
+      }
+    ]
+  },
+  "defaultRoles": [
+    "user"
+  ],
+  "users": [
+    {
+      "username": "johndoe",
+      "enabled": true,
+      "email": "johndoe@gmail.com",
+      "firstName": "John",
+      "lastName": "Doe",
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "password"
+        }
+      ],
+      "realmRoles": [
+        "admin system"
+      ]
+    },
+    {
+      "username": "janedoe",
+      "enabled": true,
+      "email": "jahndoe@gmail.com",
+      "firstName": "Jane",
+      "lastName": "Doe",
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "password"
+        }
+      ],
+      "realmRoles": [
+        "user"
+      ]
+    }
+  ]
+}

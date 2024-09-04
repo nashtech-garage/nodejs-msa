@@ -91,6 +91,20 @@ services:
       timeout: 5s
       retries: 5
 
+  identity:
+    build: identity
+    container_name: identity
+    ports:
+      - "8080:8080"
+    networks:
+     - nodejs_msa_network
+    environment:
+      - KC_DB=postgres
+      - KC_DB_URL_HOST=db
+      - KC_DB_PORT=5432
+      - KC_DB_USERNAME=${POSTGRES_USER}
+      - KC_DB_PASSWORD=${POSTGRES_PASSWORD}
+
 volumes:
   postgres_data:
 
