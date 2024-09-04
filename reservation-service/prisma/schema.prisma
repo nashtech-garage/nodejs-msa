@@ -1,0 +1,51 @@
+generator dbml {
+  provider = "prisma-dbml-generator"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Reservation {
+  id              Int               @id(map: "Reservation_pk") @default(autoincrement())
+  firstName       String            @db.VarChar
+  lastName        String            @db.VarChar
+  phoneNumber     String            @db.VarChar
+  email           String            @db.VarChar
+  startDate       DateTime          @db.Date
+  endDate         DateTime          @db.Date
+  roomAmount      Int
+  totalPrice      Float
+  note            String?
+  status          ReservationStatus @default(PENDING)
+  bookingDate     DateTime          @default(now()) @db.Date
+  createdBy       Int
+  updatedAt       DateTime          @updatedAt @db.Date
+  updatedBy       Int
+  ReservationRoom ReservationRoom[]
+}
+
+model ReservationRoom {
+  reservationId Int
+  roomId        Int
+  price         Float
+  capacity      Int
+  createdAt     DateTime   @default(now()) @db.Date
+  createdBy     Int
+  updatedAt     DateTime   @updatedAt @db.Date
+  updatedBy     Int
+  reservation   Reservation @relation(fields: [reservationId], references: [id])
+
+  @@id([reservationId, roomId])
+}
+
+enum ReservationStatus {
+  APPROVED
+  PENDING
+  REJECTED
+}

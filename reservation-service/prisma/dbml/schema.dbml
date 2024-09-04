@@ -1,0 +1,46 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table Reservation {
+  id Int [pk, increment]
+  firstName String [not null]
+  lastName String [not null]
+  phoneNumber String [not null]
+  email String [not null]
+  startDate DateTime [not null]
+  endDate DateTime [not null]
+  roomAmount Int [not null]
+  totalPrice Float [not null]
+  note String
+  status ReservationStatus [not null, default: 'PENDING']
+  bookingDate DateTime [default: `now()`, not null]
+  createdBy Int [not null]
+  updatedAt DateTime [not null]
+  updatedBy Int [not null]
+  ReservationRoom ReservationRoom [not null]
+}
+
+Table ReservationRoom {
+  reservationId Int [not null]
+  roomId Int [not null]
+  price Float [not null]
+  capacity Int [not null]
+  createdAt DateTime [default: `now()`, not null]
+  createdBy Int [not null]
+  updatedAt DateTime [not null]
+  updatedBy Int [not null]
+  reservation Reservation [not null]
+
+  indexes {
+    (reservationId, roomId) [pk]
+  }
+}
+
+Enum ReservationStatus {
+  APPROVED
+  PENDING
+  REJECTED
+}
+
+Ref: ReservationRoom.reservationId > Reservation.id
