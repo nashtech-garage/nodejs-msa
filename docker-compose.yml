@@ -29,10 +29,9 @@ services:
       KC_DB_URL_DATABASE: ${KC_DB_NAME}
       KC_DB_USERNAME: ${KC_DB_USERNAME}
       KC_DB_PASSWORD:  ${KC_DB_PASSWORD}
-#    volumes:
-#      - ./dockers/identity/realms:/opt/keycloak/data/import
-#    command: ["start-dev", "--import-realm"]
-    command: ["start-dev"]
+    volumes:
+      - ./dockers/identity/realms:/opt/keycloak/data/import
+    command: ["start-dev", "--import-realm"]
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=traefik"
