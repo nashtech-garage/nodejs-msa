@@ -61,7 +61,7 @@ This document provides an overview of the different services used in the project
 | 2  | merchant app        | Dart        | Provide a mobile app for merchant to manage their rooms, view booking detail, ...                            |
 | 3  | admin app           | Typescript  | A web application for admin to manage users, rooms and bookings                                              |
 | 4  | BFF                 | Typescript  | Prepare a GraphQL gateway for homefront, merchant app to communicate with internal services                  |
-| 5  | identity            | Java          | Provide OIDC authentication                                                                                  |
+| 5  | identity            |             | Provide OIDC authentication                                                                                  |
 | 6  | listing-service     | Typescript  | Lists rooms, views room detail, price...                                                                     |
 | 7  | reservation-service | Typescript  | Manage room reservation                                                                                      |
 | 8  | payment-service     | Typescript  | Processes payment                                                                                            |
