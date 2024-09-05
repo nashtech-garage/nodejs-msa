@@ -13,9 +13,9 @@
 
 /node_modules
 
-# dotenv environment variable files
+# Ignore all .env files
 .env
-.env.development.local
-.env.test.local
-.env.production.local
-.env.local
+.env.*
+
+# Exclude .env.example from being ignored
+!.env.example
