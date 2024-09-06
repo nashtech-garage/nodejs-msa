@@ -1,0 +1,186 @@
+{
+  "realm": "node-msa",
+  "enabled": true,
+  "roles": {
+    "realm": [
+      {
+        "name": "User",
+        "description": "User role with limited access",
+        "composite": true,
+        "clientRole": false,
+        "containerId": "node-msa",
+        "composites": {
+          "client": {
+            "account": [
+              "manage-account",
+              "view-profile"
+            ]
+          }
+        }
+      },
+      {
+        "name": "Admin",
+        "description": "Administrator role with full access",
+        "composite": true,
+        "clientRole": false,
+        "containerId": "node-msa",
+        "composites": {
+          "realm": [
+            "User"
+          ],
+          "client": {
+            "realm-management": [
+              "manage-users",
+              "query-users",
+              "view-users",
+              "query-groups",
+              "manage-events",
+              "view-events"
+            ]
+          }
+        }
+      },
+      {
+        "name": "System admin",
+        "description": "System Administrator role with full system control",
+        "composite": true,
+        "clientRole": false,
+        "containerId": "node-msa",
+        "composites": {
+          "realm": [
+            "Admin"
+          ],
+          "client": {
+            "realm-management": [
+              "realm-admin"
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "defaultRoles": [
+    "User"
+  ],
+  "users": [
+    {
+      "username": "tuonglevan",
+      "enabled": true,
+      "email": "tuonglevan@gmail.com",
+      "firstName": "Tuong",
+      "lastName": "Le Van",
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "password"
+        }
+      ],
+      "realmRoles": [
+        "System admin"
+      ]
+    },
+    {
+      "username": "tridominh",
+      "enabled": true,
+      "email": "tridominh@gmail.com",
+      "firstName": "Tri",
+      "lastName": "Do Minh",
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "password"
+        }
+      ],
+      "realmRoles": [
+        "System admin"
+      ]
+    },
+    {
+      "username": "hainguyenvan",
+      "enabled": true,
+      "email": "hainguyenvan@gmail.com",
+      "firstName": "Hai",
+      "lastName": "Nguyen Van",
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "password"
+        }
+      ],
+      "realmRoles": [
+        "System admin"
+      ]
+    },
+    {
+      "username": "minhledang",
+      "enabled": true,
+      "email": "minhledang@gmail.com",
+      "firstName": "Minh",
+      "lastName": "Le Dang",
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "password"
+        }
+      ],
+      "realmRoles": [
+        "System admin"
+      ]
+    },
+    {
+      "username": "phucnguyenhoang",
+      "enabled": true,
+      "email": "phucnguyenhoang@gmail.com",
+      "firstName": "Phuc",
+      "lastName": "Nguyen Hoang",
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "password"
+        }
+      ],
+      "realmRoles": [
+        "System admin"
+      ]
+    },
+    {
+      "username": "phuctranvinh",
+      "enabled": true,
+      "email": "phuctranvinh@gmail.com",
+      "firstName": "Phuc",
+      "lastName": "Tran Vinh",
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "password"
+        }
+      ],
+      "realmRoles": [
+        "System admin"
+      ]
+    },
+    {
+      "username": "thangongduy",
+      "enabled": true,
+      "email": "thangongduy@gmail.com",
+      "firstName": "Thang",
+      "lastName": "Ong Duy",
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "password"
+        }
+      ],
+      "realmRoles": [
+        "User"
+      ]
+    }
+  ]
+}
