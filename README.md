@@ -14,7 +14,7 @@ We try to build a simple room booking to make the best practices NodeJS in MSA.
 * [NodeJs](https://nodejs.org) / [NestJS v9](https://github.com/nestjs/nest)
 * [NextJS v13](https://nextjs.org)
 * [Flutter v3.3](https://flutter.dev)
-* [goauthentik](https://goauthentik.io)
+* [Keycloak](https://www.keycloak.org)
 * [Kafka](https://kafka.apache.org)
 * [PostgreSQL](https://www.postgresql.org)
 * [Docker](https://www.docker.com)
@@ -61,7 +61,7 @@ This document provides an overview of the different services used in the project
 | 2  | merchant app        | Dart        | Provide a mobile app for merchant to manage their rooms, view booking detail, ...                            |
 | 3  | admin app           | Typescript  | A web application for admin to manage users, rooms and bookings                                              |
 | 4  | BFF                 | Typescript  | Prepare a GraphQL gateway for homefront, merchant app to communicate with internal services                  |
-| 5  | identity            | Go          | Provide OIDC authentication                                                                                  |
+| 5  | identity            |             | Provide OIDC authentication                                                                                  |
 | 6  | listing-service     | Typescript  | Lists rooms, views room detail, price...                                                                     |
 | 7  | reservation-service | Typescript  | Manage room reservation                                                                                      |
 | 8  | payment-service     | Typescript  | Processes payment                                                                                            |

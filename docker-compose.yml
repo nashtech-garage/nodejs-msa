@@ -29,13 +29,12 @@ services:
       KC_DB_URL_DATABASE: ${KC_DB_NAME}
       KC_DB_USERNAME: ${KC_DB_USERNAME}
       KC_DB_PASSWORD:  ${KC_DB_PASSWORD}
-#    volumes:
-#      - ./dockers/identity/realms:/opt/keycloak/data/import
-#    command: ["start-dev", "--import-realm"]
-    command: ["start-dev"]
+    volumes:
+      - ./dockers/identity/realms:/opt/keycloak/data/import
+    command: ["start-dev", "--import-realm"]
     labels:
       - "traefik.enable=true"
-      - "traefik.docker.network=traefik"
+      - "traefik.docker.network=nodejs-msa-traefik"
       - "traefik.http.routers.identity.rule=Host(`identity.local`)"
       - "traefik.http.services.identity.loadbalancer.server.port=8080"
     networks:
@@ -98,6 +97,7 @@ services:
       discovery.type: single-node
     labels:
       - "traefik.enable=true"
+      - "traefik.docker.network=nodejs-msa-traefik"
       - "traefik.http.routers.elasticsearch.rule=Host(`elasticsearch.local`)"
       - "traefik.http.services.elasticsearch.loadbalancer.server.port=9200"
     volumes:
@@ -114,6 +114,7 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=${GF_ADMIN_PASSWORD}
     labels:
       - "traefik.enable=true"
+      - "traefik.docker.network=nodejs-msa-traefik"
       - "traefik.http.routers.grafana.rule=Host(`grafana.local`)"
       - "traefik.http.services.grafana.loadbalancer.server.port=3000"
     ports:
