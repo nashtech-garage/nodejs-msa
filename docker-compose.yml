@@ -110,8 +110,8 @@ services:
     image: grafana/grafana
     container_name: "grafana"
     environment:
-      - GF_SECURITY_ADMIN_USER=${GF_ADMIN_USER}
-      - GF_SECURITY_ADMIN_PASSWORD=${GF_ADMIN_PASSWORD}
+      GF_SECURITY_ADMIN_USER: ${GF_ADMIN_USER}
+      GF_SECURITY_ADMIN_PASSWORD: ${GF_ADMIN_PASSWORD}
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=nodejs-msa-traefik"
@@ -154,6 +154,11 @@ services:
       dockerfile: ./apps/listing-service/Dockerfile
     image: nodejs-msa-listing:dev
     container_name: listing
+    environment:
+      POSTGRES_HOST: db
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - "3002:3000"
     volumes:
