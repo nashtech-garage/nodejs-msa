@@ -131,6 +131,85 @@ services:
       retries: 5
 
   # Backend APP
+  bff:
+    build:
+      context: ./backend/nestjs
+      target: dev
+      dockerfile: ./apps/bff-service/Dockerfile
+    image: nodejs-msa-bff:dev
+    container_name: bff
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./backend/nestjs/apps/bff-service:/usr/src/app/apps/bff-service
+      - ./backend/nestjs/libs:/usr/src/app/libs
+    command: ["nest", "start", "bff-service", "--watch"]
+    networks:
+      - backend
+
+  listing:
+    build:
+      context: ./backend/nestjs
+      target: dev
+      dockerfile: ./apps/listing-service/Dockerfile
+    image: nodejs-msa-listing:dev
+    container_name: listing
+    ports:
+      - "3002:3000"
+    volumes:
+      - ./backend/nestjs/apps/listing-service:/usr/src/app/apps/listing-service
+      - ./backend/nestjs/libs:/usr/src/app/libs
+    command: [ "nest", "start", "listing-service", "--watch" ]
+    networks:
+      - backend
+
+  reservation:
+    build:
+      context: ./backend/nestjs
+      target: dev
+      dockerfile: ./apps/reservation-service/Dockerfile
+    image: nodejs-msa-reservation:dev
+    container_name: reservation
+    ports:
+      - "3003:3000"
+    volumes:
+      - ./backend/nestjs/apps/reservation-service:/usr/src/app/apps/reservation-service
+      - ./backend/nestjs/libs:/usr/src/app/libs
+    command: [ "nest", "start", "reservation-service", "--watch" ]
+    networks:
+      - backend
+
+  payment:
+    build:
+      context: ./backend/nestjs
+      target: dev
+      dockerfile: ./apps/payment-service/Dockerfile
+    image: nodejs-msa-payment:dev
+    container_name: payment
+    ports:
+      - "3004:3000"
+    volumes:
+      - ./backend/nestjs/apps/payment-service:/usr/src/app/apps/payment-service
+      - ./backend/nestjs/libs:/usr/src/app/libs
+    command: [ "nest", "start", "payment-service", "--watch" ]
+    networks:
+      - backend
+
+  search:
+    build:
+      context: ./backend/nestjs
+      target: dev
+      dockerfile: ./apps/search-service/Dockerfile
+    image: nodejs-msa-search:dev
+    container_name: search
+    ports:
+      - "3005:3000"
+    volumes:
+      - ./backend/nestjs/apps/search-service:/usr/src/app/apps/search-service
+      - ./backend/nestjs/libs:/usr/src/app/libs
+    command: [ "nest", "start", "search-service", "--watch" ]
+    networks:
+      - backend
   # Frontend APP
 volumes:
   traefik-certificates:
