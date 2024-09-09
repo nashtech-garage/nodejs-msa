@@ -3,6 +3,12 @@
   "collection": "@nestjs/schematics",
   "sourceRoot": "apps/bff-service/src",
   "monorepo": true,
+  "compilerOptions": {
+    "deleteOutDir": true,
+    "webpack": true,
+    "webpackConfigPath": "webpack.config.js",
+    "tsConfigPath": "tsconfig.build.json"
+  },
   "projects": {
     "bff-service": {
       "type": "application",
@@ -57,9 +63,51 @@
       "compilerOptions": {
         "tsConfigPath": "libs/utils/tsconfig.lib.json"
       }
+    },
+    "elasticsearch": {
+      "type": "library",
+      "root": "libs/elasticsearch",
+      "entryFile": "index",
+      "sourceRoot": "libs/elasticsearch/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/elasticsearch/tsconfig.lib.json"
+      }
+    },
+    "kafka": {
+      "type": "library",
+      "root": "libs/kafka",
+      "entryFile": "index",
+      "sourceRoot": "libs/kafka/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/kafka/tsconfig.lib.json"
+      }
+    },
+    "aws": {
+      "type": "library",
+      "root": "libs/aws",
+      "entryFile": "index",
+      "sourceRoot": "libs/aws/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/aws/tsconfig.lib.json"
+      }
+    },
+    "database": {
+      "type": "library",
+      "root": "libs/database",
+      "entryFile": "index",
+      "sourceRoot": "libs/database/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/database/tsconfig.lib.json"
+      }
+    },
+    "shared": {
+      "type": "library",
+      "root": "libs/shared",
+      "entryFile": "index",
+      "sourceRoot": "libs/shared/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/shared/tsconfig.lib.json"
+      }
     }
-  },
-  "compilerOptions": {
-    "webpack": true
   }
 }
