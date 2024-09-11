@@ -1,0 +1,22 @@
+name: NestJS CI Template
+
+on:
+  workflow_call:
+    inputs:
+      serviceName:
+        description: 'The name of the service'
+        required: true
+        type: string
+      imageTag:
+        description: 'The tag for the Docker image'
+        required: false
+        type: string
+
+jobs:
+  build:
+    uses: ./.github/workflows/ci-template.yml
+    with:
+      serviceName: ${{ inputs.serviceName }}
+      dockerfilePath: './backend/nestjs/apps/${{ inputs.serviceName }}-service/Dockerfile'
+      buildContext: './backend/nestjs'
+      imageTag:  ${{ inputs.imageTag || 'latest' }}
