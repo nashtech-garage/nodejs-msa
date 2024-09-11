@@ -1,0 +1,19 @@
+name: Listing Service CI
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "backend/nestjs/apps/listing-service/**"
+      - "backend/nestjs/libs/**"
+      - "backend/nestjs/package.json"
+      - "backend/nestjs/package-lock.json"
+      - ".github/workflows/listing-ci.yml"
+  workflow_call:
+
+jobs:
+  build-and-push-docker-image:
+    uses: ./.github/workflows/nestjs-ci-template.yml
+    with:
+      serviceName: 'listing'

@@ -1,0 +1,19 @@
+name: Admin Page CI
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "frontend/admin/**"
+      - ".github/workflows/adminpage-ci.yml"
+  workflow_call:
+
+jobs:
+  build-and-push-docker-image:
+    uses: ./.github/workflows/ci-template.yml
+    with:
+      serviceName: 'adminpage'
+      dockerfilePath: './frontend/admin/Dockerfile'
+      buildContext: './frontend/admin'
+      imageTag: 'latest'

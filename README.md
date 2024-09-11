@@ -2,11 +2,12 @@
 
 We try to build a simple room booking to make the best practices NodeJS in MSA. 
 
-[![Build bff service](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/bff-builder.yml/badge.svg)](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/bff-builder.yml)
-[![Build homefront service](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/homefront-builder.yml/badge.svg)](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/homefront-builder.yml)
-[![Build listing service](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/listing-builder.yml/badge.svg)](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/listing-builder.yml)
-[![Build payment service](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/payment-builder.yml/badge.svg)](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/payment-builder.yml)
-[![Build reservation service](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/reservation-builder.yml/badge.svg)](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/reservation-builder.yml)
+[![Backend For Frontend Service CI](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/bff-ci.yml/badge.svg)](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/bff-ci.yml)
+[![Listing service CI](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/listing-ci.yml/badge.svg)](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/listing-ci.yml)
+[![Reservation service CI](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/reservation-ci.yml/badge.svg)](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/reservation-ci.yml)
+[![Payment service CI](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/payment-ci.yml/badge.svg)](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/payment-ci.yml)
+[![Search service CI](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/search-ci.yml/badge.svg)](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/search-ci.yml)
+[![Admin Page CI](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/adminpage-ci.yml/badge.svg)](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/adminpage-ci.yml)
 
 ## Technical stack
 
