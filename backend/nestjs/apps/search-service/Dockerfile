@@ -4,7 +4,8 @@ ARG NODE_VERSION=20.17.0-alpine
 FROM node:${NODE_VERSION} AS base
 
 WORKDIR /usr/src/app
-
+# Install Nest CLI globally
+RUN npm install -g @nestjs/cli
 # Copy root package.json and package-lock.json
 COPY package*.json ./
 
@@ -19,12 +20,10 @@ COPY tsconfig*.json ./
 
 # Stage 2: Build the application
 FROM base AS builder
-RUN npm run build
+RUN nest build search-service
 
 # Stage 3: Development setup
 FROM base AS dev
-# Install Nest CLI globally
-RUN npm install -g @nestjs/cli
 # Expose the application port (optional)
 EXPOSE 3000
 # Command to run application in dev mode
@@ -43,4 +42,4 @@ COPY --from=builder /usr/src/app/node_modules ./node_modules
 EXPOSE 3000
 
 # Command to run the application
-CMD ["node", "dist/main.js"]
+CMD ["node", "dist/apps/search-services/main.js"]
