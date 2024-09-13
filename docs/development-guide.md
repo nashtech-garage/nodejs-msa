@@ -1,8 +1,16 @@
-# Development Guide
+# Table of Contents
+1. [Wireframe](#wireframe)
+    - [Hone Front](#homefront)
+    - [Merchant App](#merchant-app)
+2. [Database schema](#database-schema)
+3. [Task Creation on Kanban](#task-creation-on-kanban)
+4. [Branch Naming Convention](#branch-naming-convention)
+5. [Creating a Pull Request on GitHub](#creating-a-pull-request-on-github)
 
+## Wireframe
 <details>
   <summary>
-    <a href="javascript: void(0)"><strong>1. Wireframe</strong></a>
+    <a href="javascript: void(0)">View Details</a>
   </summary>
 
 ### Homefront
@@ -23,9 +31,10 @@
 
 </details>
 
+## Database schema
 <details>
   <summary>
-    <a href="javascript: void(0)"><strong>2. Database schema</strong></a>
+    <a href="javascript: void(0)"><strong>View Details</strong></a>
   </summary>
 
 The below database schema is designed by using [dbdesigner](https://erd.dbdesigner.net/). You can import this file [room-booking.dbml](/docs/db-schema/room-booking.dbml) into **dbdesigner** to visualize the db schema like the below image.
