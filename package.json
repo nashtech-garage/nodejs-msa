@@ -1,9 +1,0 @@
-{
-  "name": "nodejs-msa",
-  "workspaces": [
-    "bff-service",
-    "listing-service",
-    "reservation-service",
-    "payment-service"
-  ]
-}
