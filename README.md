@@ -31,10 +31,12 @@ We try to build a simple room booking to make the best practices NodeJS in MSA.
 1. Get the latest source code
 2. Add the following records to your host file:
    ```sh
+   127.0.0.1 traefik.local
    127.0.0.1 identity.local
    127.0.0.1 node-msa.local/api-docs
-   127.0.0.1 node-msa.local
+   127.0.0.1 grafana.local
    127.0.0.1 admin.node-msa.local 
+   127.0.0.1 node-msa.local
    ```
 To edit the hosts file on macOS or Unix-based systems:
    ```sh
@@ -51,7 +53,7 @@ docker-compose up -d
 ```
 5. Ensure your services are properly labeled to be picked up by Traefik.
 Accessing the Traefik Dashboard:
-Traefik dashboard will be available at http://localhost:8080
+Traefik dashboard will be available at http://traefik.local
 
 ## Service Documentation
 This document provides an overview of the different services used in the project, including details on their implementation languages and functionalities
