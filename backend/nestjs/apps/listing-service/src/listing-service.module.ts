@@ -1,16 +1,18 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { DatabaseModule } from './database/database.module';
+import { dataSourceOptions } from './database/data-source';
 import { ListingServiceController } from './listing-service.controller';
 import { ListingServiceService } from './listing-service.service';
 import { HotelsModule } from './hotels/hotels.module';
+import { DatabaseModule } from '@app/database';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
+      envFilePath: '../../.env',
     }),
-    DatabaseModule,
+    DatabaseModule.forRoot(dataSourceOptions),
     HotelsModule,
   ],
   controllers: [ListingServiceController],

@@ -23,6 +23,33 @@
       ],
       "@app/utils/*": [
         "libs/utils/src/*"
+      ],
+      "@app/elasticsearch": [
+        "libs/elasticsearch/src"
+      ],
+      "@app/elasticsearch/*": [
+        "libs/elasticsearch/src/*"
+      ],
+      "@app/kafka": [
+        "libs/kafka/src"
+      ],
+      "@app/kafka/*": [
+        "libs/kafka/src/*"
+      ],
+      "@app/aws": [
+        "libs/aws/src"
+      ],
+      "@app/aws/*": [
+        "libs/aws/src/*"
+      ],
+      "@app/database": [
+        "libs/database/src"
+      ],
+      "@app/database/*": [
+        "libs/database/src/*"
+      ],
+      "@app/shared/*": [
+        "libs/shared/*"
       ]
     }
   }

@@ -5,11 +5,11 @@ import { DataSourceOptions } from 'typeorm';
 
 @Module({})
 export class DatabaseModule {
-  static forRoot(dataSourceOptions: DataSourceOptions): DynamicModule {
+  public static forRoot(dataSourceOptions: DataSourceOptions): DynamicModule {
     return TypeOrmModule.forRoot(dataSourceOptions);
   }
 
-  static forFeature(entities: EntityClassOrSchema[]): DynamicModule {
+  public static forFeature(entities: EntityClassOrSchema[]): DynamicModule {
     return TypeOrmModule.forFeature(entities);
   }
 }

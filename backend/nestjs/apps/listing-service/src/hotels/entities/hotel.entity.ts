@@ -1,8 +1,8 @@
 import { AbstractEntity } from 'libs/database/src';
 import { Column, Entity } from 'typeorm';
 
-@Entity('hotels')
-export class HotelEntity extends AbstractEntity {
+@Entity({ name: 'hotels' })
+export class HotelEntity extends AbstractEntity<HotelEntity> {
   @Column()
   hotel_name: string;
 
