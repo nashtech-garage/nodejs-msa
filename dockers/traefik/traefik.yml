@@ -1,0 +1,22 @@
+api:
+  dashboard: true
+  insecure: true
+pilot:
+  dashboard: false
+
+entryPoints:
+  web:
+    address: ":80"
+  websecure:
+    address: ":443"
+
+providers:
+  docker:
+    exposedByDefault: false
+
+certificatesResolvers:
+  myresolver:
+    acme:
+      email: your-email@example.com
+      storage: /letsencrypt/acme.json
+      tlschallenge: {}
