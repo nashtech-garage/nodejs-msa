@@ -19,3 +19,5 @@
 
 # Exclude .env.example from being ignored
 !.env.example
+
+.DS_Store
