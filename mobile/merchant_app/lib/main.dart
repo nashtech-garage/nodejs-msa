@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:merchant_app/src/screens/auth/forget_password.dart';
 import 'package:merchant_app/src/screens/home.dart';
 import 'package:merchant_app/src/screens/auth/signin.dart';
 import 'package:merchant_app/src/screens/auth/signup.dart';
+import 'package:merchant_app/src/utils/load_env.dart';
 
 Future main() async {
-  await dotenv.load(fileName: '.env');
+  WidgetsFlutterBinding.ensureInitialized();
+  await loadEnv();
   runApp(const MyApp());
 }
 
