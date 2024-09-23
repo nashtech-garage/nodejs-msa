@@ -1,0 +1,60 @@
+name: Merchant Android CI
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "mobile/merchant_app/**"
+      - ".github/workflows/merchant-android-ci.yml"
+  workflow_call:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: mobile/merchant_app
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v2
+
+      - name: Create .env
+        # TODO: We are going to change these variables when we finish developing the Flutter application.
+        run: |
+          touch .env
+          echo "APP_NAME=Nodejs MSA" >> .env
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt' # Specify the distribution
+
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.0' # You can specify a specific version
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run tests
+        run: flutter test
+
+      - name: Clean Flutter build
+        run: flutter clean
+
+      - name: Build APK
+        run: flutter build apk --release
+
+      - name: List build output directory
+        run: ls -R build/app/outputs/flutter-apk/
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release.apk
+          path: ${{ github.workspace }}/mobile/merchant_app/build/app/outputs/flutter-apk/app-release.apk
