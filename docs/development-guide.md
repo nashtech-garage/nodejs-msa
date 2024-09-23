@@ -1,6 +1,6 @@
 # Table of Contents
 1. [Wireframe](#wireframe)
-    - [Hone Front](#homefront)
+    - [Home Front](#homefront)
     - [Merchant App](#merchant-app)
 2. [Database schema](#database-schema)
 3. [Task Creation on Kanban](#task-creation-on-kanban)
