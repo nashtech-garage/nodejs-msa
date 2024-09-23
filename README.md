@@ -8,6 +8,7 @@ We try to build a simple room booking to make the best practices NodeJS in MSA.
 [![Payment service CI](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/payment-ci.yml/badge.svg)](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/payment-ci.yml)
 [![Search service CI](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/search-ci.yml/badge.svg)](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/search-ci.yml)
 [![Admin Page CI](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/adminpage-ci.yml/badge.svg)](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/adminpage-ci.yml)
+[![Web App CI](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/web-app-ci.yml/badge.svg)](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/web-app-ci.yml)
 [![Merchant Android CI](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/merchant-android-ci.yml/badge.svg)](https://github.com/nashtech-garage/nodejs-msa/actions/workflows/merchant-android-ci.yml)
 
 ## Technical stack
