@@ -1,0 +1,19 @@
+name: Web App CI
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "frontend/webapp/**"
+      - ".github/workflows/web-app-ci.yml"
+  workflow_call:
+
+jobs:
+  build-and-push-docker-image:
+    uses: ./.github/workflows/ci-template.yml
+    with:
+      serviceName: 'webapp'
+      dockerfilePath: './frontend/webapp/Dockerfile'
+      buildContext: './frontend/webapp'
+      imageTag: 'latest'
