@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - dev
     paths:
       - "mobile/merchant_app/**"
       - ".github/workflows/merchant-android-ci.yml"
