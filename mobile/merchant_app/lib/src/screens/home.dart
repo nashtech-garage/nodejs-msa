@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:merchant_app/src/wigets/search_title_bar.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -6,24 +7,9 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home screen 2'),
-      ),
+      appBar: AppBar(title: SearchTitleBar()),
       body: Center(
-        child: InkWell(
-          onTap: () {
-            // Navigate to the login page
-            Navigator.pushNamed(context, '/signin');
-          },
-          child: const Text(
-            'Go to login',
-            style: TextStyle(
-              color: Colors.blue,
-              decoration: TextDecoration.underline,
-              fontSize: 18,
-            ),
-          ),
-        ),
+        child: Text("hello world"),
       ),
     );
   }
