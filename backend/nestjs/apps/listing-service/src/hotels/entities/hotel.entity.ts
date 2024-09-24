@@ -23,10 +23,4 @@ export class HotelEntity extends AbstractEntity<HotelEntity> {
 
   @Column({ length: 1 })
   status: string;
-
-  @Column({ nullable: true })
-  created_by: number;
-
-  @Column({ nullable: true })
-  updated_by: number;
 }
