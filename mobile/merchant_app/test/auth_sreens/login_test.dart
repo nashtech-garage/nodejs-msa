@@ -1,16 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:merchant_app/src/configs/config.app.dart';
 import 'package:merchant_app/src/screens/auth/signin.dart';
-import 'package:merchant_app/src/utils/load_env.dart';
+import 'package:provider/provider.dart';
 
 void main() {
+  late AppConfig appConfig;
+
   setUpAll(() async {
-    await loadEnv();
+    appConfig = AppConfig();
+    await appConfig.loadConfig();
   });
 
   testWidgets('SignInScreen display correctly', (WidgetTester tester) async {
-    await tester.pumpWidget(const MaterialApp(home: SignInScreen()));
+    await tester.pumpWidget(
+      ChangeNotifierProvider<AppConfig>.value(
+        value: appConfig,
+        child: const MaterialApp(
+          home: SignInScreen(),
+        ),
+      ),
+    );
 
-    expect(find.text('Nodejs MSA Dev'), findsOneWidget);
+    await tester.pump();
+
+    expect(find.text('Nodejs MSA'), findsOneWidget);
   });
 }

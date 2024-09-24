@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:form_validator/form_validator.dart';
-import 'package:merchant_app/src/screens/home.dart';
+import 'package:merchant_app/src/configs/config.app.dart';
+import 'package:merchant_app/src/screens/home/home.dart';
+import 'package:provider/provider.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -38,8 +39,6 @@ class _SignUpState extends State<SignUpScreen> {
         "password": _passwordController.text,
       };
 
-      print(body);
-
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text("Sign up ...")));
       // Simulate a network request or some processing time
@@ -62,7 +61,8 @@ class _SignUpState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    String appName = dotenv.env['APP_NAME'] ?? "App Name is not defined";
+    AppConfig appConfig = Provider.of<AppConfig>(context);
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -73,7 +73,7 @@ class _SignUpState extends State<SignUpScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  appName,
+                  appConfig.appName,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontSize: 32,

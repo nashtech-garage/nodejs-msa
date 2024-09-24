@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:form_validator/form_validator.dart';
-import 'package:merchant_app/src/screens/home.dart';
+import 'package:merchant_app/src/configs/config.app.dart';
+import 'package:merchant_app/src/screens/home/home.dart';
+import 'package:provider/provider.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
   const ForgetPasswordScreen({super.key});
@@ -52,7 +53,8 @@ class _ForgetPasswordState extends State<ForgetPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    String appName = dotenv.env['APP_NAME'] ?? "App Name is not defined";
+    AppConfig appConfig = Provider.of<AppConfig>(context);
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -63,7 +65,7 @@ class _ForgetPasswordState extends State<ForgetPasswordScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  appName,
+                  appConfig.appName,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontSize: 32,
