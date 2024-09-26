@@ -182,5 +182,27 @@
         "User"
       ]
     }
-  ]
+  ],
+  "clients": [
+    {
+      "clientId": "frontend-admin",
+      "name": "Frontend Admin",
+      "description": "Next JS frontend for admin",
+      "rootUrl": "http://admin.localhost",
+      "adminUrl": "http://admin.localhost",
+      "baseUrl": "http://admin.localhost",
+      "enabled": true,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "0395359a-1464-495a-ae75-f19750cc04be",
+      "redirectUris": [
+        "http://admin.localhost/*"
+      ],
+      "webOrigins": [
+        "+"
+      ]
+    }
+  ],
+  "attributes": {
+    "frontendUrl": "http://identity.localhost"
+  }
 }

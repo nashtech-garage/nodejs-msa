@@ -26,10 +26,11 @@ services:
       - ./dockers/traefik/traefik.yml:/traefik.yml
     labels:
       <<: *traefik-labels
-      traefik.http.routers.api.rule: "Host(`traefik.local`)"
+      traefik.http.routers.api.rule: "Host(`traefik.localhost`)"
       traefik.http.routers.api.service: "api@internal"
     networks:
-      - traefik
+      traefik:
+        ipv4_address: 10.0.0.254
 
   identity:
     image: quay.io/keycloak/keycloak:25.0.4
@@ -42,13 +43,14 @@ services:
       KC_DB_URL_DATABASE: ${KC_DB_NAME}
       KC_DB_USERNAME: ${KC_DB_USERNAME}
       KC_DB_PASSWORD: ${KC_DB_PASSWORD}
+      KC_HOSTNAME: identity.localhost
     volumes:
       - ./dockers/identity/realms:/opt/keycloak/data/import
     command: ["start-dev", "--import-realm"]
     labels:
       <<: *traefik-labels
       traefik.docker.network: "nodejs-msa-traefik"
-      traefik.http.routers.identity.rule: "Host(`identity.local`)"
+      traefik.http.routers.identity.rule: "Host(`identity.localhost`)"
       traefik.http.services.identity.loadbalancer.server.port: "8080"
     <<: *networks-default
 
@@ -88,7 +90,7 @@ services:
       - "5432:5432"
     labels:
       <<: *traefik-labels
-      traefik.http.routers.postgres.rule: "Host(`postgres.local`)"
+      traefik.http.routers.postgres.rule: "Host(`postgres.localhost`)"
       traefik.http.services.postgres.loadbalancer.server.port: "5432"
     <<: *networks-default
     healthcheck:
@@ -103,7 +105,7 @@ services:
     labels:
       <<: *traefik-labels
       traefik.docker.network: "nodejs-msa-traefik"
-      traefik.http.routers.elasticsearch.rule: "Host(`elasticsearch.local`)"
+      traefik.http.routers.elasticsearch.rule: "Host(`elasticsearch.localhost`)"
       traefik.http.services.elasticsearch.loadbalancer.server.port: "9200"
     volumes:
       - elasticsearch-data:/usr/share/elasticsearch/data
@@ -118,7 +120,7 @@ services:
     labels:
       <<: *traefik-labels
       traefik.docker.network: "nodejs-msa-traefik"
-      traefik.http.routers.grafana.rule: "Host(`grafana.local`)"
+      traefik.http.routers.grafana.rule: "Host(`grafana.localhost`)"
       traefik.http.services.grafana.loadbalancer.server.port: "3000"
     ports:
       - "3000:3000"
@@ -226,15 +228,27 @@ services:
     ports:
       - "4000:3000"
     volumes:
-      - ./frontend/admin:/usr/src/app
+      - ./frontend/admin/src:/usr/src/app/src
+    extra_hosts:
+      - "identity.localhost:10.0.0.254"
     command: ["npm", "run", "dev"]
     networks:
       - traefik
+    environment:
+      NEXT_PUBLIC_BFF_SERVICE_URL: ${NEXT_PUBLIC_BFF_SERVICE_URL}
+      AUTH_CLIENT_ID: ${AUTH_CLIENT_ID}
+      AUTH_CLIENT_SECRET: ${AUTH_CLIENT_SECRET}
+      NEXTAUTH_URL: ${NEXTAUTH_URL}
+      AUTH_TENANT: ${AUTH_TENANT}
+      AUTH_PROVIDER_URL: ${AUTH_PROVIDER_URL}
+      AUTH_ISSUER: ${AUTH_ISSUER}
+      AUTH_OPENID_CONFIGURATION_URL: ${AUTH_OPENID_CONFIGURATION_URL}
     labels:
       <<: *traefik-labels
       traefik.docker.network: "nodejs-msa-traefik"
-      traefik.http.routers.admin-page.rule: "Host(`admin.node-msa.local`)"
-      traefik.http.services.admin-page.loadbalancer.server.port: "3000"
+      traefik.http.routers.admin.rule: "Host(`admin.localhost`)"
+      traefik.http.services.admin.loadbalancer.server.port: "3000"
+
   webapp:
     build:
       context: ./frontend/webapp
@@ -252,7 +266,7 @@ services:
     labels:
       <<: *traefik-labels
       traefik.docker.network: "nodejs-msa-traefik"
-      traefik.http.routers.webapp.rule: "Host(`node-msa.local`)"
+      traefik.http.routers.webapp.rule: "Host(`node-msa.localhost`)"
       traefik.http.services.webapp.loadbalancer.server.port: "3000"
 
 volumes:
@@ -269,6 +283,9 @@ networks:
   traefik:
     name: nodejs-msa-traefik
     driver: bridge
+    ipam:
+      config:
+        - subnet: 10.0.0.0/16
   backend:
     name: nodejs-msa-backend
     driver: bridge
