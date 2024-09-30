@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:merchant_app/src/configs/config.app.dart';
+import 'package:merchant_app/src/layouts/center.layout.dart';
 import 'package:merchant_app/src/screens/home/home.dart';
 import 'package:provider/provider.dart';
 
@@ -63,121 +64,114 @@ class _SignUpState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     AppConfig appConfig = Provider.of<AppConfig>(context);
 
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Form(
-          key: _formKey,
-          child: Center(
-            child: Column(
+    return CenterLayout(
+      content: Form(
+        key: _formKey,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              appConfig.appName,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 32,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 40),
+            TextFormField(
+              controller: _firstNameController,
+              validator: ValidationBuilder()
+                  .required('First name is required')
+                  .build(),
+              decoration: const InputDecoration(
+                  labelText: "First name",
+                  alignLabelWithHint: true,
+                  border: OutlineInputBorder(
+                      gapPadding: 20,
+                      borderRadius: BorderRadius.all(Radius.circular(10)))),
+            ),
+            const SizedBox(height: 10),
+            TextFormField(
+              controller: _lastNameController,
+              validator:
+                  ValidationBuilder().required('Last name is required').build(),
+              decoration: const InputDecoration(
+                  labelText: "Last name",
+                  alignLabelWithHint: true,
+                  border: OutlineInputBorder(
+                      gapPadding: 20,
+                      borderRadius: BorderRadius.all(Radius.circular(10)))),
+            ),
+            const SizedBox(height: 10),
+            TextFormField(
+              controller: _emailController,
+              validator: ValidationBuilder()
+                  .email('Enter a valid email')
+                  .required("Email is required")
+                  .build(),
+              keyboardType: TextInputType.emailAddress,
+              decoration: const InputDecoration(
+                  labelText: "Email",
+                  alignLabelWithHint: true,
+                  border: OutlineInputBorder(
+                      gapPadding: 20,
+                      borderRadius: BorderRadius.all(Radius.circular(10)))),
+            ),
+            const SizedBox(height: 10),
+            TextFormField(
+              obscureText: true,
+              controller: _passwordController,
+              validator:
+                  ValidationBuilder().required('Password is required').build(),
+              decoration: const InputDecoration(
+                  labelText: "Password",
+                  alignLabelWithHint: true,
+                  border: OutlineInputBorder(
+                      gapPadding: 20,
+                      borderRadius: BorderRadius.all(Radius.circular(10)))),
+            ),
+            const SizedBox(height: 10),
+            TextFormField(
+              obscureText: true,
+              controller: _confirmPasswordController,
+              validator: ValidationBuilder()
+                  .required('Confirm password is required')
+                  .add((value) => value == _passwordController.text
+                      ? null
+                      : 'Passwords do not match')
+                  .build(),
+              decoration: const InputDecoration(
+                  labelText: "Confirm password",
+                  alignLabelWithHint: true,
+                  border: OutlineInputBorder(
+                      gapPadding: 20,
+                      borderRadius: BorderRadius.all(Radius.circular(10)))),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: _isSubmiting ? null : _onSubmitSignup,
+              style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 100, vertical: 15)),
+              child: const Text("Sign up"),
+            ),
+            const SizedBox(height: 40),
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  appConfig.appName,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 40),
-                TextFormField(
-                  controller: _firstNameController,
-                  validator: ValidationBuilder()
-                      .required('First name is required')
-                      .build(),
-                  decoration: const InputDecoration(
-                      labelText: "First name",
-                      alignLabelWithHint: true,
-                      border: OutlineInputBorder(
-                          gapPadding: 20,
-                          borderRadius: BorderRadius.all(Radius.circular(10)))),
-                ),
-                const SizedBox(height: 10),
-                TextFormField(
-                  controller: _lastNameController,
-                  validator: ValidationBuilder()
-                      .required('Last name is required')
-                      .build(),
-                  decoration: const InputDecoration(
-                      labelText: "Last name",
-                      alignLabelWithHint: true,
-                      border: OutlineInputBorder(
-                          gapPadding: 20,
-                          borderRadius: BorderRadius.all(Radius.circular(10)))),
-                ),
-                const SizedBox(height: 10),
-                TextFormField(
-                  controller: _emailController,
-                  validator: ValidationBuilder()
-                      .email('Enter a valid email')
-                      .required("Email is required")
-                      .build(),
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: const InputDecoration(
-                      labelText: "Email",
-                      alignLabelWithHint: true,
-                      border: OutlineInputBorder(
-                          gapPadding: 20,
-                          borderRadius: BorderRadius.all(Radius.circular(10)))),
-                ),
-                const SizedBox(height: 10),
-                TextFormField(
-                  obscureText: true,
-                  controller: _passwordController,
-                  validator: ValidationBuilder()
-                      .required('Password is required')
-                      .build(),
-                  decoration: const InputDecoration(
-                      labelText: "Password",
-                      alignLabelWithHint: true,
-                      border: OutlineInputBorder(
-                          gapPadding: 20,
-                          borderRadius: BorderRadius.all(Radius.circular(10)))),
-                ),
-                const SizedBox(height: 10),
-                TextFormField(
-                  obscureText: true,
-                  controller: _confirmPasswordController,
-                  validator: ValidationBuilder()
-                      .required('Confirm password is required')
-                      .add((value) => value == _passwordController.text
-                          ? null
-                          : 'Passwords do not match')
-                      .build(),
-                  decoration: const InputDecoration(
-                      labelText: "Confirm password",
-                      alignLabelWithHint: true,
-                      border: OutlineInputBorder(
-                          gapPadding: 20,
-                          borderRadius: BorderRadius.all(Radius.circular(10)))),
-                ),
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: _isSubmiting ? null : _onSubmitSignup,
-                  style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 100, vertical: 15)),
-                  child: const Text("Sign up"),
-                ),
-                const SizedBox(height: 40),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text("Already have an account?"),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/signin');
-                      },
-                      child: const Text('Sign in'),
-                    )
-                  ],
+                const Text("Already have an account?"),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/signin');
+                  },
+                  child: const Text('Sign in'),
                 )
               ],
-            ),
-          ),
+            )
+          ],
         ),
       ),
     );
